@@ -24,6 +24,11 @@
                                         class="nav-link
                                 {% if my_route == 'app_register'%} active{% endif %}"
                                         href="{{ path('app_register')}}">S'enregister</a></li>
+                            <li class="nav-item"><a
+                                        class="nav-link
+                                {% if my_route == 'sortie_ajouter'%} active{% endif %}"
+                                        aria-current="page"
+                                        href="{{ path('sortie_ajouter')}}">Ajouter une sortie</a></li>
 
                         </ul>
                     </div>
