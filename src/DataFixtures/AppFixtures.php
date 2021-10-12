@@ -137,7 +137,8 @@ class AppFixtures extends Fixture
         $participant1-> setTelephone("01.02.03.30.20");
         $participant1-> setEmail("john.hey@gmail.com");
         $participant1-> setPassword("123456");
-        $participant1-> setAdministrateur(true);
+        $participant1->setRoles(['ROLE_USER']);
+        $participant1-> setAdministrateur(false);
         $participant1-> setActif(true);
         $participant1->setCampus($campus1);
         $manager->persist($participant1);
@@ -150,6 +151,7 @@ class AppFixtures extends Fixture
         $participant2-> setTelephone("01.72.83.35.25");
         $participant2-> setEmail("jcdus@gmail.com");
         $participant2-> setPassword("123456");
+        $participant2->setRoles(['ROLE_USER']);
         $participant2-> setAdministrateur(false);
         $participant2-> setActif(false);
         $participant2->setCampus($campus2);
@@ -163,6 +165,7 @@ class AppFixtures extends Fixture
         $participant3-> setTelephone("01.72.83.35.25");
         $participant3-> setEmail("jojo@gmail.com");
         $participant3-> setPassword("123456");
+        $participant3->setRoles(['ROLE_ADMIN']);
         $participant3-> setAdministrateur(true);
         $participant3-> setActif(true);
         $participant3->setCampus($campus3);
@@ -176,6 +179,7 @@ class AppFixtures extends Fixture
         $participant4-> setTelephone("01.72.00.65.25");
         $participant4-> setEmail("chanchan@gmail.com");
         $participant4-> setPassword("123456");
+        $participant4->setRoles(['ROLE_ADMIN']);
         $participant4-> setAdministrateur(true);
         $participant4-> setActif(true);
         $participant4->setCampus($campus4);
