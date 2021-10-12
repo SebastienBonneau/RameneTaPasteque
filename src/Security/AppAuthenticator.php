@@ -25,23 +25,32 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
     public const LOGIN_ROUTE = 'app_login';
 
     private UrlGeneratorInterface $urlGenerator;
+    // On ajoute cette variable de type ParticipantRepository pour pouvoir :
+    //- lui appliquer la méthode qui permet de se connecter avec pseudo ou email et
+    // qui a été définie dans ParticipantRepository
+    //- l'injecter en paramètre dans le constructeur
     private ParticipantRepository $participantRepository;
+
+    // injection de la dépendance ParticipantRepository
     public function __construct(UrlGeneratorInterface $urlGenerator, ParticipantRepository $participantRepository)
-    {
+    {   // on instancie la variable de type ParticipantRepository
         $this->participantRepository = $participantRepository;
         $this->urlGenerator = $urlGenerator;
     }
 
     public function authenticate(Request $request): PassportInterface
     {
-        $identifier = $request->request->get('email_or_pseudo');
+        // On crée la variable $identifier qui récupère ce que l'on trouve
+        // dans la base de données
+        $identifier = $request->request->get('identifiant');
 
         $request->getSession()->set(Security::LAST_USERNAME, $identifier);
 
         return new Passport(
-            new UserBadge($identifier, function($userIdentifier) {
-                return $this->participantRepository->loadUserByIdentifier($userIdentifier);
+            new UserBadge($identifier, function($identifier) {
+                return $this->participantRepository->loadUserByIdentifier($identifier);
             }),
+
             new PasswordCredentials($request->request->get('password', '')),
             [
                 new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
