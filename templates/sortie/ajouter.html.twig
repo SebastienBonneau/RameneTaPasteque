@@ -1,0 +1,13 @@
+{%  extends 'base.html.twig' %}
+
+{% block title %}Sortie{% endblock %}
+
+{% block body %}
+    {{ form_start(formSortie) }}
+    {{ form_widget(formSortie) }}
+    <button type = "submit" class="btn btn-secondary">Enregistrer</button>
+    <a href="#" class="btn btn-secondary">Publier la sortie</a>
+    <a href="#" class="btn btn-secondary">Annuler</a>
+    {{ form_end(formSortie) }}
+
+{% endblock %}
