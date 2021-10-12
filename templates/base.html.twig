@@ -16,20 +16,35 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         {% set my_route = app.request.get('_route') %}
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a
-                                        class="nav-link
+                            {% if not app.user %}
+                                <li class="nav-item"><a
+                                            class="nav-link
                                 {% if my_route == 'app_login'%} active{% endif %}"
-                                        aria-current="page"
-                                        href="{{ path('app_login')}}">Login</a></li>
-                            <li class="nav-item"><a
-                                        class="nav-link
+                                            aria-current="page"
+                                            href="{{ path('app_login')}}">Login</a></li>
+                                <li class="nav-item"><a
+                                            class="nav-link
                                 {% if my_route == 'app_register'%} active{% endif %}"
-                                        href="{{ path('app_register')}}">S'enregister</a></li>
-                            <li class="nav-item"><a
-                                        class="nav-link
+                                            href="{{ path('app_register')}}">S'enregister</a></li>
+                            {% endif %}
+
+                            {% if app.user %}
+                                <li class="nav-item"><a
+                                            class="nav-link
+                                    {% if my_route == 'participant_modifier'%} active{% endif %}"
+                                            aria-current="page"
+                                            href="{{ path('participant_modifier')}}">Mon Profil</a></li>
+                                <li class="nav-item"><a
+                                            class="nav-link
                                 {% if my_route == 'sortie_ajouter'%} active{% endif %}"
-                                        aria-current="page"
-                                        href="{{ path('sortie_ajouter')}}">Ajouter une sortie</a></li>
+                                            aria-current="page"
+                                            href="{{ path('sortie_ajouter')}}">Ajouter une sortie</a></li>
+                                <li class="nav-item"><a
+                                            class="nav-link
+                                {% if my_route == 'app_logout'%} active{% endif %}"
+                                            aria-current="page"
+                                            href="{{ path('app_logout')}}">Logout</a></li>
+                            {% endif %}
 
                         </ul>
                     </div>

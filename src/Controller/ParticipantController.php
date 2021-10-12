@@ -16,10 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class ParticipantController extends AbstractController
 {
     /**
-     * @Route("/modifier/{id}", name="_modifier")
+     * @Route("/modifier/", name="_modifier")
      */
-    public function modifier(Participant $user, Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
+    public function modifier(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(ParticipantType::class, $user);
         $form->handleRequest($request);
 
@@ -39,7 +40,7 @@ class ParticipantController extends AbstractController
             // do anything else you need here, like send an email
 
             $this->addFlash('success', 'Le participant a bien été modifié.');
-            return $this->redirectToRoute('app_participant_modifier');
+            return $this->redirectToRoute('participant_modifier');
         }
 
         return $this->render('participant/modifier.html.twig', [
