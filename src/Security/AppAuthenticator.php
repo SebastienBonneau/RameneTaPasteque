@@ -44,10 +44,13 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         // dans la base de données
         $identifier = $request->request->get('identifiant');
 
+        // récupération les infos de l'user en session
         $request->getSession()->set(Security::LAST_USERNAME, $identifier);
 
         return new Passport(
             new UserBadge($identifier, function($identifier) {
+                // return le résultat de la méthode qui permet de se connecter avec
+                // pseudo ou email (et qui est définie dans ParticipantRepository
                 return $this->participantRepository->loadUserByIdentifier($identifier);
             }),
 

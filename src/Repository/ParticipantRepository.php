@@ -66,9 +66,13 @@ class ParticipantRepository extends ServiceEntityRepository implements PasswordU
         ;
     }
     */
+    /**
+     * Nouvelle méthode de Symfony 5.3 pour pouvoir se connecter avec
+     * pseudo ou email
+     */
     public function loadUserByIdentifier(string $identifier):?Participant
     {
-
+        // On utilise un QueryBuilder
         return $this->createQueryBuilder( 'p')
             ->andWhere('p.email = :identifier')
             ->orWhere('p.pseudo = :identifier')
@@ -77,6 +81,12 @@ class ParticipantRepository extends ServiceEntityRepository implements PasswordU
             ->getOneOrNullResult();
     }
 
+    /**
+     *
+     * Méthode qu'on utilise pas mais qu'il faut garder car elle fait partie de
+     * la classe UserLoaderInterface qui a été implémentée pour avoir la méthode
+     * ci- dessus
+     */
     public function loadUserByUsername(string $username)
     {
         // TODO: Implement loadUserByUsername() method.
