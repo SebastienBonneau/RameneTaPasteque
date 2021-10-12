@@ -136,7 +136,7 @@ class AppFixtures extends Fixture
         $participant1-> setPrenom("John");
         $participant1-> setTelephone("01.02.03.30.20");
         $participant1-> setEmail("john.hey@gmail.com");
-        $participant1-> setPassword("123456");
+        $participant1-> setPassword("$2y$13\$idY/Bn2/DEcTBGfk1AzfX.IGk6GBNkhrYL4xiaHnTpf3Eu6kI71l2");
         $participant1->setRoles(['ROLE_USER']);
         $participant1-> setAdministrateur(false);
         $participant1-> setActif(true);
@@ -150,7 +150,7 @@ class AppFixtures extends Fixture
         $participant2-> setPrenom("Jean-claude");
         $participant2-> setTelephone("01.72.83.35.25");
         $participant2-> setEmail("jcdus@gmail.com");
-        $participant2-> setPassword("123456");
+        $participant2-> setPassword("$2y$13\$idY/Bn2/DEcTBGfk1AzfX.IGk6GBNkhrYL4xiaHnTpf3Eu6kI71l2");
         $participant2->setRoles(['ROLE_USER']);
         $participant2-> setAdministrateur(false);
         $participant2-> setActif(false);
@@ -164,7 +164,7 @@ class AppFixtures extends Fixture
         $participant3-> setPrenom("Josiane");
         $participant3-> setTelephone("01.72.83.35.25");
         $participant3-> setEmail("jojo@gmail.com");
-        $participant3-> setPassword("123456");
+        $participant3-> setPassword("$2y$13\$idY/Bn2/DEcTBGfk1AzfX.IGk6GBNkhrYL4xiaHnTpf3Eu6kI71l2");
         $participant3->setRoles(['ROLE_ADMIN']);
         $participant3-> setAdministrateur(true);
         $participant3-> setActif(true);
@@ -178,7 +178,7 @@ class AppFixtures extends Fixture
         $participant4-> setPrenom("Chantal");
         $participant4-> setTelephone("01.72.00.65.25");
         $participant4-> setEmail("chanchan@gmail.com");
-        $participant4-> setPassword("123456");
+        $participant4-> setPassword("$2y$13\$idY/Bn2/DEcTBGfk1AzfX.IGk6GBNkhrYL4xiaHnTpf3Eu6kI71l2");
         $participant4->setRoles(['ROLE_ADMIN']);
         $participant4-> setAdministrateur(true);
         $participant4-> setActif(true);
