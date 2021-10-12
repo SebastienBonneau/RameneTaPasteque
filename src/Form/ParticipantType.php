@@ -33,19 +33,18 @@ class ParticipantType extends AbstractType
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'mapped' => false,
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
-                'required' => true,
+                'required' => false,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
             ])
             //->add('administrateur')
             //->add('actif')
-            ->add('campus', EntityType::class, [
-                'class' => Campus::class,
+            ->add('campus', null, [
                 'choice_label' => "nom",
-                'label' => 'Campus : ',
-                'multiple' => true
+                'label' => 'Campus : '
             ])
             //->add('inscrits')
         ;
