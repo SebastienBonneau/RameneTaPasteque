@@ -17,11 +17,23 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     /**
      * @Route("/ajouter", name="_ajouter")
      */
-    public function ajouter(EntityManagerInterface $em, Request $request): \Symfony\Component\HttpFoundation\Response
+    public function ajouter(
+        EntityManagerInterface $em,
+        Request $request
+
+        ): \Symfony\Component\HttpFoundation\Response
     {
         $newSortie = new Sortie();
-
+        /* TODO ajouter les champs écrits en dur dans le formulaire et récupérérés selon organisateur de la sortie et lieu choisi
+        $campus = $newSortie->getOrganisateur($newSortie)->getCampus($newSortie);
+        $rue = $newSortie->getLieu($newSortie)->getRue($newSortie);
+        $codePostal = $newSortie->getLieu($newSortie)->getVille($newSortie)->getCodePostal($newSortie);
+        $newSortie->setCampus($campus);
+        $newSortie->setLieu($newSortie->getRue());
+        $newSortie->getLieu($newSortie)->getVille($newSortie)->setCodePostal($codePostal);
+        */
         $formSortie = $this->createForm(SortieType::class, $newSortie);
+
         $formSortie->handleRequest($request);
 
         if ($formSortie->isSubmitted() && $formSortie->isValid()) {

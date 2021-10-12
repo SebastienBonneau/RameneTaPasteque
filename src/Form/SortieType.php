@@ -2,9 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\Ville;
+use App\Repository\CampusRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,9 +38,7 @@ class SortieType extends AbstractType
             ->add('infosSortie', null, [
                 'label'=> "Description et infos : "
             ])
-            ->add('campus', null, [
-                'label'=> "Campus : "
-            ])
+
             /*->add('organisateur', null, [
                 'label'=> "Date limite d\'inscription : "
             ])
@@ -55,24 +55,23 @@ class SortieType extends AbstractType
                 'multiple'=>true
             ])
             */
-           /* ->add('lieu', EntityType::class, [
+            ->add('lieu', EntityType::class, [
                 'class'=> Lieu::class,
                 'label'=> "Lieu : ",
-                'choice-label'=>"nom",
-                'multiple'=>true
+                'choice_label'=>"nom",
+                'mapped'=>false, // mapped=>false permet de lui dire que ce champ ne fait
+                // pas partie de l'entité liée au formulaire
+                'multiple'=>false
             ])
-            ->add('rue', null, [
-                'label'=> "Rue : "
-            ])
-            ->add('codePostal', null, [
-                'label'=> "Code postal : "
-            ])
+
             ->add('latitude', null, [
-                'label'=> "latitude : "
+                'label'=> "latitude : ",
+                'mapped'=>false
             ])
             ->add('longitude', null, [
-                'label'=> "longitude : "
-            ])*/
+                'label'=> "longitude : ",
+                'mapped'=>false
+            ])
         ;
     }
 
