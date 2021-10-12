@@ -5,7 +5,7 @@
 {% block body %}
 <form method="post">
     {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="alert alert-danger">Identifiant ou mot de passe incorrects</div>
     {% endif %}
 
     {% if app.user %}
@@ -30,7 +30,7 @@
     #}
         <div class="checkbox mb-3">
             <label>
-                <input type="checkbox" name="_remember_me"> Remember me
+                <input type="checkbox" name="_remember_me"> Se souvenir de moi
             </label>
         </div>
 
