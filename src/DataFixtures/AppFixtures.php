@@ -17,28 +17,33 @@ class AppFixtures extends Fixture
     {
 
         $etat1 = new Etat();
-        $etat1->setLibelle("Clorurée");
+        $etat1->setLibelle("Créée");
         $manager->persist($etat1);
         $manager->flush();
 
         $etat2 = new Etat();
-        $etat2->setLibelle("Activité en cours");
+        $etat2->setLibelle("Ouverte");
         $manager->persist($etat2);
         $manager->flush();
 
         $etat3 = new Etat();
-        $etat3->setLibelle("Ouverte");
+        $etat3->setLibelle("Clôturée");
         $manager->persist($etat3);
         $manager->flush();
 
         $etat4 = new Etat();
-        $etat4->setLibelle("Passée");
+        $etat4->setLibelle("Activité en cours");
         $manager->persist($etat4);
         $manager->flush();
 
         $etat5 = new Etat();
-        $etat5->setLibelle("Annulée");
+        $etat5->setLibelle("Passée");
         $manager->persist($etat5);
+        $manager->flush();
+
+        $etat6 = new Etat();
+        $etat6->setLibelle("Annulée");
+        $manager->persist($etat1);
         $manager->flush();
 
 

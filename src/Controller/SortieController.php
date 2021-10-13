@@ -47,7 +47,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             // on hydrate (affecter) notre ampus à la sortie.
             $newSortie->setCampus($campus);
             // on définie l'état en dure dans notre sortie.
-            $newSortie->setEtat($repoEtat->findOneBy(['id'=>3]));
+            $newSortie->setEtat($repoEtat->findOneBy(['id'=>47]));
             $em->persist($newSortie);
             $em->flush();
             // do anything else you need here, like send an email
