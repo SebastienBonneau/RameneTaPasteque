@@ -19,35 +19,35 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 {
     /**
-     * @Route("/ajouter/{id}", name="_ajouter")
+     * @Route("/ajouter", name="_ajouter")
      */
     public function ajouter(
         EntityManagerInterface $em,
         Request $request,
-        ParticipantRepository $repo,
-        EtatRepository $repoEtat,
-        LieuRepository $repoLieu,
-        $id
+        EtatRepository $repoEtat
 
         ): \Symfony\Component\HttpFoundation\Response
     {
-        // récupération de l'organisateur de la sortie à parti de son id
-        $organisateur = $repo->findOneBy(["id"=>$id]);
-
         // création d'une nouvelle sortie
         $newSortie = new Sortie();
         // récupération du campus associé à la $newSortie via l'organisateur que l'on affecte à $newSortie
-        $newSortie->setCampus($organisateur->getCampus());
-        // récupération de la rue de la sortie via le lieu, que l'on affecte à $newSortie
-        $newSortie->setLieu($repoLieu->findOneBy(['id'=>$id]));
-        $newSortie->setOrganisateur($organisateur);
-        $newSortie->setEtat($repoEtat->findOneBy(['id'=>3]));
+        $campus = $this->getUser()->getCampus();
+
         $formSortie = $this->createForm(SortieType::class, $newSortie);
 
         $formSortie->handleRequest($request);
 
         if ($formSortie->isSubmitted() && $formSortie->isValid()) {
-
+            // on récupère l'objet participant
+            $organisateur = $this->getUser();
+            // on hydrate (affecter) notre organisateur à la sortie.
+            $newSortie->setOrganisateur($organisateur);
+            // on récupère l'objet campus
+            $campus = $this->getUser()->getCampus();
+            // on hydrate (affecter) notre ampus à la sortie.
+            $newSortie->setCampus($campus);
+            // on définie l'état en dure dans notre sortie.
+            $newSortie->setEtat($repoEtat->findOneBy(['id'=>3]));
             $em->persist($newSortie);
             $em->flush();
             // do anything else you need here, like send an email
@@ -57,7 +57,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         }
 
         return $this->renderForm('sortie/ajouter.html.twig',
-        compact("formSortie", 'organisateur','newSortie' ));
+        compact("formSortie",'newSortie', 'campus'));
     }
 
     /**

@@ -18,12 +18,11 @@
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             {% if app.user %}
                                 {% if is_granted('ROLE_ADMIN') %}
-
-                                <li class="nav-item"><a
-                                            class="nav-link
-                                {% if my_route == 'app_register'%} active{% endif %}"
-                                            href="{{ path('app_register')}}">Ajouter un Participant</a>
-                                    {% endif %}
+                                    <li class="nav-item"><a
+                                                class="nav-link
+                                    {% if my_route == 'app_register'%} active{% endif %}"
+                                                href="{{ path('app_register')}}">Ajouter un Participant</a>
+                                {% endif %}
                             {% endif %}
 
                             {% if app.user %}

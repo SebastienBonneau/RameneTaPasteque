@@ -23,7 +23,6 @@ class SortieType extends AbstractType
             ->add('dateHeureDebut', null, [
                 'label'=> 'Date et heure de la sortie : '
             ])
-
             ->add('dateLimiteInscription', null, [
                 'label'=> "Date limite d\'inscription : "
             ])
@@ -33,30 +32,14 @@ class SortieType extends AbstractType
             ->add('duree', null, [
                 'label'=> 'durée : ',
                 'attr' => ['min'=> 30, 'step'=>15]
-
             ])
             ->add('infosSortie', null, [
                 'label'=> "Description et infos : "
             ])
-
-            /*->add('organisateur', null, [
-                'label'=> "Date limite d\'inscription : "
+            ->add('lieu', null, [
+                'choice_label'=>"nom",
             ])
-            ->add('participants')
-            ->add('etat')*/
-
-            // Attention menu déroulant ==> entityType::class,
-            // que l'on précise avec 'class"=> nomEntity::class
-            // choice label avec le champ que l'on veut dans cette class
-            // et attribut "multiple"=>true
-            /*->add('ville', EntityType::class, [
-                'class'=> Ville::class,
-                'label'=> "Ville : ",
-                'choice-label'=>"nom",
-                'multiple'=>true
-            ])
-            */
-            ->add('lieu', EntityType::class, [
+           /* ->add('lieu', EntityType::class, [
                 'class'=> Lieu::class,
                 'label'=> "Lieu : ",
                 'choice_label'=>"nom",
@@ -73,6 +56,7 @@ class SortieType extends AbstractType
                 'label'=> "longitude : ",
                 'mapped'=>false
             ])
+           */
         ;
     }
 
