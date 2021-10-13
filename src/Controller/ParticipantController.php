@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ParticipantController extends AbstractController
 {
     /**
-     * @Route("/modifier/", name="_modifier")
+     * @Route("/modifier", name="_modifier")
      */
     public function modifier(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
