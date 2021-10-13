@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<p>Ceci est la page principale pour afficher la liste des sorties</p>
+
     <div id="date">
         <p>Date du jour : {{ date('now')|date('d/m/Y') }} </p>
         <p>Participant : {{ app.user.pseudo }}</p>
@@ -13,24 +13,74 @@
 
 
     <ul>
-        {% for sortie in listeSorties %}
 
-            <li>notre sortie s'appelle <a href="#"> {{ sortie.nom }} </a> et se passe {{ sortie.lieu.nom }}</li>
 
-        {% endfor %}
+
+
     </ul>
 
     <div>
         <table class="table table-striped">
             <tbody id="myTbody">
-
+            <tr>
+                <th>Nom de la sortie</th>
+                <th>Date de la sortie</th>
+                <th>Clôture</th>
+                <th>Inscrits/places</th>
+                <th>Eta</th>
+                <th>Inscrit</th>
+                <th>organisateur</th>
+                <th>Actions</th>
+            </tr>
             </tbody>
         </table>
     </div>
     <template id="ligne">
+
         <tr>
-            <td>John</td>
-            <td>DOE</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
     </template>
+
+
+<script>
+    function afficherTableau(tableau) {
+        let tbody = document.querySelector("#myTbody");
+        let template = document.querySelector("#ligne");
+
+
+        for (let s of listeSorties){
+            // je clone le contenu du template dans une variable
+            let clone = template.content.cloneNode(true);
+            // je mets un sélecteur à l'interieur de la partie HTMl clonée
+            let tabTd = clone.querySelectorAll("td"); // j'ai un tableau
+            tabTd[0].innerHTML = s.nom;
+            tabTd[1].innerHTML = s.dateHeureDebut;
+            tabTd[2].innerHTML = s.dateLimiteInscription;
+            tabTd[3].innerHTML = s.nbInscriptionsMax;
+            tabTd[4].innerHTML = s.etat;
+            tabTd[5].innerHTML = s.participant;
+            tabTd[6].innerHTML = p.organisateur;
+            tabTd[7].innerHTML = <div>
+                                    <a href="#">afficher</a>
+                                    <a href="#">Se désister</a>
+                                    <a href="#">Modifier</a>
+                                    <a href="#">S'inscrire</a>
+                                    <a href="#">Publier</a>
+                                    <a href="#">Annuler</a>
+                                </div>
+            // j'ajoute la balise <tr> dans la balise tbody
+            tbody.appendChild(clone);
+        }
+    }
+//TODO let url et tutti quanti !
+</script>
+
 {% endblock %}

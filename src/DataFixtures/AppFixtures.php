@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
 
         $etat6 = new Etat();
         $etat6->setLibelle("Annulée");
-        $manager->persist($etat1);
+        $manager->persist($etat6);
         $manager->flush();
 
 

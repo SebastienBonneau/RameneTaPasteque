@@ -61,12 +61,21 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     }
 
     /**
-     * @Route("/liste", name="_liste")
+     * @Route("/api", name="_api")
      */
-    public function AfficherListeSorties(SortieRepository $repo)
+    public function api()
+    {
+        //$listeSorties = $repo->findAll();
+
+        return $this->render('sortie/liste.html.twig');//, compact('listeSorties'));
+    }
+
+    /**
+     * @Route("/api/liste", name="_api_liste")
+     */
+    public function apiListe(SortieRepository $repo)
     {
         $listeSorties = $repo->findAll();
-
-        return $this->render('sortie/liste.html.twig', compact('listeSorties'));
+        return $this->json($listeSorties);
     }
 }
