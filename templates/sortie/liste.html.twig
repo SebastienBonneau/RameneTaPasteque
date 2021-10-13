@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<p>Ceci est la page principale pour afficher la liste des sorties</p>
+
+
+
+    <ul>
+        {% for sortie in listeSorties %}
+
+            <li>notre sortie s'appelle <a href="#"> {{ sortie.nom }} </a> et se passe {{ sortie.lieu.nom }}</li>
+
+        {% endfor %}
+    </ul>
+{% endblock %}

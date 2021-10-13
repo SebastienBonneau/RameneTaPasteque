@@ -10,22 +10,20 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-success">
                 <div class="container px-3">
-                    <img style="heig80px; width: 100px"ht:  src="{{ asset('images/papa3.jpg') }}" alt="lapapa1">
+                    <img style="height:80px; width: 100px;":  src="{{ asset('images/papa3.jpg') }}" alt="lapapa1">
                     <a class="navbar-brand" href="{{ path('app_login') }}">Sandia Juntos !!!</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         {% set my_route = app.request.get('_route') %}
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            {% if not app.user %}
-                                <li class="nav-item"><a
-                                            class="nav-link
-                                {% if my_route == 'app_login'%} active{% endif %}"
-                                            aria-current="page"
-                                            href="{{ path('app_login')}}">Login</a></li>
+                            {% if app.user %}
+                                {% if is_granted('ROLE_ADMIN') %}
+
                                 <li class="nav-item"><a
                                             class="nav-link
                                 {% if my_route == 'app_register'%} active{% endif %}"
-                                            href="{{ path('app_register')}}">S'enregister</a></li>
+                                            href="{{ path('app_register')}}">Ajouter un Participant</a>
+                                    {% endif %}
                             {% endif %}
 
                             {% if app.user %}
@@ -44,7 +42,13 @@
                                 {% if my_route == 'app_logout'%} active{% endif %}"
                                             aria-current="page"
                                             href="{{ path('app_logout')}}">Logout</a></li>
+                                <li class="nav-item"><a
+                                            class="nav-link
+                                {% if my_route == 'sortie_liste'%} active{% endif %}"
+                                            aria-current="page"
+                                            href="{{ path('sortie_liste')}}">Liste des Sorties</a></li>
                             {% endif %}
+
 
                         </ul>
                     </div>
