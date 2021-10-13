@@ -23,7 +23,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+
             $campus = $form->get('campus')->getData();
             $user->setCampus($campus);
             $user->setPassword(
@@ -33,7 +33,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $this->getDoctrine()->getManager();// remplace injection de dépendance
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email

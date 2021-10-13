@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use App\Repository\EtatRepository;
+use App\Repository\LieuRepository;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use http\Env\Response;
@@ -16,23 +19,29 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 {
     /**
-     * @Route("/ajouter", name="_ajouter")
+     * @Route("/ajouter/{id}", name="_ajouter")
      */
     public function ajouter(
         EntityManagerInterface $em,
-        Request $request
+        Request $request,
+        ParticipantRepository $repo,
+        EtatRepository $repoEtat,
+        LieuRepository $repoLieu,
+        $id
 
         ): \Symfony\Component\HttpFoundation\Response
     {
+        // récupération de l'organisateur de la sortie à parti de son id
+        $organisateur = $repo->findOneBy(["id"=>$id]);
+
+        // création d'une nouvelle sortie
         $newSortie = new Sortie();
-        /* TODO ajouter les champs écrits en dur dans le formulaire et récupérérés selon organisateur de la sortie et lieu choisi
-        $campus = $newSortie->getOrganisateur($newSortie)->getCampus($newSortie);
-        $rue = $newSortie->getLieu($newSortie)->getRue($newSortie);
-        $codePostal = $newSortie->getLieu($newSortie)->getVille($newSortie)->getCodePostal($newSortie);
-        $newSortie->setCampus($campus);
-        $newSortie->setLieu($newSortie->getRue());
-        $newSortie->getLieu($newSortie)->getVille($newSortie)->setCodePostal($codePostal);
-        */
+        // récupération du campus associé à la $newSortie via l'organisateur que l'on affecte à $newSortie
+        $newSortie->setCampus($organisateur->getCampus());
+        // récupération de la rue de la sortie via le lieu, que l'on affecte à $newSortie
+        $newSortie->setLieu($repoLieu->findOneBy(['id'=>$id]));
+        $newSortie->setOrganisateur($organisateur);
+        $newSortie->setEtat($repoEtat->findOneBy(['id'=>3]));
         $formSortie = $this->createForm(SortieType::class, $newSortie);
 
         $formSortie->handleRequest($request);
@@ -48,7 +57,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         }
 
         return $this->renderForm('sortie/ajouter.html.twig',
-        compact("formSortie"));
+        compact("formSortie", 'organisateur','newSortie' ));
     }
 
     /**

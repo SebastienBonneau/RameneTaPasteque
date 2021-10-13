@@ -44,6 +44,7 @@ class SortieType extends AbstractType
             ])
             ->add('participants')
             ->add('etat')*/
+
             // Attention menu déroulant ==> entityType::class,
             // que l'on précise avec 'class"=> nomEntity::class
             // choice label avec le champ que l'on veut dans cette class
