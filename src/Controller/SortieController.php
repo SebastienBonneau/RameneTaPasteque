@@ -4,12 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
 use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use http\Env\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -27,6 +27,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         ParticipantRepository $repo,
         EtatRepository $repoEtat,
         LieuRepository $repoLieu,
+        CampusRepository $repoCampus,
         $id
 
         ): \Symfony\Component\HttpFoundation\Response
@@ -37,9 +38,9 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         // création d'une nouvelle sortie
         $newSortie = new Sortie();
         // récupération du campus associé à la $newSortie via l'organisateur que l'on affecte à $newSortie
-        $newSortie->setCampus($organisateur->getCampus());
+        $newSortie->setCampus($organisateur->getCampus()->getId());
         // récupération de la rue de la sortie via le lieu, que l'on affecte à $newSortie
-        $newSortie->setLieu($repoLieu->findOneBy(['id'=>$id]));
+        $newSortie->setLieu($repoLieu->findOneBy(['id'=>1]));
         $newSortie->setOrganisateur($organisateur);
         $newSortie->setEtat($repoEtat->findOneBy(['id'=>3]));
         $formSortie = $this->createForm(SortieType::class, $newSortie);
@@ -53,7 +54,8 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             // do anything else you need here, like send an email
 
             $this->addFlash('success', 'La sortie a bien été ajoutée.');
-            return $this->redirectToRoute('sortie_ajouter');
+            return $this->redirectToRoute('sortie_ajouter', ["id"=>$newSortie->getId()
+            ]);
         }
 
         return $this->renderForm('sortie/ajouter.html.twig',
