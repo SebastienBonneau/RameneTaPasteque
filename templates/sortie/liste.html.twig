@@ -14,6 +14,7 @@
 
     <div>
         <table class="table table-striped">
+           <!-- Affichage de l'entête du tableau en dur -->
             <thead>
             <tr>
                 <th>Nom de la sortie</th>
@@ -23,9 +24,12 @@
                 <th>Etat</th>
                 <th>Inscrit</th>
                 <th>organisateur</th>
+                <!-- affichage de la dernière colonne sur l'équivalent de 3 td-->
                 <th colspan="3">Actions</th>
             </tr>
             </thead>
+            <!-- le corps du tableau sera rempli avec du js ==>
+            on lui met un id qui permettra-->
             <tbody id="myTbody">
 
             </tbody>
@@ -39,6 +43,8 @@
             <td>2</td>
             <td>3</td>
             <td>4</td>
+            <!--dans la colonne suivante, affichage par défaut d'une icône v qui sera cachée en JS
+             si lapp.user n'est pas isncrit à cette sortie-->
             <td><i class="fas fa-check"></i></td>
             <td>6</td>
             <td colspan="3">
@@ -59,7 +65,7 @@
         </tr>
     </template>
 
-
+<!-- création d'un lien vers le fichier js qui regroupe les méthodes à appeler pour l'affichage-->
 <script src="{{ asset('javascript/listeSortie.js') }}">
 </script>
 
