@@ -2,10 +2,9 @@
 
 {% block body %}
 
-    <h2>Afficher une sortie</h2>
+    <h2>Découvrez tous les détails de la sortie  : {{ sortie.nom }} !</h2>
     <ul>
         <div>
-            <li>Nom de la sortie : {{ sortie.nom }}</li>
             <li>Date et heure de la sortie : {{ sortie.dateHeureDebut|date ('d,M,Y H,i') }}</li>
             <li>Date limite d'inscription : {{ sortie.dateLimiteInscription|date ('d,M,Y') }}</li>
             <li>Nombre de places : {{ sortie.nbInscriptionsMax }}</li>
