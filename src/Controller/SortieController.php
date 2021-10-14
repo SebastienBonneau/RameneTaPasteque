@@ -81,7 +81,12 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
         //Boucle for each pour récupérer tout ce qu'il y a dans le tableau
             foreach ($listeSorties as $sortie){
-
+                // On crée une variable de type booléen pour récupérer l'info si l'user connecté
+                // est inscrit ou pas ==> On fait appel à notre injection de dépendance Service
+                // pour appliquer la méthode qui y est définie (verifInscription et qui utilise
+                // en paramètres (participants de sortie et l'user connecté)
+                // C'est ce qui permettra de gérer l'affichage de la colonne 'inscrit' dans le tableau
+                // du twig liste
                 $userInscrit = $service->verifInscription($sortie->getParticipants(),$this->getUser());
                 $tab['id']= $sortie->getId();
                 $tab['nom']= $sortie->getNom();
@@ -89,8 +94,8 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $tab['dateLimiteInscription']= $sortie->getDateLimiteInscription();
                 $tab['nbInscriptionsMax']= $sortie->getNbInscriptionsMax();
                 $tab['etat']= $sortie->getEtat()->getLibelle();
-                //$tab['participant']= $sortie->set('0');TODO à modifier après inscription à une sortie
-                //$tab['organisateur']= $sortie->getOrganisateur();
+                //La colonne 'inscrit' du tableau est gérée directement en js, avec $userInscrit
+                $tab['organisateur']= $sortie->getOrganisateur()->getPrenom();
                 $tab['userInscrit'] = $userInscrit;
                 $tableau[]= $tab;
             }
