@@ -51,6 +51,28 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             $em->persist($newSortie);
             $em->flush();
 
+    /**
+     * @Route("/inscription/{exit}", name="_inscription")
+     */
+    public function inscription(
+        Sortie $exit,
+        EntityManagerInterface $em,
+        SortieRepository $sr
+    ): Response
+    {
+        $inscription = $sr->findOneBy(["id_participant" => $this->getUser()->getUserIdentifier()]);
+        $inscription->addParticipant($exit);
+        $em->persist($inscription);
+        $em->flush();
+
+
+        $this->addFlash('success', 'Votre participation a bien ete prise en compte.');
+        return $this->redirectToRoute('sortie_api_liste');
+
+    }
+
+
+
 
             $this->addFlash('success', 'La sortie a bien été ajoutée.');
             return $this->redirectToRoute('sortie_ajouter');
