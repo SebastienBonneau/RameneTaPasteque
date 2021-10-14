@@ -39,7 +39,7 @@
             <td>2</td>
             <td>3</td>
             <td>4</td>
-            <td>5</td>
+            <td><i class="fas fa-check"></i></td>
             <td>6</td>
             <td colspan="3">
                 <!-- lien affiché tout le temps, renvoie vers le détail de la sortie-->
@@ -49,10 +49,10 @@
                 <!-- lien à afficher si app.user est l'organisateur ET que la date de la sortie n'est pas atteinte-->
                 <a href="#">Modifier</a>
                 <!-- lien à afficher si app.user n'est pas inscrit (donc si la croix n'est pas affiché dans la colonne inscrit)-->
-                <a href="#">S'inscrire</a>
+                <a href="#" id="inscrire">S'inscrire</a>
                 <!-- lien à afficher si app.user est l'organisateur et que la sortie est en état créée(on a
                 donc appuyé sur le bouton enregistrer dans le formulaire de création de la sortie-->
-                <a href="#">Publier</a>
+                <a href="#" >Publier</a>
                 <!-- lien à afficher si app.user est l'organisateur et si l'état est différent de activité en cours -->
                 <a href="#">Annuler</a>
             </td>
@@ -60,53 +60,7 @@
     </template>
 
 
-<script>
-    function afficherTableau(tableau) {
-        let tbody = document.querySelector("#myTbody");
-        let template = document.querySelector("#ligne");
-
-
-        for (let s of tableau){
-            // je clone le contenu du template dans une variable
-            let clone = template.content.cloneNode(true);
-            // je mets un sélecteur à l'interieur de la partie HTMl clonée
-            let tabTd = clone.querySelectorAll("td"); // j'ai un tableau
-            tabTd[0].innerHTML = s.nom;
-            tabTd[1].innerHTML = s.dateHeureDebut;
-            tabTd[2].innerHTML = s.dateLimiteInscription;
-            tabTd[3].innerHTML = s.nbInscriptionsMax;
-            tabTd[4].innerHTML = s.etat;
-            tabTd[5].innerHTML = s.participant;
-            tabTd[6].innerHTML = s.organisateur;
-
-            // j'ajoute la balise <tr> dans la balise tbody
-            tbody.appendChild(clone);
-        }
-    }
-    {#
-    // récupération de l'organisateur de la sortie à partir de son id
-    //$organisateur = $repo->findOneBy(["id"=>$id]);
-    function liste(){
-        /*
-         let url = 'http://localhost/projet-vierge/public/api/personne/';
-         fetch(url)
-             .then(response => response.json()) // renvoie au 2 eme then le body (contenu JSON)
-             .then(tableau =>
-             {
-                 //console.log(tableau);
-                 afficherTab(tableau);
-             });
- */
-    }
-#}
-    let url = 'http://127.0.0.1:8000/sortie/api/liste/'; // l'URL pour afficher le tableau doit être identique a l'url donner lors du lancement du serveur.
-    fetch(url)
-        .then(response => response.json()) // renvoie au 2 eme then le body (contenu JSON)
-        .then(tableau=>
-        {
-            console.log(tableau);
-            afficherTableau(tableau);
-        });
+<script src="{{ asset('javascript/listeSortie.js') }}">
 </script>
 
 {% endblock %}

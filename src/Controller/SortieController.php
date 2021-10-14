@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
+use App\Services\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,33 +48,10 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             // on hydrate (= on affecte) notre campus à la sortie.
             $newSortie->setCampus($campus);
             // on définit l'état en dur dans notre sortie (état créée avec id=1).
-            $newSortie->setEtat($repoEtat->findOneBy(['id'=>1]));
+            $newSortie->setEtat($repoEtat->findOneBy(['id' => 1]));
 
             $em->persist($newSortie);
             $em->flush();
-
-    /**
-     * @Route("/inscription/{exit}", name="_inscription")
-     */
-    public function inscription(
-        Sortie $exit,
-        EntityManagerInterface $em,
-        SortieRepository $sr
-    ): Response
-    {
-        $inscription = $sr->findOneBy(["id_participant" => $this->getUser()->getUserIdentifier()]);
-        $inscription->addParticipant($exit);
-        $em->persist($inscription);
-        $em->flush();
-
-
-        $this->addFlash('success', 'Votre participation a bien ete prise en compte.');
-        return $this->redirectToRoute('sortie_api_liste');
-
-    }
-
-
-
 
             $this->addFlash('success', 'La sortie a bien été ajoutée.');
             return $this->redirectToRoute('sortie_ajouter');
@@ -95,26 +74,50 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     /**
      * @Route("/api/liste/", name="_api_liste")
      */
-    public function apiListe(SortieRepository $repo): Response
+    public function apiListe(SortieRepository $repo, Service $service): Response
     {
         $listeSorties = $repo->findAll();
         $tableau = [];
+
         //Boucle for each pour récupérer tout ce qu'il y a dans le tableau
             foreach ($listeSorties as $sortie){
+
+                $userInscrit = $service->verifInscription($sortie->getParticipants(),$this->getUser());
                 $tab['id']= $sortie->getId();
                 $tab['nom']= $sortie->getNom();
                 $tab['dateHeureDebut']= $sortie->getDateHeureDebut(new \DateTime());
                 $tab['dateLimiteInscription']= $sortie->getDateLimiteInscription();
                 $tab['nbInscriptionsMax']= $sortie->getNbInscriptionsMax();
                 $tab['etat']= $sortie->getEtat()->getLibelle();
-                //$tab['participant']= $sortie->set('0');//TODO à modifier après inscription à une sortie
+                //$tab['participant']= $sortie->set('0');TODO à modifier après inscription à une sortie
                 //$tab['organisateur']= $sortie->getOrganisateur();
-
+                $tab['userInscrit'] = $userInscrit;
                 $tableau[]= $tab;
-
             }
+
         return $this->json($tableau);
     }
+
+    /**
+     * @Route("/inscription/{exit}", name="_inscription")
+     */
+    public function inscription(
+        Sortie $exit,
+        EntityManagerInterface $em,
+        SortieRepository $sr
+    ): Response
+    {
+//        $inscription = $sr->findOneBy(["id_participant" => $this->getUser()->getUserIdentifier()]);
+        $exit->addParticipant($this->getUser());
+        $em->persist($exit);
+        $em->flush();
+
+
+        $this->addFlash('success', 'Votre participation a bien ete prise en compte.');
+        return $this->redirectToRoute('sortie_liste');
+
+    }
+
 
     /**
      * @Route("/detail/{sortie}", name="_detail")
