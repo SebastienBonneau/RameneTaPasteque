@@ -51,6 +51,14 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             $em->persist($newSortie);
             $em->flush();
 
+            $this->addFlash('success', 'La sortie a bien été ajoutée.');
+            return $this->redirectToRoute('sortie_ajouter');
+        }
+
+        return $this->renderForm('sortie/ajouter.html.twig',
+        compact("formSortie",'newSortie', 'campus'));
+    }
+
     /**
      * @Route("/inscription/{exit}", name="_inscription")
      */
@@ -69,17 +77,6 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         $this->addFlash('success', 'Votre participation a bien ete prise en compte.');
         return $this->redirectToRoute('sortie_api_liste');
 
-    }
-
-
-
-
-            $this->addFlash('success', 'La sortie a bien été ajoutée.');
-            return $this->redirectToRoute('sortie_ajouter');
-        }
-
-        return $this->renderForm('sortie/ajouter.html.twig',
-        compact("formSortie",'newSortie', 'campus'));
     }
 
     /**
