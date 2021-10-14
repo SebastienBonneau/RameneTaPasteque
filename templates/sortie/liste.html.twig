@@ -36,7 +36,6 @@
         </table>
     </div>
     <template id="ligne">
-
         <tr>
             <td>0</td>
             <td>1</td>
@@ -44,7 +43,8 @@
             <td>3</td>
             <td>4</td>
             <!--dans la colonne suivante, affichage par défaut d'une icône v qui sera cachée en JS
-             si lapp.user n'est pas isncrit à cette sortie-->
+             si l'app.user n'est pas inscrit à cette sortie
+             C'est une balise <i> qui sera utilisée dans le JS pour venir remplacer son contenu-->
             <td><i class="fas fa-check"></i></td>
             <td>6</td>
             <td colspan="3">
@@ -53,14 +53,14 @@
                 <!-- lien à afficher si app.user est inscrit à la sortie ET si date de la sortie non attente; cela décoche la colonne inscrit-->
                 <a href="#" id="seDesister">Se désister</a>
                 <!-- lien à afficher si app.user est l'organisateur ET que la date de la sortie n'est pas atteinte-->
-                <a href="#">Modifier</a>
+                <a href="#" id="modifier">Modifier</a>
                 <!-- lien à afficher si app.user n'est pas inscrit (donc si la croix n'est pas affiché dans la colonne inscrit)-->
                 <a href="#" id="inscrire">S'inscrire</a>
                 <!-- lien à afficher si app.user est l'organisateur et que la sortie est en état créée(on a
                 donc appuyé sur le bouton enregistrer dans le formulaire de création de la sortie-->
-                <a href="#" >Publier</a>
+                <a href="#" id="publier" >Publier</a>
                 <!-- lien à afficher si app.user est l'organisateur et si l'état est différent de activité en cours -->
-                <a href="#">Annuler</a>
+                <a href="#" id="annuler">Annuler</a>
             </td>
         </tr>
     </template>

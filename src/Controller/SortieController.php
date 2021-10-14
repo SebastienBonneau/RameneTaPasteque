@@ -90,13 +90,13 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $userInscrit = $service->verifInscription($sortie->getParticipants(),$this->getUser());
                 $tab['id']= $sortie->getId();
                 $tab['nom']= $sortie->getNom();
-                $tab['dateHeureDebut']= $sortie->getDateHeureDebut(new \DateTime());
+                $tab['dateHeureDebut']= $sortie->getDateHeureDebut();
                 $tab['dateLimiteInscription']= $sortie->getDateLimiteInscription();
                 $tab['nbInscriptionsMax']= $sortie->getNbInscriptionsMax();
                 $tab['etat']= $sortie->getEtat()->getLibelle();
-                //La colonne 'inscrit' du tableau est gérée directement en js, avec $userInscrit
-                $tab['organisateur']= $sortie->getOrganisateur()->getPrenom();
                 $tab['userInscrit'] = $userInscrit;
+                $tab['organisateur']= $sortie->getOrganisateur()->getPrenom();
+
                 $tableau[]= $tab;
             }
 
@@ -109,10 +109,10 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     public function inscription(
         Sortie $exit,
         EntityManagerInterface $em,
-        SortieRepository $sr
+
     ): Response
     {
-//        $inscription = $sr->findOneBy(["id_participant" => $this->getUser()->getUserIdentifier()]);
+//
         $exit->addParticipant($this->getUser());
         $em->persist($exit);
         $em->flush();
@@ -129,7 +129,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     public function seDesinscrire(
         Sortie $exit,
         EntityManagerInterface $em,
-        SortieRepository $sr
+
     ): Response
     {
 //        $inscription = $sr->findOneBy(["id_participant" => $this->getUser()->getUserIdentifier()]);
@@ -151,5 +151,27 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         return $this->render('sortie/detail.html.twig',
             compact("sortie")
         );
+    }
+
+    /**
+     * @Route("/publier/{sortie}", name="_publier")
+     */
+    public function publier(
+        Sortie $sortie,
+        EntityManagerInterface $em,
+        EtatRepository $repoEtat
+    ): Response
+    {
+        // Dans la BDD, je donne à la variable sortie l'état "ouverte" ==> id =2
+        $sortie->setEtat($repoEtat->findOneBy(['id' => 2]));
+        // je mets à jour avec cette valeur
+        $em->persist($sortie);
+        // j'envoie en BDD
+        $em->flush();
+
+
+        $this->addFlash('success', 'La sortie a bien été publiée.');
+        return $this->redirectToRoute('sortie_liste');
+
     }
 }
