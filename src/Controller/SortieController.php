@@ -24,7 +24,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         Request $request,
         EtatRepository $repoEtat
 
-        ): \Symfony\Component\HttpFoundation\Response
+        ): Response
     {
         // création d'une nouvelle sortie
         $newSortie = new Sortie();
@@ -94,5 +94,13 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         return $this->json($tableau);
     }
 
-
+    /**
+     * @Route("/detail/{sortie}", name="_detail")
+     */
+    public function detail(Sortie $sortie): Response
+    {
+        return $this->render('sortie/detail.html.twig',
+            compact("sortie")
+        );
+    }
 }
