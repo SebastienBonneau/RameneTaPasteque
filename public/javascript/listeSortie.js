@@ -2,10 +2,12 @@ function afficherTableau(tableau) {
     let tbody = document.querySelector("#myTbody");
     let template = document.querySelector("#ligne");
     let urlInscrire = "http://127.0.0.1:8000/sortie/inscription/";
+    let urlseDesinscrire = "http://127.0.0.1:8000/sortie/seDesinscrire/";
 
 
     for (let s of tableau){
         let urlInscrire2 = urlInscrire+s.id;
+        let urlSeDesinscrire2 = urlseDesinscrire+s.id;
         // je clone le contenu du template dans une variable
         let clone = template.content.cloneNode(true);
         // je mets un sélecteur à l'interieur de la partie HTMl clonée
@@ -17,9 +19,12 @@ function afficherTableau(tableau) {
         tabTd[4].innerHTML = s.etat;
         if( s.userInscrit === false){
             tabTd[5].querySelector('i').setAttribute('hidden', '');
+        }if (s.userInscrit === true){
+            tabTd[5].querySelector('i').removeAttribute('hidden');
         }
             tabTd[6].innerHTML = s.organisateur;
         tabTd[7].querySelector('#inscrire').setAttribute('href',urlInscrire2);
+        tabTd[7].querySelector('#seDesister').setAttribute('href',urlSeDesinscrire2);
         // j'ajoute la balise <tr> dans la balise tbody
         tbody.appendChild(clone);
     }

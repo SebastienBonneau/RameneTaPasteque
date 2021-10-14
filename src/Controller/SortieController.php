@@ -118,6 +118,25 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
     }
 
+    /**
+     * @Route("/seDesinscrire/{exit}", name="_seDesinscrire")
+     */
+    public function seDesinscrire(
+        Sortie $exit,
+        EntityManagerInterface $em,
+        SortieRepository $sr
+    ): Response
+    {
+//        $inscription = $sr->findOneBy(["id_participant" => $this->getUser()->getUserIdentifier()]);
+        $exit->removeParticipant($this->getUser());
+        $em->persist($exit);
+        $em->flush();
+
+
+        $this->addFlash('success', 'Nous avons bien pris en compte votre desistement.');
+        return $this->redirectToRoute('sortie_liste');
+
+    }
 
     /**
      * @Route("/detail/{sortie}", name="_detail")
