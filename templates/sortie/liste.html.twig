@@ -12,13 +12,6 @@
     </div>
 
 
-    <ul>
-
-
-
-
-    </ul>
-
     <div>
         <table class="table table-striped">
             <thead>
@@ -49,11 +42,18 @@
             <td>5</td>
             <td>6</td>
             <td colspan="3">
+                <!-- lien affiché tout le temps, renvoie vers le détail de la sortie-->
                 <a href="#">afficher</a>
+                <!-- lien à afficher si app.user est inscrit à la sortie ET si date de la sortie non attente; cela décoche la colonne inscrit-->
                 <a href="#">Se désister</a>
+                <!-- lien à afficher si app.user est l'organisateur ET que la date de la sortie n'est pas atteinte-->
                 <a href="#">Modifier</a>
+                <!-- lien à afficher si app.user n'est pas inscrit (donc si la croix n'est pas affiché dans la colonne inscrit)-->
                 <a href="#">S'inscrire</a>
+                <!-- lien à afficher si app.user est l'organisateur et que la sortie est en état créée(on a
+                donc appuyé sur le bouton enregistrer dans le formulaire de création de la sortie-->
                 <a href="#">Publier</a>
+                <!-- lien à afficher si app.user est l'organisateur et si l'état est différent de activité en cours -->
                 <a href="#">Annuler</a>
             </td>
         </tr>
@@ -78,12 +78,7 @@
             tabTd[4].innerHTML = s.etat;
             tabTd[5].innerHTML = s.participant;
             tabTd[6].innerHTML = s.organisateur;
-            /*tabTd[7].innerHTML = 'liens à insérer'  ;<a href="#">afficher</a>
-                                    <a href="#">Se désister</a>
-                                    <a href="#">Modifier</a>
-                                    <a href="#">S'inscrire</a>
-                                    <a href="#">Publier</a>
-                                    <a href="#">Annuler</a>*/
+
             // j'ajoute la balise <tr> dans la balise tbody
             tbody.appendChild(clone);
         }
