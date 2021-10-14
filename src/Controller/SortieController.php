@@ -61,9 +61,9 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     }
 
     /**
-     * @Route("/api", name="_api")
+     * @Route("/liste", name="_liste")
      */
-    public function api()
+    public function liste()
     {
         //$listeSorties = $repo->findAll();
 
@@ -71,7 +71,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     }
 
     /**
-     * @Route("/api/liste", name="_api_liste")
+     * @Route("/api/liste/", name="_api_liste")
      */
     public function apiListe(SortieRepository $repo): Response
     {
@@ -81,7 +81,13 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             foreach ($listeSorties as $sortie){
                 $tab['id']= $sortie->getId();
                 $tab['nom']= $sortie->getNom();
-
+                $tab['dateHeureDebut']= $sortie->getDateHeureDebut(new \DateTime());
+                $tab['dateLimiteInscription']= $sortie->getDateLimiteInscription();
+                $tab['nbInscriptionsMax']= $sortie->getNbInscriptionsMax();
+                $tab['etat']= $sortie->getEtat()->getLibelle();
+                //$tab['participant']= $sortie->set('0');//TODO à modifier après inscription à une sortie
+                /*$tab['organisateur']= $sortie->getOrganisateur();
+*/
                 $tableau[]= $tab;
 
             }
