@@ -27,7 +27,7 @@
                 <th>Date de la sortie</th>
                 <th>Clôture</th>
                 <th>Inscrits/places</th>
-                <th>Eta</th>
+                <th>Etat</th>
                 <th>Inscrit</th>
                 <th>organisateur</th>
                 <th colspan="3">Actions</th>
@@ -48,7 +48,14 @@
             <td>4</td>
             <td>5</td>
             <td>6</td>
-            <td colspan="3">7</td>
+            <td colspan="3">
+                <a href="#">afficher</a>
+                <a href="#">Se désister</a>
+                <a href="#">Modifier</a>
+                <a href="#">S'inscrire</a>
+                <a href="#">Publier</a>
+                <a href="#">Annuler</a>
+            </td>
         </tr>
     </template>
 
@@ -65,12 +72,12 @@
             // je mets un sélecteur à l'interieur de la partie HTMl clonée
             let tabTd = clone.querySelectorAll("td"); // j'ai un tableau
             tabTd[0].innerHTML = s.nom;
-            /*tabTd[1].innerHTML = s.dateHeureDebut;
+            tabTd[1].innerHTML = s.dateHeureDebut;
             tabTd[2].innerHTML = s.dateLimiteInscription;
             tabTd[3].innerHTML = s.nbInscriptionsMax;
             tabTd[4].innerHTML = s.etat;
             tabTd[5].innerHTML = s.participant;
-            tabTd[6].innerHTML = s.organisateur;*/
+            tabTd[6].innerHTML = s.organisateur;
             /*tabTd[7].innerHTML = 'liens à insérer'  ;<a href="#">afficher</a>
                                     <a href="#">Se désister</a>
                                     <a href="#">Modifier</a>

@@ -86,8 +86,8 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $tab['nbInscriptionsMax']= $sortie->getNbInscriptionsMax();
                 $tab['etat']= $sortie->getEtat()->getLibelle();
                 //$tab['participant']= $sortie->set('0');//TODO à modifier après inscription à une sortie
-                /*$tab['organisateur']= $sortie->getOrganisateur();
-*/
+                //$tab['organisateur']= $sortie->getOrganisateur();
+
                 $tableau[]= $tab;
 
             }
