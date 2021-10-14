@@ -56,7 +56,7 @@
         let template = document.querySelector("#ligne");
 
 
-        for (let s of listeSorties){
+        for (let s of tableau){
             // je clone le contenu du template dans une variable
             let clone = template.content.cloneNode(true);
             // je mets un sélecteur à l'interieur de la partie HTMl clonée
@@ -67,7 +67,7 @@
             tabTd[3].innerHTML = s.nbInscriptionsMax;
             tabTd[4].innerHTML = s.etat;
             tabTd[5].innerHTML = s.participant;
-            tabTd[6].innerHTML = p.organisateur;
+            tabTd[6].innerHTML = s.organisateur;
             tabTd[7].innerHTML = <div>
                                     <a href="#">afficher</a>
                                     <a href="#">Se désister</a>
@@ -80,7 +80,29 @@
             tbody.appendChild(clone);
         }
     }
-//TODO let url et tutti quanti !
+    // récupération de l'organisateur de la sortie à partir de son id
+    //$organisateur = $repo->findOneBy(["id"=>$id]);
+    function liste(){
+        /*
+         let url = 'http://localhost/projet-vierge/public/api/personne/';
+         fetch(url)
+             .then(response => response.json()) // renvoie au 2 eme then le body (contenu JSON)
+             .then(tableau =>
+             {
+                 //console.log(tableau);
+                 afficherTab(tableau);
+             });
+ */
+    }
+
+    let url = 'http://localhost/RameneTaPasteque/public/sortie/api/liste';
+    fetch(url)
+        .then(response => response.json()) // renvoie au 2 eme then le body (contenu JSON)
+        .then(tableau=>
+        {
+            //console.log(listeSorties);
+            afficherTableau(tableau);
+        });
 </script>
 
 {% endblock %}

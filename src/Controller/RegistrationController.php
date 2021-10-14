@@ -29,6 +29,7 @@ class RegistrationController extends AbstractController
             $user->setPassword(
             $userPasswordHasherInterface->hashPassword(
                     $user,
+                    // pour récupérer une info détachée de l'entité (==> 'mapped'=> false dans le EntityTypeForm
                     $form->get('plainPassword')->getData()
                 )
             );

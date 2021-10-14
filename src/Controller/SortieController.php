@@ -5,12 +5,10 @@ namespace App\Controller;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
-use App\Repository\LieuRepository;
-use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use http\Env\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -38,19 +36,21 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         $formSortie->handleRequest($request);
 
         if ($formSortie->isSubmitted() && $formSortie->isValid()) {
-            // on récupère l'objet participant
+            // on récupère l'objet participant (qui est l'organisateur de la sortie)
+            // grâce à getUser qui récupère l'user (=participant= connecté
             $organisateur = $this->getUser();
-            // on hydrate (affecter) notre organisateur à la sortie.
+            // on hydrate (= on affecte) notre organisateur à la sortie.
             $newSortie->setOrganisateur($organisateur);
             // on récupère l'objet campus
             $campus = $this->getUser()->getCampus();
-            // on hydrate (affecter) notre ampus à la sortie.
+            // on hydrate (= on affecte) notre campus à la sortie.
             $newSortie->setCampus($campus);
-            // on définie l'état en dure dans notre sortie.
+            // on définit l'état en dur dans notre sortie (état créée avec id=1).
             $newSortie->setEtat($repoEtat->findOneBy(['id'=>1]));
+
             $em->persist($newSortie);
             $em->flush();
-            // do anything else you need here, like send an email
+
 
             $this->addFlash('success', 'La sortie a bien été ajoutée.');
             return $this->redirectToRoute('sortie_ajouter');
@@ -73,9 +73,18 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     /**
      * @Route("/api/liste", name="_api_liste")
      */
-    public function apiListe(SortieRepository $repo)
+    public function apiListe(SortieRepository $repo): Response
     {
         $listeSorties = $repo->findAll();
-        return $this->json($listeSorties);
+        $tableau = [];
+        //Boucle for each pour récupérer tout ce qu'il y a dans le tableau
+            foreach ($listeSorties as $sortie){
+                $tab['id']= $sortie->getId();
+                $tab['nom']= $sortie->getNom();
+
+                $tableau[]= $tab;
+
+            }
+        return $this->json($tableau);
     }
 }
