@@ -37,8 +37,8 @@ class ParticipantType extends AbstractType
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => false,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'Nouveau mot de passe : '],
+                'second_options' => ['label' => 'Comfirmer mot de passe : '],
             ])
             //->add('administrateur')
             //->add('actif')
