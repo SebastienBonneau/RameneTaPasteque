@@ -30,5 +30,14 @@ class Service
         }return false;
     }
 
+/*
+    public function vérifUserConnectedOrganisateur($userConnected, $sorties){
 
+        foreach ($sorties as $s){
+            if ($userConnected->getId() == $s->getOrganisateur()->getId()){
+                return true;
+            }
+        } return false;
+    }
+*/
 }

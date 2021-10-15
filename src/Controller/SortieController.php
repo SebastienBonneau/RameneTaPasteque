@@ -49,7 +49,11 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             $newSortie->setCampus($campus);
             // on définit l'état en dur dans notre sortie (état créée avec id=1).
             $newSortie->setEtat($repoEtat->findOneBy(['id' => 1]));
-
+            //je récupère l'info du bouton publier pour appliquer le traitement
+            $publier = $request->get('publier');
+            if ($publier == 1){
+                $newSortie->setEtat($repoEtat->findOneBy(['id' => 2]));
+            }
             $em->persist($newSortie);
             $em->flush();
 
@@ -87,6 +91,8 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 // en paramètres (participants de sortie et l'user connecté)
                 // C'est ce qui permettra de gérer l'affichage de la colonne 'inscrit' dans le tableau
                 // du twig liste
+                //$userOrganisateur =$service->vérifUserConnectedOrganisateur($sortie->getOrganisateur()->getPrenom(), $this->getUser());
+                //dd($userOrganisateur);
                 $userInscrit = $service->verifInscription($sortie->getParticipants(),$this->getUser());
                 $tab['id']= $sortie->getId();
                 $tab['nom']= $sortie->getNom();
@@ -96,6 +102,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $tab['etat']= $sortie->getEtat()->getLibelle();
                 $tab['userInscrit'] = $userInscrit;
                 $tab['organisateur']= $sortie->getOrganisateur()->getPrenom();
+                //$tab['userOrganisateur']= $userOrganisateur;
 
                 $tableau[]= $tab;
             }
@@ -174,4 +181,26 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         return $this->redirectToRoute('sortie_liste');
 
     }
+
+    /*
+     * @Route("/annuler/{sortie}", name="_annuler")
+     *
+    public function annuler(
+        Sortie $sortie,
+        EntityManagerInterface $em,
+        EtatRepository $repoEtat
+    ): Response
+    {
+        // Dans la BDD, je donne à la variable sortie l'état "annulée" ==> id =6
+        $sortie->setEtat($repoEtat->findOneBy(['id' => 6]));
+        // je mets à jour avec cette valeur
+        $em->persist($sortie);
+        // j'envoie en BDD
+        $em->flush();
+
+
+        $this->addFlash('success', 'La sortie a bien été annulée.');
+        return $this->redirectToRoute('sortie_liste');
+
+    }*/
 }

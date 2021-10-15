@@ -3,16 +3,18 @@
 {% block title %}{{ parent() }} Register{% endblock %}
 
 {% block body %}
+
+<div class="offset-3 col-6 mb-3">
+
     <h1>S'inscrire</h1>
+    <div class="col-6">
+    {{ form_start(registrationForm)}}
 
-
-
-    {{ form_start(registrationForm) }}
-
-        {{ form_widget(registrationForm) }}
-        <button type="submit" class="btn btn-lg btn-warning">Enregister</button>
+    {{ form_widget(registrationForm) }}
+    <button type="submit" class="btn btn-lg btn-warning mt-3">Enregister</button>
 
     {{ form_end(registrationForm) }}
-
+    </div>
+</div>
 
 {% endblock %}
