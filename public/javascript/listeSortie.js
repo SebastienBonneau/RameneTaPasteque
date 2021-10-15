@@ -12,7 +12,8 @@ function afficherTableau(tableau) {
     let urlDetail = "http://127.0.0.1:8000/sortie/detail/"; // lien afficher
     let urlseDesinscrire = "http://127.0.0.1:8000/sortie/seDesinscrire/"; //lien Se désister
     let urlPublier = "http://127.0.0.1:8000/sortie/publier/"; // lien publier
-   // let urlAnnuler ="http://127.0.0.1:8000/sortie/annuler/"; // lien annuler
+    let date1 = new Date(); // Je creer une variable avec la date du jour, pas besoin de la mettre dans la boucle
+
 
     // On fait une boucle pour récupérer chaque élément d'une sortie
     // pour toutes les sorties existantes
@@ -23,6 +24,8 @@ function afficherTableau(tableau) {
         let urlDetail2 = urlDetail+s.id;//lien afficher
         let urlSeDesinscrire2 = urlseDesinscrire+s.id;//lien se désister
         let urlPublier2 = urlPublier+s.id; // lien publier
+        let date2 = new Date(s.dateLimiteInscription); // Je recupere la date dans mon tableau et la stocke dans une variable
+        let date3 = new Date(s.dateHeureDebut);
     //    let urlAnnuler2 = urlAnnuler=s.id; // lien annuler
 
         // je clone le contenu du template dans une variable
@@ -48,20 +51,20 @@ function afficherTableau(tableau) {
         // C'est la colonne où s'affichent tous les liens ==> je les cible avec le querySelector et leur #id
         // et je les active avec setAttribute('href', urlId)
 
-        //lien s'inscrire
-        if( s.userInscrit === false) {
+        //lien s'inscrire Condition SI user n'est pas inscrit et que la date de cloture est supperieur a la date du jour
+        if( s.userInscrit === false || date2 > date1) {
             //j'affiche le lien "s'inscrire'
             tabTd[7].querySelector('#inscrire').setAttribute('href', urlInscrire2);
-        }if (s.userInscrit === true) {
+        }if (s.userInscrit === true || date2 < date1) {
             //je cache le lien "s'inscrire"
             tabTd[7].querySelector('#inscrire').setAttribute('hidden', '');//lien "s'inscrire" caché
         }
 
         //lien se désister
-        if (s.userInscrit === true) {
+        if (s.userInscrit === true || date3 > date1) {
             // j'affiche le lien se Désister
             tabTd[7].querySelector('#seDesister').setAttribute('href', urlSeDesinscrire2);
-        }if( s.userInscrit === false) {
+        }if( s.userInscrit === false || date3 < date1) {
             //je cache le lien "se désister"
             tabTd[7].querySelector('#seDesister').setAttribute('hidden', '');
         }

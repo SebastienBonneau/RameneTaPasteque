@@ -93,11 +93,13 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 // du twig liste
                 //$userOrganisateur =$service->vérifUserConnectedOrganisateur($sortie->getOrganisateur()->getPrenom(), $this->getUser());
                 //dd($userOrganisateur);
+                $maDateInscription = $sortie->getDateLimiteInscription(); // je crée une variable pour la date pour pouvoir la formater comme je veux sans influencer sur mon fichier JS qui recupere la meme date.
+                $maDateDebut = $sortie->getDateHeureDebut();
                 $userInscrit = $service->verifInscription($sortie->getParticipants(),$this->getUser());
                 $tab['id']= $sortie->getId();
                 $tab['nom']= $sortie->getNom();
-                $tab['dateHeureDebut']= $sortie->getDateHeureDebut();
-                $tab['dateLimiteInscription']= $sortie->getDateLimiteInscription();
+                $tab['dateHeureDebut']= $maDateDebut->format('d/m/Y H:i'); // permets de formater le dateTime en date seulement et comme on veut.
+                $tab['dateLimiteInscription']= $maDateInscription->format('d/m/Y H:i');
                 $tab['nbInscriptionsMax']= $sortie->getNbInscriptionsMax();
                 $tab['etat']= $sortie->getEtat()->getLibelle();
                 $tab['userInscrit'] = $userInscrit;
