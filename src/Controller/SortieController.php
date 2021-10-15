@@ -87,11 +87,13 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 // en paramètres (participants de sortie et l'user connecté)
                 // C'est ce qui permettra de gérer l'affichage de la colonne 'inscrit' dans le tableau
                 // du twig liste
+                $maDateInscription = $sortie->getDateLimiteInscription(); // je crée une variable pour la date pour pouvoir la formater comme je veux sans influencer sur mon fichier JS qui recupere la meme date.
+                $maDateDebut = $sortie->getDateHeureDebut();
                 $userInscrit = $service->verifInscription($sortie->getParticipants(),$this->getUser());
                 $tab['id']= $sortie->getId();
                 $tab['nom']= $sortie->getNom();
-                $tab['dateHeureDebut']= $sortie->getDateHeureDebut();
-                $tab['dateLimiteInscription']= $sortie->getDateLimiteInscription();
+                $tab['dateHeureDebut']= $maDateDebut->format('d/m/Y H:i'); // permets de formater le dateTime en date seulement et comme on veut.
+                $tab['dateLimiteInscription']= $maDateInscription->format('d/m/Y H:i');
                 $tab['nbInscriptionsMax']= $sortie->getNbInscriptionsMax();
                 $tab['etat']= $sortie->getEtat()->getLibelle();
                 $tab['userInscrit'] = $userInscrit;
