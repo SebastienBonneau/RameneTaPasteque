@@ -31,6 +31,8 @@ class Service
     }
 
 /*
+ * /**
+ * Méthode qui permet de vérifier si l'user connect
     public function vérifUserConnectedOrganisateur($userConnected, $sorties){
 
         foreach ($sorties as $s){

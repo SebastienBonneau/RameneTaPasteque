@@ -55,8 +55,9 @@
             {# read and display all flash messages #}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="flash-{{ label }}">
-                        {{ message }}
+                    <div class="flash-{{ label }} mx-auto">
+                        <h1>{{ message }}</h1>
+                        <img src="{{ asset('images/papa5.gif') }}" alt="logo succes">
                     </div>
                 {% endfor %}
             {% endfor %}
