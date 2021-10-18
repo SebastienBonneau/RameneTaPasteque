@@ -9,7 +9,16 @@
                 <h2>Créer une sortie</h2>
                 {{ form_start(formSortie, {'attr':{id: 'formS'}}) }}
                 {{ form_widget(formSortie) }}
-
+                <label class="form-label"  for="ville">Ville</label>
+                <select class="form-control" name="ville" id="ville" onchange="changerVille()">
+                    // ici on alimente
+                </select>
+                <label class="form-label"  for="lieu">Lieu</label>
+                <select class="form-control" name="lieu" id="lieu">
+                    // ici on alimente
+                </select>
+                <label class="form-label"  for="code">Ville</label>
+                <input class="form-control"  id="code" disabled>
                 {# J'ajoute un input de type hidden pour gérer mon bouton enregistrer #}
                 <input type="hidden" id="enregistrer" name="enregistrer" value="1">
 
@@ -25,6 +34,7 @@
         </div>
     </div>
     <script>
+
         /**
          * Fonction qui permet d'enregistrer la sortie en BDD
          */
@@ -43,6 +53,10 @@
         document.querySelector('#formS').submit();
     }
 
+    </script>
+
+    <!-- création d'un lien vers le fichier js qui regroupe les méthodes à appeler pour l'affichage-->
+    <script src="{{ asset('javascript/ajouterSortie.js') }}">
     </script>
 
 

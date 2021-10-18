@@ -5,13 +5,18 @@ namespace App\Controller;
 use App\Entity\Sortie;
 use App\Form\AnnulerSortieType;
 use App\Form\SortieType;
+use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
+use App\Repository\LieuRepository;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
+use App\Repository\VilleRepository;
 use App\Services\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Date;
 use function Composer\Autoload\includeFile;
 
 /**
@@ -26,6 +31,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     public function ajouter(
         EntityManagerInterface $em,
         Request $request,
+        LieuRepository $repoL,
         EtatRepository $repoEtat
 
         ): Response
@@ -40,6 +46,10 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         $formSortie->handleRequest($request);
 
         if ($formSortie->isSubmitted() && $formSortie->isValid()) {
+            // on récupère l'id du lieu
+            $lieuId = $request->get('lieu');
+            $lieu = $repoL->find($lieuId);
+            $newSortie->setLieu($lieu);
             // on récupère l'objet participant (qui est l'organisateur de la sortie)
             // grâce à getUser qui récupère l'user (=participant= connecté
             $organisateur = $this->getUser();
@@ -80,7 +90,11 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     /**
      * @Route("/api/liste/", name="_api_liste")
      */
-    public function apiListe(SortieRepository $repo, Service $service): Response
+    public function apiListe(
+        SortieRepository $repo,
+        Service $service
+
+        ): Response
     {
 
         $listeSorties = $repo->findAll();
@@ -134,14 +148,12 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     ): Response
     {
 
-//
-         $exit->addParticipant($this->getUser());
+            $exit->addParticipant($this->getUser());
+            $em->persist($exit);
+            $em->flush();
 
-        $em->persist($exit);
-        $em->flush();
+            $this->addFlash('success', 'Votre participation a bien ete prise en compte.');
 
-
-        $this->addFlash('success', 'Votre participation a bien ete prise en compte.');
         return $this->redirectToRoute('sortie_liste');
 
     }
@@ -155,13 +167,12 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
     ): Response
     {
-//        $inscription = $sr->findOneBy(["id_participant" => $this->getUser()->getUserIdentifier()]);
-        $exit->removeParticipant($this->getUser());
-        $em->persist($exit);
-        $em->flush();
 
+            $exit->removeParticipant($this->getUser());
+            $em->persist($exit);
+            $em->flush();
+            $this->addFlash('success', 'Nous avons bien pris en compte votre desistement.');
 
-        $this->addFlash('success', 'Nous avons bien pris en compte votre desistement.');
         return $this->redirectToRoute('sortie_liste');
 
     }
@@ -203,9 +214,9 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
      */
     public function annuler(
         Sortie $sortie,
-        Request $request,
         EntityManagerInterface $em,
-        EtatRepository $repoEtat
+        EtatRepository $repoEtat,
+        Request $request
     ): Response
     {
         // création du formulaire pour la sortie à annuler
@@ -230,4 +241,40 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         return $this->renderForm('sortie/annuler.html.twig',
         compact('formAnnuler', 'sortie'));
         }
+
+
+
+    /**
+     * @Route("/api/ville-lieu/", name="_api_ville-lieu")
+     */
+    public function api(VilleRepository $repoV,LieuRepository $repoL): Response
+    {
+        $villes = $repoV->findAll();
+        $tab_ville = [];
+        foreach ($villes as $v)
+        {
+            $info_v['id'] = $v->getId();
+            $info_v['nom'] = $v->getNom();
+            $info_v['codePostal'] = $v->getCodePostal();
+            $tab_ville[] = $info_v;
+        }
+
+        $lieux = $repoL->findAll();
+        $tab_lieu = [];
+        foreach ($lieux as $l)
+        {
+            $info_l['id'] = $l->getId();
+            $info_l['nom'] = $l->getNom();
+            $info_l['rue'] = $l->getRue();
+            $info_l['latitude']  = $l->getLatitude();
+            $info_l['longitude']  = $l->getLongitude();
+            $info_l['ville'] = $l->getVille()->getId();
+            $tab_lieu[] = $info_l;
+        }
+        $tab['villes'] = $tab_ville;
+        $tab['lieux'] = $tab_lieu;
+
+
+        return $this->json($tab);
+    }
 }

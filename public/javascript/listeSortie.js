@@ -98,6 +98,9 @@ function afficherTableau(tableau) {
         tbody.appendChild(clone);
     }
 }
+
+//------------------------------------
+
 let url = 'http://127.0.0.1:8000/sortie/api/liste/'; // l'URL pour afficher le tableau doit être identique a l'url donner lors du lancement du serveur.
 fetch(url)
     .then(response => response.json()) // renvoie au 2 eme then le body (contenu JSON)
