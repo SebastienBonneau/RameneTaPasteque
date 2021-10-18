@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
+use App\Form\AnnulerSortieType;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
-use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use App\Services\Service;
 use Doctrine\ORM\EntityManagerInterface;
@@ -184,25 +184,35 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
     }
 
-    /*
+    /**
      * @Route("/annuler/{sortie}", name="_annuler")
-     *
+     */
     public function annuler(
+        Request $request,
         Sortie $sortie,
         EntityManagerInterface $em,
         EtatRepository $repoEtat
     ): Response
     {
-        // Dans la BDD, je donne à la variable sortie l'état "annulée" ==> id =6
-        $sortie->setEtat($repoEtat->findOneBy(['id' => 6]));
-        // je mets à jour avec cette valeur
-        $em->persist($sortie);
-        // j'envoie en BDD
-        $em->flush();
+
+        // création du formulaire pour la sortie à annuler
+        $formAnnuler = $this->createForm(AnnulerSortieType::class, $sortie);
+        $formAnnuler->handleRequest($request);
+
+        if ($formAnnuler->isSubmitted() && $formAnnuler->isValid()) {
+
+            // Dans la BDD, je donne à la variable sortie l'état "annulée" ==> id =6
+            $sortie->setEtat($repoEtat->findOneBy(['id' => 6]));
+            // je mets à jour avec cette valeur
+            //$em->persist($sortieAannuler);
+            // j'envoie en BDD
+            $em->flush();
 
 
-        $this->addFlash('success', 'La sortie a bien été annulée.');
-        return $this->redirectToRoute('sortie_liste');
-
-    }*/
+            $this->addFlash('success', 'La sortie a bien été annulée.');
+            return $this->redirectToRoute('sortie_annuler');
+        }
+        return $this->renderForm('sortie/annuler.html.twig',
+        compact('formAnnuler'));
+        }
 }
