@@ -16,6 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Date;
 use function Composer\Autoload\includeFile;
 
 /**
@@ -147,14 +148,12 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     ): Response
     {
 
-//
-         $exit->addParticipant($this->getUser());
+            $exit->addParticipant($this->getUser());
+            $em->persist($exit);
+            $em->flush();
 
-        $em->persist($exit);
-        $em->flush();
+            $this->addFlash('success', 'Votre participation a bien ete prise en compte.');
 
-
-        $this->addFlash('success', 'Votre participation a bien ete prise en compte.');
         return $this->redirectToRoute('sortie_liste');
 
     }
@@ -168,13 +167,12 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
     ): Response
     {
-//        $inscription = $sr->findOneBy(["id_participant" => $this->getUser()->getUserIdentifier()]);
-        $exit->removeParticipant($this->getUser());
-        $em->persist($exit);
-        $em->flush();
 
+            $exit->removeParticipant($this->getUser());
+            $em->persist($exit);
+            $em->flush();
+            $this->addFlash('success', 'Nous avons bien pris en compte votre desistement.');
 
-        $this->addFlash('success', 'Nous avons bien pris en compte votre desistement.');
         return $this->redirectToRoute('sortie_liste');
 
     }
@@ -217,7 +215,8 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     public function annuler(
         Sortie $sortie,
         EntityManagerInterface $em,
-        EtatRepository $repoEtat
+        EtatRepository $repoEtat,
+        Request $request
     ): Response
     {
         // création du formulaire pour la sortie à annuler
