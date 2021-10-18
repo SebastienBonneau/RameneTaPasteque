@@ -12,7 +12,20 @@ class AnnulerSortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
+            ->add('nom', null,[
+                'label'=>'Nom de la sortie :'
+            ])
+            ->add('dateHeureDebut', null,[
+                'label'=>'Date de la sortie :'
+            ])
+           /* ->add('campus', null,[
+                'label'=>'Campus :',
+                'choice_label'
+            ])
+            ->add('lieu', null,[
+                'label'=>'Lieu :'
+            ])
+           */
             ->add('infosSortie', null,[
                 'label'=> 'motif :'
             ])

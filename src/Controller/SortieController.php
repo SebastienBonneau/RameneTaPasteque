@@ -210,9 +210,11 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     {
         // création du formulaire pour la sortie à annuler
         $formAnnuler = $this->createForm(AnnulerSortieType::class, $sortie);
+
         $formAnnuler->handleRequest($request);
 
         if ($formAnnuler->isSubmitted() && $formAnnuler->isValid()) {
+
 
             // Dans la BDD, je donne à la variable sortie l'état "annulée" ==> id =6
             $sortie->setEtat($repoEtat->findOneBy(['id' => 6]));
