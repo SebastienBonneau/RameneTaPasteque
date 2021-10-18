@@ -12,12 +12,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Composer\Autoload\includeFile;
 
 /**
  * @Route("/sortie", name="sortie")
  */
 class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 {
+
     /**
      * @Route("/ajouter", name="_ajouter")
      */
@@ -80,8 +82,10 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
      */
     public function apiListe(SortieRepository $repo, Service $service): Response
     {
+
         $listeSorties = $repo->findAll();
         $tableau = [];
+
 
         //Boucle for each pour récupérer tout ce qu'il y a dans le tableau
             foreach ($listeSorties as $sortie){
@@ -96,10 +100,18 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $maDateInscription = $sortie->getDateLimiteInscription(); // je crée une variable pour la date pour pouvoir la formater comme je veux sans influencer sur mon fichier JS qui recupere la meme date.
                 $maDateDebut = $sortie->getDateHeureDebut();
                 $userInscrit = $service->verifInscription($sortie->getParticipants(),$this->getUser());
+
+                   // if ($userInscrit == true){
+                     //   $nbInscrits++;
+                    // }//elseif ($userInscrit == false){
+                       // $nbInscrits--;
+                   // }
+
                 $tab['id']= $sortie->getId();
                 $tab['nom']= $sortie->getNom();
                 $tab['dateHeureDebut']= $maDateDebut->format('d/m/Y H:i'); // permets de formater le dateTime en date seulement et comme on veut.
                 $tab['dateLimiteInscription']= $maDateInscription->format('d/m/Y H:i');
+                $tab['nbInscription']= count($sortie->getParticipants());
                 $tab['nbInscriptionsMax']= $sortie->getNbInscriptionsMax();
                 $tab['etat']= $sortie->getEtat()->getLibelle();
                 $tab['userInscrit'] = $userInscrit;
@@ -121,8 +133,10 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
     ): Response
     {
+
 //
-        $exit->addParticipant($this->getUser());
+         $exit->addParticipant($this->getUser());
+
         $em->persist($exit);
         $em->flush();
 

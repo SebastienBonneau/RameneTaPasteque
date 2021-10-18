@@ -26,6 +26,8 @@ function afficherTableau(tableau) {
         let urlPublier2 = urlPublier+s.id; // lien publier
         let date2 = new Date(s.dateLimiteInscription); // Je recupere la date dans mon tableau et la stocke dans une variable
         let date3 = new Date(s.dateHeureDebut);
+
+        
     //    let urlAnnuler2 = urlAnnuler=s.id; // lien annuler
 
         // je clone le contenu du template dans une variable
@@ -36,7 +38,7 @@ function afficherTableau(tableau) {
         tabTd[0].innerHTML = s.nom;
         tabTd[1].innerHTML = s.dateHeureDebut;
         tabTd[2].innerHTML = s.dateLimiteInscription;
-        tabTd[3].innerHTML = s.nbInscriptionsMax;
+        tabTd[3].innerHTML = s.nbInscription +" / " + s.nbInscriptionsMax;
         tabTd[4].innerHTML = s.etat;
         // Colonne 'inscrit' par défaut il y a une image V que je cache si s.userInsrit est false
         if( s.userInscrit === false){
@@ -53,6 +55,7 @@ function afficherTableau(tableau) {
 
         //lien s'inscrire Condition SI user n'est pas inscrit et que la date de cloture est supperieur a la date du jour
         if( s.userInscrit === false || date2 > date1) {
+
             //j'affiche le lien "s'inscrire'
             tabTd[7].querySelector('#inscrire').setAttribute('href', urlInscrire2);
         }if (s.userInscrit === true || date2 < date1) {
@@ -62,6 +65,7 @@ function afficherTableau(tableau) {
 
         //lien se désister
         if (s.userInscrit === true || date3 > date1) {
+
             // j'affiche le lien se Désister
             tabTd[7].querySelector('#seDesister').setAttribute('href', urlSeDesinscrire2);
         }if( s.userInscrit === false || date3 < date1) {
