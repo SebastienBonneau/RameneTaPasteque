@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
+use App\Form\AnnulerSortieType;
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
-use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
@@ -38,7 +38,6 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         $newSortie = new Sortie();
         // récupération du campus associé à la $newSortie via l'organisateur que l'on affecte à $newSortie
         $campus = $this->getUser()->getCampus();
-
 
         $formSortie = $this->createForm(SortieType::class, $newSortie);
 
@@ -108,7 +107,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 // en paramètres (participants de sortie et l'user connecté)
                 // C'est ce qui permettra de gérer l'affichage de la colonne 'inscrit' dans le tableau
                 // du twig liste
-                //$userOrganisateur =$service->vérifUserConnectedOrganisateur($sortie->getOrganisateur()->getPrenom(), $this->getUser());
+                //$userOrganisateur =$service->vérifUserConnectedOrganisateur($sortie->getOrganisateur()->getId(), $this->getUser());
                 //dd($userOrganisateur);
                 $maDateInscription = $sortie->getDateLimiteInscription(); // je crée une variable pour la date pour pouvoir la formater comme je veux sans influencer sur mon fichier JS qui recupere la meme date.
                 $maDateDebut = $sortie->getDateHeureDebut();
@@ -211,27 +210,37 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
     }
 
-    /*
+    /**
      * @Route("/annuler/{sortie}", name="_annuler")
-     *
+     */
     public function annuler(
         Sortie $sortie,
         EntityManagerInterface $em,
         EtatRepository $repoEtat
     ): Response
     {
-        // Dans la BDD, je donne à la variable sortie l'état "annulée" ==> id =6
-        $sortie->setEtat($repoEtat->findOneBy(['id' => 6]));
-        // je mets à jour avec cette valeur
-        $em->persist($sortie);
-        // j'envoie en BDD
-        $em->flush();
+        // création du formulaire pour la sortie à annuler
+        $formAnnuler = $this->createForm(AnnulerSortieType::class, $sortie);
+        $formAnnuler->handleRequest($request);
+
+        if ($formAnnuler->isSubmitted() && $formAnnuler->isValid()) {
+
+            // Dans la BDD, je donne à la variable sortie l'état "annulée" ==> id =6
+            $sortie->setEtat($repoEtat->findOneBy(['id' => 6]));
+            // je mets à jour avec cette valeur
+            //$em->persist($sortieAannuler);
+            // j'envoie en BDD
+            $em->flush();
 
 
-        $this->addFlash('success', 'La sortie a bien été annulée.');
-        return $this->redirectToRoute('sortie_liste');
+            $this->addFlash('success', 'La sortie a bien été annulée.');
+            return $this->redirectToRoute('sortie_liste');
+        }
+        return $this->renderForm('sortie/annuler.html.twig',
+        compact('formAnnuler', 'sortie'));
+        }
 
-    }*/
+
 
     /**
      * @Route("/api/ville-lieu/", name="_api_ville-lieu")

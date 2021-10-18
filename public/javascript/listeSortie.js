@@ -12,6 +12,7 @@ function afficherTableau(tableau) {
     let urlDetail = "http://127.0.0.1:8000/sortie/detail/"; // lien afficher
     let urlseDesinscrire = "http://127.0.0.1:8000/sortie/seDesinscrire/"; //lien Se désister
     let urlPublier = "http://127.0.0.1:8000/sortie/publier/"; // lien publier
+    let urlAnnuler = "http://127.0.0.1:8000/sortie/annuler/"; // lien annuler
     let date1 = new Date(); // Je creer une variable avec la date du jour, pas besoin de la mettre dans la boucle
 
 
@@ -24,10 +25,9 @@ function afficherTableau(tableau) {
         let urlDetail2 = urlDetail+s.id;//lien afficher
         let urlSeDesinscrire2 = urlseDesinscrire+s.id;//lien se désister
         let urlPublier2 = urlPublier+s.id; // lien publier
+        let urlAnnuler2 = urlAnnuler+s.id; // lien annuler
         let date2 = new Date(s.dateLimiteInscription); // Je recupere la date dans mon tableau et la stocke dans une variable
         let date3 = new Date(s.dateHeureDebut);
-
-        
     //    let urlAnnuler2 = urlAnnuler=s.id; // lien annuler
 
         // je clone le contenu du template dans une variable
@@ -54,11 +54,11 @@ function afficherTableau(tableau) {
         // et je les active avec setAttribute('href', urlId)
 
         //lien s'inscrire Condition SI user n'est pas inscrit et que la date de cloture est supperieur a la date du jour
-        if( s.userInscrit === false || date2 > date1) {
+        if( s.userInscrit === false || date2 > date1 || s.nbInscription <= s.nbInscriptionsMax) {
 
             //j'affiche le lien "s'inscrire'
             tabTd[7].querySelector('#inscrire').setAttribute('href', urlInscrire2);
-        }if (s.userInscrit === true || date2 < date1) {
+        }if (s.userInscrit === true || date2 < date1 || s.nbInscription >= s.nbInscriptionsMax) {
             //je cache le lien "s'inscrire"
             tabTd[7].querySelector('#inscrire').setAttribute('hidden', '');//lien "s'inscrire" caché
         }
@@ -85,10 +85,10 @@ function afficherTableau(tableau) {
         }
 
         //Lien annuler
-   /*     if (s.userOrganisateur == true) {
+         //if (s.userOrganisateur == true) {
             // j'affiche le lien
             tabTd[7].querySelector('#annuler').setAttribute('href', urlAnnuler2);
-        } if (s.userOrganisateur == false) {
+ /*       } if (s.userOrganisateur == false) {
             // je cache le lien
             tabTd[7].querySelector('#annuler').setAttribute('hidden', '');
         }

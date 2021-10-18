@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container" my-4>
+    <div class="row">
+        <div class="offset-3 col-6">
+            <h2>Annuler une sortie</h2>
+            {{ form_start(formAnnuler) }}
+            {{ form_widget(formAnnuler) }}
+                <button class="btn btn-warning my-3" type="submit">Enregistrer</button>
+                <a href="{{ path('sortie_liste') }}" type="btn btn-secondary my-3">Annuler</a>
+            {{ form_end(formAnnuler) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
