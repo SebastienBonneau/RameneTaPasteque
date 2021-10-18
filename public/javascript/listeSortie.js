@@ -85,10 +85,10 @@ function afficherTableau(tableau) {
         }
 
         //Lien annuler
-   /*     if (s.userOrganisateur == true) {
-            // j'affiche le lien */
+         //if (s.userOrganisateur == true) {
+            // j'affiche le lien
             tabTd[7].querySelector('#annuler').setAttribute('href', urlAnnuler2);
-       /* } if (s.userOrganisateur == false) {
+ /*       } if (s.userOrganisateur == false) {
             // je cache le lien
             tabTd[7].querySelector('#annuler').setAttribute('hidden', '');
         }

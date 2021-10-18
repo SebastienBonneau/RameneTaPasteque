@@ -95,7 +95,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 // en paramètres (participants de sortie et l'user connecté)
                 // C'est ce qui permettra de gérer l'affichage de la colonne 'inscrit' dans le tableau
                 // du twig liste
-                //$userOrganisateur =$service->vérifUserConnectedOrganisateur($sortie->getOrganisateur()->getPrenom(), $this->getUser());
+                //$userOrganisateur =$service->vérifUserConnectedOrganisateur($sortie->getOrganisateur()->getId(), $this->getUser());
                 //dd($userOrganisateur);
                 $maDateInscription = $sortie->getDateLimiteInscription(); // je crée une variable pour la date pour pouvoir la formater comme je veux sans influencer sur mon fichier JS qui recupere la meme date.
                 $maDateDebut = $sortie->getDateHeureDebut();
@@ -202,13 +202,12 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
      * @Route("/annuler/{sortie}", name="_annuler")
      */
     public function annuler(
-        Request $request,
         Sortie $sortie,
+        Request $request,
         EntityManagerInterface $em,
         EtatRepository $repoEtat
     ): Response
     {
-
         // création du formulaire pour la sortie à annuler
         $formAnnuler = $this->createForm(AnnulerSortieType::class, $sortie);
         $formAnnuler->handleRequest($request);
@@ -224,9 +223,9 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
 
             $this->addFlash('success', 'La sortie a bien été annulée.');
-            return $this->redirectToRoute('sortie_annuler');
+            return $this->redirectToRoute('sortie_liste');
         }
         return $this->renderForm('sortie/annuler.html.twig',
-        compact('formAnnuler'));
+        compact('formAnnuler', 'sortie'));
         }
 }
