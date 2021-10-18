@@ -33,9 +33,11 @@ class SortieType extends AbstractType
             ->add('infosSortie', null, [
                 'label'=> "Description et infos : "
             ])
-            ->add('lieu', null, [
+
+            /*->add('lieu', null, [
                 'choice_label'=>"nom",
             ])
+            */
            /* ->add('lieu', EntityType::class, [
                 'class'=> Lieu::class,
                 'label'=> "Lieu : ",
