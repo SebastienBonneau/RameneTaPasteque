@@ -85,14 +85,14 @@ function afficherTableau(tableau) {
         }
 
         //Lien annuler
-         //if (s.userOrganisateur == true) {
+         //if (s.organisateur == app.user) {
             // j'affiche le lien
             tabTd[7].querySelector('#annuler').setAttribute('href', urlAnnuler2);
- /*       } if (s.userOrganisateur == false) {
+      // } if (s.organisateur != app.user) {
             // je cache le lien
-            tabTd[7].querySelector('#annuler').setAttribute('hidden', '');
-        }
-*/
+     //      tabTd[7].querySelector('#annuler').setAttribute('hidden', '');
+       // }
+
 
         // j'ajoute la balise <tr> dans la balise tbody
         tbody.appendChild(clone);

@@ -6,6 +6,7 @@ use App\Entity\Campus;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,9 +18,11 @@ class SortieType extends AbstractType
             ->add('nom', null, [
                 'label'=> 'Nom de la sortie : '
             ])
-            ->add('dateHeureDebut', null, [
-                'label'=> 'Date et heure de la sortie : '
+
+            ->add('dateHeureDebut', \null, [
+                'label' => 'Date et heure de la sortie : '
             ])
+
             ->add('dateLimiteInscription', null, [
                 'label'=> "Date limite d\'inscription : "
             ])

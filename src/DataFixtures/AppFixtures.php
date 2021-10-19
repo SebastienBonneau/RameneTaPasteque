@@ -195,9 +195,9 @@ class AppFixtures extends Fixture
 
         $sortie1 = new Sortie();
         $sortie1-> setNom("Attrappe la meduse");
-        $sortie1-> setDateHeureDebut(new \datetime("10-09-2021"));
+        $sortie1-> setDateHeureDebut(new \datetime("10-11-2021"));
         $sortie1-> setDuree(999);
-        $sortie1-> setDateLimiteInscription(new \datetime("08-09-2021"));
+        $sortie1-> setDateLimiteInscription(new \datetime("08-11-2021"));
         $sortie1-> setNbInscriptionsMax(10);
         $sortie1-> setInfosSortie("A main nue, à toi de ramener le plus de méduses pour remporter notre super cadeau, le livre 'Histoire de Geek' edition ENI.");
         $sortie1-> setCampus($campus1);
@@ -210,9 +210,9 @@ class AppFixtures extends Fixture
 
         $sortie2 = new Sortie();
         $sortie2-> setNom("pedalo");
-        $sortie2-> setDateHeureDebut(new \datetime("20-10-2021"));
+        $sortie2-> setDateHeureDebut(new \datetime("20-11-2021"));
         $sortie2-> setDuree(120);
-        $sortie2-> setDateLimiteInscription(new \datetime("18-10-2021"));
+        $sortie2-> setDateLimiteInscription(new \datetime("18-11-2021"));
         $sortie2-> setNbInscriptionsMax(20);
         $sortie2-> setInfosSortie("le but est d'atteindre la rive le premier, avec des pédalos qui ont parfois quelques avaries... A vous de vaincre les éléments !");
         $sortie2-> setCampus($campus2);
@@ -224,13 +224,13 @@ class AppFixtures extends Fixture
 
         $sortie3 = new Sortie();
         $sortie3-> setNom("Le Grand saut !!");
-        $sortie3-> setDateHeureDebut(new \datetime("10-11-2021"));
+        $sortie3-> setDateHeureDebut(new \datetime("10-12-2021"));
         $sortie3-> setDuree(30);
-        $sortie3-> setDateLimiteInscription(new \datetime("08-11-2021"));
-        $sortie3-> setNbInscriptionsMax(14);
+        $sortie3-> setDateLimiteInscription(new \datetime("08-12-2021"));
+        $sortie3-> setNbInscriptionsMax(7);
         $sortie3-> setInfosSortie("A nous le grand saut en parachute, nous convions 14 participants mais nous possedons seulement 10 parachutes, ATTENTION vous etes obligé de sauter");
         $sortie3-> setCampus($campus3);
-        $sortie3-> setEtat($etat3);
+        $sortie3-> setEtat($etat2);
         $sortie3->setLieu($lieu3);
         $sortie3-> setOrganisateur($participant3);
         $manager->persist($sortie3);
@@ -242,9 +242,9 @@ class AppFixtures extends Fixture
         $sortie4-> setDuree(10);
         $sortie4-> setDateLimiteInscription(new \datetime("14-12-2021"));
         $sortie4-> setNbInscriptionsMax(10);
-        $sortie4-> setInfosSortie("Rien de tel que de se faire plaisir avant Noeë, plein de cadeaux sont à remporter, à condition de croquer la pomme. Le jeu se deroule par équipe de 2 minimum, un joueur met une pomme sur sa tête et l'autre joueur a 3 couteaux. Si apres avoir lancé ses couteaux le joueur a touché la pomme il remporte un cadeau sinon c'est perdu !!");
+        $sortie4-> setInfosSortie("Rien de tel que de se faire plaisir avant Noël, plein de cadeaux sont à remporter, à condition de croquer la pomme. Le jeu se deroule par équipes de 2 minimum, un joueur met une pomme sur sa tête et l'autre joueur a 3 couteaux. Si après avoir lancé ses couteaux le joueur a touché la pomme, il remporte un cadeau. Sinon c'est perdu !!");
         $sortie4-> setCampus($campus4);
-        $sortie4-> setEtat($etat3);
+        $sortie4-> setEtat($etat1);
         $sortie4->setLieu($lieu4);
         $sortie4-> setOrganisateur($participant4);
         $manager->persist($sortie4);

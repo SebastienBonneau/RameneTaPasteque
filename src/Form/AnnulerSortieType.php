@@ -18,14 +18,7 @@ class AnnulerSortieType extends AbstractType
             ->add('dateHeureDebut', null,[
                 'label'=>'Date de la sortie :'
             ])
-           /* ->add('campus', null,[
-                'label'=>'Campus :',
-                'choice_label'
-            ])
-            ->add('lieu', null,[
-                'label'=>'Lieu :'
-            ])
-           */
+
             ->add('infosSortie', null,[
                 'label'=> 'motif :'
             ])

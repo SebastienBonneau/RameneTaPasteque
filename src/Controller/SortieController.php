@@ -51,7 +51,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             $lieu = $repoL->find($lieuId);
             $newSortie->setLieu($lieu);
             // on récupère l'objet participant (qui est l'organisateur de la sortie)
-            // grâce à getUser qui récupère l'user (=participant= connecté
+            // grâce à getUser qui récupère l'user (=participant connecté)
             $organisateur = $this->getUser();
             // on hydrate (= on affecte) notre organisateur à la sortie.
             $newSortie->setOrganisateur($organisateur);
@@ -109,7 +109,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 // en paramètres (participants de sortie et l'user connecté)
                 // C'est ce qui permettra de gérer l'affichage de la colonne 'inscrit' dans le tableau
                 // du twig liste
-                //$userOrganisateur =$service->vérifUserConnectedOrganisateur($sortie->getOrganisateur()->getId(), $this->getUser());
+                //$userOrganisateur =$service->verifUserConnectedOrganisateur($sortie->getOrganisateur(), $this->getUser());
                 //dd($userOrganisateur);
                 $maDateInscription = $sortie->getDateLimiteInscription(); // je crée une variable pour la date pour pouvoir la formater comme je veux sans influencer sur mon fichier JS qui recupere la meme date.
                 $maDateDebut = $sortie->getDateHeureDebut();
