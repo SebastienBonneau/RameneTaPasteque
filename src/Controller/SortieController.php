@@ -79,6 +79,14 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     }
 
     /**
+     * @Route("/listeLien", name="_liste_lien")
+     */
+    public function listeLien(CampusRepository $repoC)
+    {
+        return $this->render('sortie/liste.html.twig');
+    }
+
+    /**
      * @Route("/liste", name="_liste")
      */
     public function liste(CampusRepository $repoC)
@@ -155,7 +163,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             $SommeParticipants = count($exit->getParticipants());
 
            if( $exit->getDateLimiteInscription() > $maDate && $exit->getNbInscriptionsMax() > $SommeParticipants && $verif == false)
-           {
+          {
                $exit->addParticipant($this->getUser());
                $em->persist($exit);
                $em->flush();
@@ -165,7 +173,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                $this->addFlash('echec', 'Je t\'ai à l\'oeil, petit FILOU !!');
            }
 
-        return $this->redirectToRoute('sortie_liste');
+        return $this->redirectToRoute('sortie_liste_lien');
 
     }
 
@@ -193,7 +201,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         {
             $this->addFlash('echec', 'Je t\'ai à l\'oeil, petit FILOU !! ');
         }
-        return $this->redirectToRoute('sortie_liste');
+        return $this->redirectToRoute('sortie_liste_lien');
 
     }
 
