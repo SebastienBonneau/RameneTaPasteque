@@ -8,7 +8,40 @@
     </div>
     <div id="filtre">
         <h2> Filtrer les sorties </h2>
-        <input type="" id="">
+        <label for="campus">Campus : </label>
+        <div class="col-2">
+        <select class="form-control" name="campus" id="campus" onchange="changerCampus()">
+           <option value="0">Choisir un campus</option>
+            {% for camp in campus %}
+           <option value="{{ camp.id }}">{{ camp.nom }}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <br>
+        <label for="filtreNom">Le nom de la sortie contient :</label>
+        <div class="col-2">
+        <input type="text" onkeyup="filtrer()"
+               id="filtreNom" class="form-control" placeholder="Rechercher">
+        </div>
+        <br>
+        <label for="dateDebut">Entre</label>
+        <div class="col-2">
+        <input type="date" id="dateDebut" class="form-control">
+        </div>
+        <label for="dateFin">et</label>
+        <div class="col-2">
+            <input type="date" id="dateFin" class="form-control">
+        </div>
+        <div class="col-2" id="checkboxes">
+            <input type="checkbox" id="critereOrga" onclick="filtrer()"> Sorties dont je suis l'organisateur/trice
+            <br>
+            <input type="checkbox" id="critereInscrit" onclick="filtrer()"> Sorties auxquelles je suis inscrit/e
+            <br>
+            <input type="checkbox" id="critereNinscrit" onclick="filtrer()"> Sorties auxquelles je ne suis pas inscrit/e
+            <br>
+            <input type="checkbox" id="criterePassees" onclick="filtrer()"> Sorties passées
+        </div>
+
     </div>
 
 
@@ -45,22 +78,22 @@
             <!--dans la colonne suivante, affichage par défaut d'une icône v qui sera cachée en JS
              si l'app.user n'est pas inscrit à cette sortie
              C'est une balise <i> qui sera utilisée dans le JS pour venir remplacer son contenu-->
-            <td>  <i class="fab fa-angellist"> </i> <!--<i class="fas fa-check"></i> --></td>
+            <td> <i class="fas fa-check"></i> <!--<i class="fab fa-angellist"> </i><i class="fas fa-check"></i> --></td>
             <td>6</td>
             <td colspan="3">
                 <!-- lien affiché tout le temps, renvoie vers le détail de la sortie-->
-                <a href="#" id="detail">afficher</a>
+                <a href="#" id="detail"><i class="fas fa-archway"></i>afficher</a>
                 <!-- lien à afficher si app.user est inscrit à la sortie ET si date de la sortie non attente; cela décoche la colonne inscrit-->
-                <a href="#" id="seDesister">Se désister</a>
+                <a href="#" id="seDesister"><i class="fas fa-external-link-alt"></i>Se désister</a>
                 <!-- lien à afficher si app.user est l'organisateur ET que la date de la sortie n'est pas atteinte-->
-                <a href="#" id="modifier">Modifier</a>
+                <a href="#" id="modifier"><i class="fas fa-edit"></i>Modifier</a>
                 <!-- lien à afficher si app.user n'est pas inscrit (donc si la croix n'est pas affiché dans la colonne inscrit)-->
-                <a href="#" id="inscrire">S'inscrire</a>
+                <a href="#" id="inscrire"><i class="fas fa-external-link-square-alt"></i>S'inscrire</a>
                 <!-- lien à afficher si app.user est l'organisateur et que la sortie est en état créée(on a
                 donc appuyé sur le bouton enregistrer dans le formulaire de création de la sortie-->
-                <a href="#" id="publier" >Publier</a>
+                <a href="#" id="publier" ><i class="fas fa-envelope-open-text"></i>Publier</a>
                 <!-- lien à afficher si app.user est l'organisateur et si l'état est différent de activité en cours -->
-                <a href="#" id="annuler">Annuler</a>
+                <a href="#" id="annuler"><i class="fas fa-cut"></i>Annuler</a>
             </td>
         </tr>
     </template>

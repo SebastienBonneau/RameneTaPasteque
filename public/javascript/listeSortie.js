@@ -1,9 +1,14 @@
+
+// Création de la variable tableau utilisable dans plusieurs fonctions
+let tableau = [];
+
 /**
- * Création de la méthode qui permet d'afficher le tableau
+ * Création de la méthode qui permet d'afficher le tableau js en HTML
  */
 function afficherTableau(tableau) {
     //Création d'une variable qui récupère l'élément #myTbody dans le twig
     let tbody = document.querySelector("#myTbody");
+    tbody.innerHTML='';
     // Création d'une variable qui récupère l'lément #ligne dans le twig
     let template = document.querySelector("#ligne");
     // Création d'une variable pour chaque lien du tableau, qui sera complétée
@@ -85,14 +90,14 @@ function afficherTableau(tableau) {
         }
 
         //Lien annuler
-         //if (s.userOrganisateur == true) {
+         //if (s.organisateur == app.user) {
             // j'affiche le lien
             tabTd[7].querySelector('#annuler').setAttribute('href', urlAnnuler2);
- /*       } if (s.userOrganisateur == false) {
+      // } if (s.organisateur != app.user) {
             // je cache le lien
-            tabTd[7].querySelector('#annuler').setAttribute('hidden', '');
-        }
-*/
+     //      tabTd[7].querySelector('#annuler').setAttribute('hidden', '');
+       // }
+
 
         // j'ajoute la balise <tr> dans la balise tbody
         tbody.appendChild(clone);
@@ -104,10 +109,92 @@ function afficherTableau(tableau) {
 let url = 'http://127.0.0.1:8000/sortie/api/liste/'; // l'URL pour afficher le tableau doit être identique a l'url donner lors du lancement du serveur.
 fetch(url)
     .then(response => response.json()) // renvoie au 2 eme then le body (contenu JSON)
-    .then(tableau=>
+    .then(tab=>
     {
-        console.log(tableau);
+        console.log(tab);
+        tableau = tab;
         afficherTableau(tableau);
     });
+
+//------------------------------------
+
+function changeCampus()
+{
+    let campusId = document.querySelector('#campus').value;
+    afficherSortie(campusId);
+}
+
+//------------------------------------
+
+function filtrerSortie(campusId){}
+
+//------------------------------------
+
+function filtrerNom(tab,nom)
+{
+    let tab2 = [];
+    // si il n'y pas de nom je retourne le tableau
+    if (nom.length > 0){
+        // parcourir le tableau de sortied
+        for(let s of tab)
+        {
+            // si le nom contient des lettre de nom
+            if (s.nom.indexOf(nom) != -1)
+            {
+                tab2.push(s);
+            }
+        }
+    }else
+    {
+        tab2 =tab;
+    }
+    return tab2;
+
+}
+
+//------------------------------------
+
+function filtrer()
+{
+    console.log('filtre !!!');
+    let tableau2 = tableau;
+    //---
+    let filtreNom = document.querySelector('#filtreNom').value;
+    console.log(filtreNom);
+    tableau2 = filtrerNom(tableau2,filtreNom);
+
+    //---
+        // filtre dateDébut
+    //---
+        // filtre dateFin
+    //---
+    /*
+    let critereOrga = document.querySelector('#critereOrga').checked;
+    //console.log(critereOrga);
+    if (critereOrga){
+        tableau2 = filtrerOrga(tableau2);
+    }
+    //---
+    let critereInscrit = document.querySelector('#critereInscrit').checked;
+    //console.log(critereDate);
+    if (critereInscrit){
+        tableau2 = filtrerInscrit(tableau2);
+    }
+    //---
+    let critereNinscrit = document.querySelector('#critereNinscrit').checked;
+    //console.log(critereDate);
+    if (critereNinscrit){
+        tableau2 = filtrerNinscrit(tableau2);
+    }
+    //---
+    let criterePassees = document.querySelector('#criterePassees').checked;
+    //console.log(critereDate);
+    if (criterePassees){
+        tableau2 = filtrerPassees(tableau2);
+    }
+    */
+
+    afficherTableau(tableau2);
+}
 
 

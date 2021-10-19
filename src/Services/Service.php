@@ -36,14 +36,11 @@ class Service
   *
  * Méthode qui permet de vérifier si l'user connecté est l'organisateur de la sortie
  */
-    public function vérifUserConnectedOrganisateur($userConnected, $sorties){
+    public function verifUserConnectedOrganisateur($userConnecte, $sortie){
 
-        foreach ($sorties as $s){
-            dd($userConnected->getId());
-            if ($userConnected->getId() == $s->getOrganisateur()->getId()){
+            if ($userConnecte->getId() == $sortie->getOrganisateur()->getId()){
                 return true;
-            }
-        } return false;
+            } return false;
     }
 
 
