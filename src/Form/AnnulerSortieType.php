@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Sortie;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +16,8 @@ class AnnulerSortieType extends AbstractType
             ->add('nom', null,[
                 'label'=>'Nom de la sortie :'
             ])
-            ->add('dateHeureDebut', null,[
+            ->add('dateHeureDebut', DateTimeType::class, [
+                'widget' => 'single_text',
                 'label'=>'Date de la sortie :'
             ])
 

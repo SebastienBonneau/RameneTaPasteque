@@ -8,16 +8,13 @@ use App\Form\SortieType;
 use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
 use App\Repository\LieuRepository;
-use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
 use App\Services\Service;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Types\String_;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Date;
 use function Composer\Autoload\includeFile;
 
 /**
@@ -115,6 +112,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $maDateDebut = $sortie->getDateHeureDebut();
                 $userInscrit = $service->verifInscription($sortie->getParticipants(),$this->getUser());
                 $userOrganisateur = $service->verifUserConnectedOrganisateur($sortie->getOrganisateur(),$this->getUser());
+                $lienAnnuler = $service->verifLienAnuler($sortie->getOrganisateur(),$this->getUser(),$maDateDebut, $sortie->getEtat());
 
                    // if ($userInscrit == true){
                      //   $nbInscrits++;
@@ -133,6 +131,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $tab['organisateur']= $sortie->getOrganisateur()->getPrenom();
                 $tab['userOrganisateur'] = $userOrganisateur;
                 $tab['campus'] = $sortie->getCampus()->getId();
+                $tab['lienAnnuler'] = $lienAnnuler;
 
                 $tableau[]= $tab;
             }
@@ -159,10 +158,10 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                $exit->addParticipant($this->getUser());
                $em->persist($exit);
                $em->flush();
-               $this->addFlash('success', 'Votre participation a bien ete prise en compte.');
+               $this->addFlash('success', 'Votre participation a bien été prise en compte.');
            }else
            {
-               $this->addFlash('echec', 'Je t\'ai à l\'oeil, petit FILOU !!');
+               $this->addFlash('echec', 'Sortie déjà passée... Je t\'ai à l\'oeil, petit FILOU !!');
            }
 
         return $this->redirectToRoute('sortie_liste');
@@ -188,10 +187,10 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             $exit->removeParticipant($this->getUser());
             $em->persist($exit);
             $em->flush();
-            $this->addFlash('success', 'Nous avons bien pris en compte votre desistement.');
+            $this->addFlash('success', 'Votre désistement a bien été pris en compte.');
         }else
         {
-            $this->addFlash('echec', 'Je t\'ai à l\'oeil, petit FILOU !! ');
+            $this->addFlash('echec', 'Sortie déjà passée... Je t\'ai à l\'oeil, petit(e) FILOU(TE) !! ');
         }
         return $this->redirectToRoute('sortie_liste');
 
@@ -240,29 +239,38 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         Service $service
     ): Response
     {
+        $maDate = new \DateTime();
+        $verif = $service->verifLienAnuler(
+            $sortie->getOrganisateur(),
+            $this->getUser(),
+            $sortie->getEtat(),
+            $sortie->getDateHeureDebut()
+        );
 
-        // création du formulaire pour la sortie à annuler
-        $formAnnuler = $this->createForm(AnnulerSortieType::class, $sortie);
+            // création du formulaire pour la sortie à annuler
+            $formAnnuler = $this->createForm(AnnulerSortieType::class, $sortie);
 
-        $formAnnuler->handleRequest($request);
+            $formAnnuler->handleRequest($request);
+            //if ($verif == true) {
+                if ($formAnnuler->isSubmitted() && $formAnnuler->isValid()) {
 
-        if ($formAnnuler->isSubmitted() && $formAnnuler->isValid()) {
 
-
-            // Dans la BDD, je donne à la variable sortie l'état "annulée" ==> id =6
-            $sortie->setEtat($repoEtat->findOneBy(['id' => 6]));
-            // je mets à jour avec cette valeur
-            //$em->persist($sortieAannuler);
-            // j'envoie en BDD
-            $em->flush();
+                    // Dans la BDD, je donne à la variable sortie l'état "annulée" ==> id =6
+                    $sortie->setEtat($repoEtat->findOneBy(['id' => 6]));
+                    // je mets à jour avec cette valeur
+                    //$em->persist($sortieAannuler);
+                    // j'envoie en BDD
+                    $em->flush();
 
 
             $this->addFlash('success', 'La sortie a bien été annulée.');
             return $this->redirectToRoute('sortie_liste');
-        }
-        return $this->renderForm('sortie/annuler.html.twig',
-        compact('formAnnuler', 'sortie'));
-        }
+                }
+       // }
+            return $this->renderForm('sortie/annuler.html.twig',
+                compact('formAnnuler', 'sortie'));
+
+    }
 
 
 

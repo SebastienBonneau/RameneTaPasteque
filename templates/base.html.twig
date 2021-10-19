@@ -58,10 +58,12 @@
             {# read and display all flash messages #}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="flash-{{ label }} container col-5">
-                        <h3>{{ message }}
-                        <img style="width: 80px; height: 80px;" src="{{ asset('images/papa5.gif') }}" alt="logo succes">
-                        </h3>
+                    <div class="flash-{{ label }} container-fluid">
+                        <div class="row">
+                            <div class="offset-2 col-9">
+                                <h3>{{ message }}<img style="width: 80px; height: 80px;" src="{{ asset('images/papa5.gif') }}" alt="logo succes"></h3>
+                            </div>
+                        </div>
                     </div>
                 {% endfor %}
             {% endfor %}

@@ -4,7 +4,7 @@ let villes = [];
 
 //------------------------------------
 /**
- * Méthode qui permet de mettre à cjour le code postal en
+ * Méthode qui permet de mettre à jour le code postal en
  * fonction de la ville sélectionnéee
  * Elle sera utilisée à l'affichage du formulaire et au moment de la sélection d'une ville
  * @param villeId

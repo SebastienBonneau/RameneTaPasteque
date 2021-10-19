@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Entity\Participant;
+use Symfony\Component\Validator\Constraints\Date;
+
 
 class Service
 {
@@ -39,5 +41,18 @@ class Service
             if ($userConnecte->getId() == $organisateur->getId()) {
                 return true;
             }return false;
+    }
+
+    /**
+     *
+     * Méthode qui permet de vérifier si le lien annuler est affichable
+     */
+    public function verifLienAnuler($organisateur, $userConnecte, $dateHeureDebut,$etat)
+    {
+        $dateDuJour = new Date();
+        if ($userConnecte->getId() == $organisateur->getId() && $dateDuJour<$dateHeureDebut && $etat->getId()<=2) {
+            return true;
+        }   return false;
+
     }
 }

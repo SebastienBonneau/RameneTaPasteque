@@ -59,21 +59,25 @@ function afficherTableau(tableau) {
         // et je les active avec setAttribute('href', urlId)
 
         //lien s'inscrire Condition SI user n'est pas inscrit et que la date de cloture est supperieur a la date du jour
-        if( s.userInscrit === true  && date2 < date1 && s.nbInscription < s.nbInscriptionsMax && s.etat === 2 ) {
+        if( s.userInscrit === false)  //&& (date2 > date1) && (s.nbInscription < s.nbInscriptionsMax) && (s.etat === 'ouverte') )
+             {
 
             //j'affiche le lien "s'inscrire'
             tabTd[7].querySelector('#inscrire').setAttribute('href', urlInscrire2);
-        }if (s.userInscrit === true || date2 > date1 || s.nbInscription >= s.nbInscriptionsMax || s.etat !== 2) {
+        }if (s.userInscrit === true)// || date2 < date1 || s.nbInscription >= s.nbInscriptionsMax || s.etat !== 'ouverte')
+             {
             //je cache le lien "s'inscrire"
             tabTd[7].querySelector('#inscrire').setAttribute('hidden', '');//lien "s'inscrire" caché
         }
 
         //lien se désister
-        if (s.userInscrit === true || date3 > date1) {
+        if (s.userInscrit === true) //&& date3 > date1)
+            {
 
             // j'affiche le lien se Désister
             tabTd[7].querySelector('#seDesister').setAttribute('href', urlSeDesinscrire2);
-        }if( s.userInscrit === false || date3 < date1) {
+        }if( s.userInscrit === false)// || date3 < date1)
+            {
             //je cache le lien "se désister"
             tabTd[7].querySelector('#seDesister').setAttribute('hidden', '');
         }
@@ -90,10 +94,10 @@ function afficherTableau(tableau) {
         }
 
         //Lien annuler
-         if (s.userOrganisateur == true) {
+         if (s.userOrganisateur === true) {
             // j'affiche le lien
             tabTd[7].querySelector('#annuler').setAttribute('href', urlAnnuler2);
-       } if (s.userOrganisateur == false) {
+       } if (s.etat ==='Annulée' || s.userOrganisateur === false) {
             // je cache le lien
           tabTd[7].querySelector('#annuler').setAttribute('hidden', '');
         }
