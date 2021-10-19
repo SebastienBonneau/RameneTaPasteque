@@ -19,7 +19,11 @@
             </div>
             <div class="col-2 my-3">
                 <select class="form-control" name="campus" id="campus" onchange="changerCampus()">
-                // ici on alimente
+                    // ici on alimente
+                    <option value="0">Choisir un campus</option>
+                    {% for camp in campus %}
+                        <option value="{{ camp.id }}">{{ camp.nom }}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="offset-1 col-4 mb-1">
