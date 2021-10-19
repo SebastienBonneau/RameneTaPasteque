@@ -33,7 +33,7 @@ function afficherTableau(tableau) {
         let urlAnnuler2 = urlAnnuler+s.id; // lien annuler
         let date2 = new Date(s.dateLimiteInscription); // Je recupere la date dans mon tableau et la stocke dans une variable
         let date3 = new Date(s.dateHeureDebut);
-    //    let urlAnnuler2 = urlAnnuler=s.id; // lien annuler
+
 
         // je clone le contenu du template dans une variable
         let clone = template.content.cloneNode(true);
@@ -90,13 +90,13 @@ function afficherTableau(tableau) {
         }
 
         //Lien annuler
-         //if (s.organisateur == app.user) {
+         if (s.userOrganisateur == true) {
             // j'affiche le lien
             tabTd[7].querySelector('#annuler').setAttribute('href', urlAnnuler2);
-      // } if (s.organisateur != app.user) {
+       } if (s.userOrganisateur == false) {
             // je cache le lien
-     //      tabTd[7].querySelector('#annuler').setAttribute('hidden', '');
-       // }
+          tabTd[7].querySelector('#annuler').setAttribute('hidden', '');
+        }
 
 
         // j'ajoute la balise <tr> dans la balise tbody
