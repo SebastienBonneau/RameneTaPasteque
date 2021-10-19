@@ -49,26 +49,26 @@ class AppFixtures extends Fixture
 
 
         $ville1 = new Ville();
-        $ville1-> setNom("Romville");
-        $ville1-> setCodePostal("85185");
+        $ville1-> setNom("Les Sables d'Olonne");
+        $ville1-> setCodePostal("85100");
         $manager->persist($ville1);
         $manager-> flush();
 
         $ville2 = new Ville();
-        $ville2-> setNom("Pouceville");
+        $ville2-> setNom("St Philbert de Grand Lieu");
         $ville2-> setCodePostal("44030");
         $manager->persist($ville2);
         $manager-> flush();
 
         $ville3 = new Ville();
-        $ville3-> setNom("Videville");
-        $ville3-> setCodePostal("56018");
+        $ville3-> setNom("Vannes");
+        $ville3-> setCodePostal("56000");
         $manager->persist($ville3);
         $manager-> flush();
 
         $ville4 = new Ville();
-        $ville4-> setNom("Aieville");
-        $ville4-> setCodePostal("49049");
+        $ville4-> setNom("Angers");
+        $ville4-> setCodePostal("49000");
         $manager->persist($ville4);
         $manager-> flush();
 
@@ -76,7 +76,7 @@ class AppFixtures extends Fixture
 
         $lieu1 = new Lieu();
         $lieu1-> setNom("la plage des sables");
-        $lieu1-> setRue("rue des poilus");
+        $lieu1-> setRue("rue des marins");
         $lieu1-> setVille($ville1);
         $manager->persist($lieu1);
         $manager-> flush();
@@ -96,8 +96,8 @@ class AppFixtures extends Fixture
         $manager-> flush();
 
         $lieu4 = new Lieu();
-        $lieu4-> setNom("La foret des mordus");
-        $lieu4-> setRue("chemin de belespoir");
+        $lieu4-> setNom("La foret des elfes");
+        $lieu4-> setRue("chemin de bel espoir");
         $lieu4-> setVille($ville4);
         $manager->persist($lieu4);
         $manager-> flush();
@@ -129,7 +129,7 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         $campus5 = new Campus();
-        $campus5->setNom("Chauve Campus");
+        $campus5->setNom("Papaye Campus");
         $manager->persist($campus5);
         $manager->flush();
 
@@ -198,8 +198,8 @@ class AppFixtures extends Fixture
         $sortie1-> setDateHeureDebut(new \datetime("10-09-2021"));
         $sortie1-> setDuree(999);
         $sortie1-> setDateLimiteInscription(new \datetime("08-09-2021"));
-        $sortie1-> setNbInscriptionsMax(300);
-        $sortie1-> setInfosSortie("A main nu, a toi de ramener le plus de meduses pour remporter notre super cadeau, le livre 'Histoire de Geek' edition ENI.");
+        $sortie1-> setNbInscriptionsMax(10);
+        $sortie1-> setInfosSortie("A main nue, à toi de ramener le plus de méduses pour remporter notre super cadeau, le livre 'Histoire de Geek' edition ENI.");
         $sortie1-> setCampus($campus1);
         $sortie1-> setEtat($etat1);
         $sortie1->setLieu($lieu1);
@@ -213,8 +213,8 @@ class AppFixtures extends Fixture
         $sortie2-> setDateHeureDebut(new \datetime("20-10-2021"));
         $sortie2-> setDuree(120);
         $sortie2-> setDateLimiteInscription(new \datetime("18-10-2021"));
-        $sortie2-> setNbInscriptionsMax(80);
-        $sortie2-> setInfosSortie("le but est de savoir nager, tous nos pédalos sont sur le points de couler, a vous de noyer vos concurrents");
+        $sortie2-> setNbInscriptionsMax(20);
+        $sortie2-> setInfosSortie("le but est d'atteindre la rive le premier, avec des pédalos qui ont parfois quelques avaries... A vous de vaincre les éléments !");
         $sortie2-> setCampus($campus2);
         $sortie2-> setEtat($etat2);
         $sortie2->setLieu($lieu2);
@@ -237,12 +237,12 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         $sortie4 = new Sortie();
-        $sortie4-> setNom("Croquer la Pômme.");
+        $sortie4-> setNom("Croquer la Pomme.");
         $sortie4-> setDateHeureDebut(new \datetime("14-12-2021"));
         $sortie4-> setDuree(10);
         $sortie4-> setDateLimiteInscription(new \datetime("14-12-2021"));
-        $sortie4-> setNbInscriptionsMax(1500);
-        $sortie4-> setInfosSortie("Rien de tel que ce faire plaisir avant noel, pleins de cadeau sont a remporter a condition de croquer la pomme. Le jeu se deroule par equipe de 2 minimum, un joueur mets une pomme sur sa tete et l'autre joueur a 3 couteaux. Si apres avoir lancé ses couteaux le joueur a touché la pomme il remporte un cadeau sinon c'est perdu !! a vous de rejouer.");
+        $sortie4-> setNbInscriptionsMax(10);
+        $sortie4-> setInfosSortie("Rien de tel que de se faire plaisir avant Noeë, plein de cadeaux sont à remporter, à condition de croquer la pomme. Le jeu se deroule par équipe de 2 minimum, un joueur met une pomme sur sa tête et l'autre joueur a 3 couteaux. Si apres avoir lancé ses couteaux le joueur a touché la pomme il remporte un cadeau sinon c'est perdu !!");
         $sortie4-> setCampus($campus4);
         $sortie4-> setEtat($etat3);
         $sortie4->setLieu($lieu4);
