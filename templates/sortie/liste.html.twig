@@ -18,7 +18,7 @@
                 <label for="campus">Campus : </label>
             </div>
             <div class="col-2 my-3">
-                <select class="form-control" name="campus" id="campus" onchange="changerCampus()">
+                <select class="form-control" name="campus" id="campus" onchange="filtrer()">
                     // ici on alimente
                     <option value="0">Choisir un campus</option>
                     {% for camp in campus %}

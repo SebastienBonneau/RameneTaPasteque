@@ -131,7 +131,8 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $tab['etat']= $sortie->getEtat()->getLibelle();
                 $tab['userInscrit'] = $userInscrit;
                 $tab['organisateur']= $sortie->getOrganisateur()->getPrenom();
-                $tab['userOrganisateur']= $userOrganisateur;
+                $tab['userOrganisateur'] = $userOrganisateur;
+                $tab['campus'] = $sortie->getCampus()->getId();
 
                 $tableau[]= $tab;
             }

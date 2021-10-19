@@ -111,12 +111,14 @@ fetch(url)
     .then(response => response.json()) // renvoie au 2 eme then le body (contenu JSON)
     .then(tab=>
     {
-/*
+
         for (let s of tab)
         {
-            s.dateHeureDebut = new Date(s.dateHeureDebut);
+            s.dateHeureDebut2 = new Date(s.dateHeureDebut);
         }
-*/
+        //let campusId = tab.campus[0].id;
+        //sorties = tab.sorties;
+        //afficherSortie(campusId)
         console.log(tab);
         tableau = tab;
         afficherTableau(tableau);
@@ -124,15 +126,27 @@ fetch(url)
 
 //------------------------------------
 
-function changeCampus()
+function filtrerCampus(tab, campus)
 {
-    let campusId = document.querySelector('#campus').value;
-    afficherSortie(campusId);
+
+    let tab2 = [];
+    // si il n'y pas de nom je retourne le tableau
+    if (campus != 0)
+    {
+        for (let s of tab){
+
+            if (s.campus == campus)
+            {
+                tab2.push(s);
+            }
+        }
+    }
+    else
+    {
+        tab2 = tab;
+    }
+    return tab2;
 }
-
-//------------------------------------
-
-function filtrerSortie(campusId){}
 
 //------------------------------------
 
@@ -152,7 +166,7 @@ function filtrerNom(tab,nom)
         }
     }else
     {
-        tab2 =tab;
+        tab2 = tab;
     }
     return tab2;
 
@@ -208,10 +222,10 @@ function filtrerNinscrit(tab)
 function filtrerPassees(tab)
 {
     let tab2 = [];
-    //let date1 = new Date();
+    let date1 = new Date();
     for (let s of tab)
     {
-        if (s.dateHeureDebut < (s.date1+30))
+        if (s.dateHeureDebut2 < date1)
         {
             tab2.push(s);
         }
@@ -226,9 +240,11 @@ function filtrer()
     //console.log('filtre !!!');
     let tableau2 = tableau;
     //---
-    let filtreNom = document.querySelector('#filtreNom').value;
-    console.log(filtreNom);
-    tableau2 = filtrerNom(tableau2,filtreNom);
+    let campus = document.querySelector('#campus').value;
+    tableau2 = filtrerCampus(tableau2, campus);
+    //---
+    let nom = document.querySelector('#filtreNom').value;
+    tableau2 = filtrerNom(tableau2,nom);
     //---
         // filtre dateDébut
     //---
