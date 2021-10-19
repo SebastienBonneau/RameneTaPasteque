@@ -8,7 +8,37 @@
     </div>
     <div id="filtre">
         <h2> Filtrer les sorties </h2>
-        <input type="" id="">
+        <label for="campus">Campus : </label>
+        <div class="col-2">
+        <select class="form-control" name="campus" id="campus" onchange="changerCampus()">
+            // ici on alimente
+        </select>
+        </div>
+        <br>
+        <label for="filtreNom">Le nom de la sortie contient :</label>
+        <div class="col-2">
+        <input type="text" onkeyup="filtrer()"
+               id="filtreNom" class="form-control" placeholder="Rechercher">
+        </div>
+        <br>
+        <label for="dateDebut">Entre</label>
+        <div class="col-2">
+        <input type="date" id="dateDebut" class="form-control">
+        </div>
+        <label for="dateFin">et</label>
+        <div class="col-2">
+            <input type="date" id="dateFin" class="form-control">
+        </div>
+        <div class="col-2" id="checkboxes">
+            <input type="checkbox" id="critereOrga" onclick="filtrer()"> Sorties dont je suis l'organisateur/trice
+            <br>
+            <input type="checkbox" id="critereInscrit" onclick="filtrer()"> Sorties auxquelles je suis inscrit/e
+            <br>
+            <input type="checkbox" id="critereNinscrit" onclick="filtrer()"> Sorties auxquelles je ne suis pas inscrit/e
+            <br>
+            <input type="checkbox" id="criterePassees" onclick="filtrer()"> Sorties passées
+        </div>
+
     </div>
 
 

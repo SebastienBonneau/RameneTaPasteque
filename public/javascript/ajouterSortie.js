@@ -4,7 +4,7 @@ let villes = [];
 
 //------------------------------------
 /**
- * Méthode qui permet de mettre à cjour le code postal en
+ * Méthode qui permet de mettre à jour le code postal en
  * fonction de la ville sélectionnéee
  * Elle sera utilisée à l'affichage du formulaire et au moment de la sélection d'une ville
  * @param villeId
@@ -60,11 +60,8 @@ function afficherLieu(villeId)
             option.setAttribute('value',l.id); //<option value="42"></option>
             option.textContent = l.nom; //<option value="42"> rouge</option>
             selectLieu.appendChild(option);
-
         }
-
     }
-
 }
 
 //------------------------------------
@@ -80,7 +77,6 @@ function afficherVille(tab)
         option.setAttribute('value',v.id); //<option value="42"></option>
         option.textContent = v.nom; //<option value="42"> rouge</option>
         document.querySelector('#ville').appendChild(option);
-
     }
 }
 
