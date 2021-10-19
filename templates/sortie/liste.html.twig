@@ -10,13 +10,15 @@
         <h2> Filtrer les sorties </h2>
         <label for="campus">Campus : </label>
         <div class="col-2">
-        <input type="select" id="campus" name="campus" class="form-control">
+        <select class="form-control" name="campus" id="campus" onchange="changerCampus()">
+            // ici on alimente
+        </select>
         </div>
         <br>
         <label for="filtreNom">Le nom de la sortie contient :</label>
         <div class="col-2">
         <input type="text" onkeyup="filtrer()"
-               id="filterNom" class="form-control" placeholder="Rechercher">
+               id="filtreNom" class="form-control" placeholder="Rechercher">
         </div>
         <br>
         <label for="dateDebut">Entre</label>
