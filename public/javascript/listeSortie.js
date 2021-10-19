@@ -1,5 +1,9 @@
+
+// Création de la variable tableau utilisable dans plusieurs fonctions
+let tableau = [];
+
 /**
- * Création de la méthode qui permet d'afficher le tableau
+ * Création de la méthode qui permet d'afficher le tableau js en HTML
  */
 function afficherTableau(tableau) {
     //Création d'une variable qui récupère l'élément #myTbody dans le twig
@@ -110,4 +114,29 @@ fetch(url)
         afficherTableau(tableau);
     });
 
+//------------------------------------
+
+function filtrer()
+{
+    console.log('filtre !!!');
+    let tableau2 = tableau;
+
+    let nom = document.querySelector('#nom').value;
+    console.log(nom);
+    tableau2 = filtrerPrenom(tableau2,prenom);
+    //---
+    let critereAge = document.querySelector('#critereAge').checked;
+    console.log(critereAge);
+    if (critereAge){
+        tableau2 = filtrerAge(tableau2);
+    }
+    //---
+    let critereDate = document.querySelector('#critereDate').checked;
+    //console.log(critereDate);
+    if (critereDate){
+        tableau2 = filtrerDate(tableau2);
+    }
+
+    afficherTab(tableau2);
+}
 
