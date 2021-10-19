@@ -118,6 +118,18 @@ fetch(url)
 
 //------------------------------------
 
+function changeCampus()
+{
+    let campusId = document.querySelector('#campus').value;
+    afficherSortie(campusId);
+}
+
+//------------------------------------
+
+function filtrerSortie(campusId){}
+
+//------------------------------------
+
 function filtrerNom(tab,nom)
 {
     let tab2 = [];
@@ -184,4 +196,5 @@ function filtrer()
 
     afficherTableau(tableau2);
 }
+
 
