@@ -111,6 +111,12 @@ fetch(url)
     .then(response => response.json()) // renvoie au 2 eme then le body (contenu JSON)
     .then(tab=>
     {
+/*
+        for (let s of tab)
+        {
+            s.dateHeureDebut = new Date(s.dateHeureDebut);
+        }
+*/
         console.log(tab);
         tableau = tab;
         afficherTableau(tableau);
@@ -154,21 +160,80 @@ function filtrerNom(tab,nom)
 
 //------------------------------------
 
+function filtrerOrga(tab)
+{
+    let tab2 = [];
+    for (let s of tab)
+    {
+        if (s.userOrganisateur === true)
+        {
+            tab2.push(s);
+        }
+    }
+    return tab2;
+}
+
+//------------------------------------
+
+function filtrerInscrit(tab)
+{
+    let tab2 = [];
+    for (let s of tab)
+    {
+        if (s.userInscrit === true)
+        {
+            tab2.push(s);
+        }
+    }
+    return tab2;
+}
+
+//------------------------------------
+
+function filtrerNinscrit(tab)
+{
+    let tab2 = [];
+    for (let s of tab)
+    {
+        if (s.userInscrit === false)
+        {
+            tab2.push(s);
+        }
+    }
+    return tab2;
+}
+
+//------------------------------------
+
+function filtrerPassees(tab)
+{
+    let tab2 = [];
+    //let date1 = new Date();
+    for (let s of tab)
+    {
+        if (s.dateHeureDebut < (s.date1+30))
+        {
+            tab2.push(s);
+        }
+    }
+    return tab2;
+}
+
+//------------------------------------
+
 function filtrer()
 {
-    console.log('filtre !!!');
+    //console.log('filtre !!!');
     let tableau2 = tableau;
     //---
     let filtreNom = document.querySelector('#filtreNom').value;
     console.log(filtreNom);
     tableau2 = filtrerNom(tableau2,filtreNom);
-
     //---
         // filtre dateDébut
     //---
         // filtre dateFin
     //---
-    /*
     let critereOrga = document.querySelector('#critereOrga').checked;
     //console.log(critereOrga);
     if (critereOrga){
@@ -192,7 +257,6 @@ function filtrer()
     if (criterePassees){
         tableau2 = filtrerPassees(tableau2);
     }
-    */
 
     afficherTableau(tableau2);
 }

@@ -30,16 +30,14 @@ class Service
         }return false;
     }
 
-
- /**
-  *
- * Méthode qui permet de vérifier si l'user connecté est l'organisateur de la sortie
- */
-    public function verifUserConnectedOrganisateur($userConnecte, $sortie){
-
-            if ($userConnecte->getId() == $sortie->getOrganisateur()->getId()){
+    /**
+     *
+     * Méthode qui permet de vérifier si l'user connecté est l'organisateur de la sortie
+     */
+    public function verifUserConnectedOrganisateur($organisateur, $userConnecte)
+    {
+            if ($userConnecte->getId() == $organisateur->getId()) {
                 return true;
-            } return false;
+            }return false;
     }
-
 }

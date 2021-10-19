@@ -113,6 +113,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $maDateInscription = $sortie->getDateLimiteInscription(); // je crée une variable pour la date pour pouvoir la formater comme je veux sans influencer sur mon fichier JS qui recupere la meme date.
                 $maDateDebut = $sortie->getDateHeureDebut();
                 $userInscrit = $service->verifInscription($sortie->getParticipants(),$this->getUser());
+                $userOrganisateur = $service->verifUserConnectedOrganisateur($sortie->getOrganisateur(),$this->getUser());
 
                    // if ($userInscrit == true){
                      //   $nbInscrits++;
@@ -129,7 +130,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $tab['etat']= $sortie->getEtat()->getLibelle();
                 $tab['userInscrit'] = $userInscrit;
                 $tab['organisateur']= $sortie->getOrganisateur()->getPrenom();
-                //$tab['userOrganisateur']= $userOrganisateur;
+                $tab['userOrganisateur']= $userOrganisateur;
 
                 $tableau[]= $tab;
             }
