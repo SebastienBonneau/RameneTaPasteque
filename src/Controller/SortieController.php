@@ -13,6 +13,7 @@ use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
 use App\Services\Service;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\String_;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -144,15 +145,24 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     public function inscription(
         Sortie $exit,
         EntityManagerInterface $em,
+        Service $service
 
     ): Response
     {
+            $maDate = new \DateTime();
+            $verif = $service->verifInscription($exit->getParticipants(),$this->getUser());
+            $SommeParticipants = count($exit->getParticipants());
 
-            $exit->addParticipant($this->getUser());
-            $em->persist($exit);
-            $em->flush();
-
-            $this->addFlash('success', 'Votre participation a bien ete prise en compte.');
+           if( $exit->getDateLimiteInscription() > $maDate && $exit->getNbInscriptionsMax() > $SommeParticipants && $verif == false)
+           {
+               $exit->addParticipant($this->getUser());
+               $em->persist($exit);
+               $em->flush();
+               $this->addFlash('success', 'Votre participation a bien ete prise en compte.');
+           }else
+           {
+               $this->addFlash('echec', 'Je t\'ai à l\'oeil, petit FILOU !!');
+           }
 
         return $this->redirectToRoute('sortie_liste');
 
@@ -164,15 +174,24 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     public function seDesinscrire(
         Sortie $exit,
         EntityManagerInterface $em,
+        Service $service
 
     ): Response
     {
+        $maDate = new \DateTime();
+        $verif = $service->verifInscription($exit->getParticipants(),$this->getUser());
+        //dd($exit->getDateHeureDebut() , $maDate );
 
+        if( $exit->getDateHeureDebut() > $maDate && $verif == true)
+        {
             $exit->removeParticipant($this->getUser());
             $em->persist($exit);
             $em->flush();
             $this->addFlash('success', 'Nous avons bien pris en compte votre desistement.');
-
+        }else
+        {
+            $this->addFlash('echec', 'Je t\'ai à l\'oeil, petit FILOU !! ');
+        }
         return $this->redirectToRoute('sortie_liste');
 
     }
