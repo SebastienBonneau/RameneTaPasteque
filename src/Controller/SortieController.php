@@ -80,11 +80,10 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     /**
      * @Route("/liste", name="_liste")
      */
-    public function liste()
+    public function liste(CampusRepository $repoC)
     {
-        //$listeSorties = $repo->findAll();
-
-        return $this->render('sortie/liste.html.twig');//, compact('listeSorties'));
+        return $this->render('sortie/liste.html.twig',
+            [ 'campus'=>$repoC->findAll()]);
     }
 
     /**

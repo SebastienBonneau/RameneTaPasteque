@@ -11,7 +11,10 @@
         <label for="campus">Campus : </label>
         <div class="col-2">
         <select class="form-control" name="campus" id="campus" onchange="changerCampus()">
-            // ici on alimente
+           <option value="0">Choisir un campus</option>
+            {% for camp in campus %}
+           <option value="{{ camp.id }}">{{ camp.nom }}</option>
+            {% endfor %}
         </select>
         </div>
         <br>
