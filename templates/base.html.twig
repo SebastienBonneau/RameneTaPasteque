@@ -54,6 +54,7 @@
                     </div>
                 </div>
             </nav>
+
             {# read and display all flash messages #}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
@@ -66,10 +67,14 @@
             {% endfor %}
 
         </header>
+
+        <div class="container">
+            <div class="col-12">
             {% block body %}
 
             {% endblock %}
-
+            </div>
+        </div>
         <!-- Footer -->
         <footer class="py-5 bg-dark mt-3">
             <div class="container px-4 px-lg-5"><p class="m-0  text-center text-white">Copyright &copy; Your Website 2021</p></div>

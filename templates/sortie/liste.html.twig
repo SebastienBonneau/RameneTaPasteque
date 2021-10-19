@@ -6,39 +6,61 @@
         <p>Date du jour : {{ date('now')|date('d/m/Y') }} </p>
         <p>Participant : <strong>{{ app.user.nom }} </strong> - Surnom : <strong>{{ app.user.pseudo }} </strong></p>
     </div>
-    <div id="filtre">
-        <h2> Filtrer les sorties </h2>
-        <label for="campus">Campus : </label>
-        <div class="col-2">
-        <select class="form-control" name="campus" id="campus" onchange="changerCampus()">
-            // ici on alimente
-        </select>
+    <div id="filtre" class="container">
+        <div class="row">
+            <div class="col-4 my-3">
+                <h2> Filtrer les sorties </h2>
+                <div></div>
+            </div>
         </div>
-        <br>
-        <label for="filtreNom">Le nom de la sortie contient :</label>
-        <div class="col-2">
-        <input type="text" onkeyup="filtrer()"
+        <div class="row">
+            <div class="col-3 my-3">
+                <label for="campus">Campus : </label>
+            </div>
+            <div class="col-2 my-3">
+                <select class="form-control" name="campus" id="campus" onchange="changerCampus()">
+                // ici on alimente
+                </select>
+            </div>
+            <div class="offset-1 col-4 mb-1">
+                <input type="checkbox" id="critereOrga" onclick="filtrer()"> Sorties dont je suis l'organisateur/trice
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 my-3">
+                <label for="filtreNom">Le nom de la sortie contient :</label>
+            </div>
+            <div class="col-2 my-3">
+                <input type="text" onkeyup="filtrer()"
                id="filtreNom" class="form-control" placeholder="Rechercher">
-        </div>
-        <br>
-        <label for="dateDebut">Entre</label>
-        <div class="col-2">
-        <input type="date" id="dateDebut" class="form-control">
-        </div>
-        <label for="dateFin">et</label>
-        <div class="col-2">
-            <input type="date" id="dateFin" class="form-control">
-        </div>
-        <div class="col-2" id="checkboxes">
-            <input type="checkbox" id="critereOrga" onclick="filtrer()"> Sorties dont je suis l'organisateur/trice
-            <br>
-            <input type="checkbox" id="critereInscrit" onclick="filtrer()"> Sorties auxquelles je suis inscrit/e
-            <br>
-            <input type="checkbox" id="critereNinscrit" onclick="filtrer()"> Sorties auxquelles je ne suis pas inscrit/e
-            <br>
-            <input type="checkbox" id="criterePassees" onclick="filtrer()"> Sorties passées
+            </div>
+            <div class="offset-1 col-4 mb-1">
+                <input type="checkbox" id="critereInscrit" onclick="filtrer()"> Sorties auxquelles je suis inscrit/e
+            </div>
         </div>
 
+        <div class="row">
+            <div class="col-1 my-3">
+                <label for="dateDebut">Entre</label>
+            </div>
+            <div class="col-2 my-3">
+                <input type="date" id="dateDebut" class="form-control">
+            </div>
+            <div class="col-1 my-3">
+                <label for="dateFin">et</label>
+            </div>
+            <div class="col-2 my-3">
+                <input type="date" id="dateFin" class="form-control">
+            </div>
+            <div class="col-4 mb-1">
+                <input type="checkbox" id="critereNinscrit" onclick="filtrer()"> Sorties auxquelles je ne suis pas inscrit/e
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-6 col-4 mb-1">
+                <input type="checkbox" id="criterePassees" onclick="filtrer()"> Sorties passées
+            </div>
+        </div>
     </div>
 
 
