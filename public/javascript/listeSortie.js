@@ -59,11 +59,11 @@ function afficherTableau(tableau) {
         // et je les active avec setAttribute('href', urlId)
 
         //lien s'inscrire Condition SI user n'est pas inscrit et que la date de cloture est supperieur a la date du jour
-        if( s.userInscrit === false || date2 > date1 || s.nbInscription <= s.nbInscriptionsMax) {
+        if( s.userInscrit === false && date2 > date1 && s.nbInscription <= s.nbInscriptionsMax) {
 
             //j'affiche le lien "s'inscrire'
             tabTd[7].querySelector('#inscrire').setAttribute('href', urlInscrire2);
-        }if (s.userInscrit === true || date2 < date1 || s.nbInscription >= s.nbInscriptionsMax) {
+        }if (s.userInscrit === true && date2 < date1 && s.nbInscription >= s.nbInscriptionsMax) {
             //je cache le lien "s'inscrire"
             tabTd[7].querySelector('#inscrire').setAttribute('hidden', '');//lien "s'inscrire" caché
         }

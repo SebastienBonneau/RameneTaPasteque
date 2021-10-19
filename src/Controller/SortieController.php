@@ -235,9 +235,11 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         Sortie $sortie,
         EntityManagerInterface $em,
         EtatRepository $repoEtat,
-        Request $request
+        Request $request,
+        Service $service
     ): Response
     {
+
         // création du formulaire pour la sortie à annuler
         $formAnnuler = $this->createForm(AnnulerSortieType::class, $sortie);
 
