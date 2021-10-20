@@ -19,6 +19,7 @@ function afficherTableau(tableau) {
     let urlPublier = "http://127.0.0.1:8000/sortie/publier/"; // lien publier
     let urlAnnuler = "http://127.0.0.1:8000/sortie/annuler/"; // lien annuler
     let urlModifier = "http://127.0.0.1:8000/sortie/modifier/"; // lien modifier
+    let urlParticipant = "http://127.0.0.1:8000/Participant/afficher/"; // lien afficher participant
     let date1 = new Date(); // Je crée une variable avec la date du jour, pas besoin de la mettre dans la boucle
 
 
@@ -33,6 +34,7 @@ function afficherTableau(tableau) {
         let urlPublier2 = urlPublier+s.id; // lien publier
         let urlAnnuler2 = urlAnnuler+s.id; // lien annuler
         let urlModifier2= urlModifier+s.id; // lien modifier
+        let urlParticipant2 = urlParticipant+s.organisateurId; // lien afficher participant
         let date2 = new Date(s.dateLimiteInscription2); // Je recupere la date dans mon tableau et la stocke dans une variable
         let date3 = new Date(s.dateHeureDebut3);
 
@@ -56,7 +58,9 @@ function afficherTableau(tableau) {
         }if (s.userInscrit === true){
             tabTd[5].querySelector('i').removeAttribute('hidden');
         }
-            tabTd[6].innerHTML = s.organisateur;
+            tabTd[6].querySelector('.organisateur').setAttribute('href', urlParticipant2);
+            tabTd[6].querySelector('.organisateur').innerHTML = s.organisateur;
+            //tabTd[6].innerHTML = s.organisateur;
         // C'est la colonne où s'affichent tous les liens ==> je les cible avec le querySelector et leur #id
         // et je les active avec setAttribute('href', urlId)
         //console.log(date2 > date1);

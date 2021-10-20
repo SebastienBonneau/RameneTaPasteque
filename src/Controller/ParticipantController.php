@@ -47,4 +47,15 @@ class ParticipantController extends AbstractController
             'participantForm' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/afficher/{participant}", name="_afficher")
+     */
+    function afficher(Participant $participant)
+    {
+        return $this->render('Participant/afficher.html.twig',
+            compact("participant")
+        );
+    }
+
 }
