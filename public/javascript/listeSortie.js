@@ -19,6 +19,7 @@ function afficherTableau(tableau) {
     let urlPublier = "http://127.0.0.1:8000/sortie/publier/"; // lien publier
     let urlAnnuler = "http://127.0.0.1:8000/sortie/annuler/"; // lien annuler
     let urlModifier = "http://127.0.0.1:8000/sortie/modifier/"; // lien modifier
+    let urlParticipant = "http://127.0.0.1:8000/Participant/afficher/"; // lien afficher participant
     let date1 = new Date(); // Je crée une variable avec la date du jour, pas besoin de la mettre dans la boucle
 
 
@@ -33,6 +34,7 @@ function afficherTableau(tableau) {
         let urlPublier2 = urlPublier+s.id; // lien publier
         let urlAnnuler2 = urlAnnuler+s.id; // lien annuler
         let urlModifier2= urlModifier+s.id; // lien modifier
+        let urlParticipant2 = urlParticipant+s.organisateurId; // lien afficher participant
         let date2 = new Date(s.dateLimiteInscription2); // Je recupere la date dans mon tableau et la stocke dans une variable
         let date3 = new Date(s.dateHeureDebut3);
 
@@ -56,13 +58,15 @@ function afficherTableau(tableau) {
         }if (s.userInscrit === true){
             tabTd[5].querySelector('i').removeAttribute('hidden');
         }
-            tabTd[6].innerHTML = s.organisateur;
+            tabTd[6].querySelector('.organisateur').setAttribute('href', urlParticipant2);
+            tabTd[6].querySelector('.organisateur').innerHTML = s.organisateur;
+            //tabTd[6].innerHTML = s.organisateur;
         // C'est la colonne où s'affichent tous les liens ==> je les cible avec le querySelector et leur #id
         // et je les active avec setAttribute('href', urlId)
-        console.log(date1);
-        console.log(date3);
-        console.log(date1<date3);
-
+        //console.log(date2 > date1);
+        //console.log(date2);
+        //console.log(date1);
+        //console.log(date3);
         //lien s'inscrire Condition SI user n'est pas inscrit et que la date de cloture est supperieur a la date du jour
         if( s.userInscrit === false && s.nbInscription < s.nbInscriptionsMax && s.etat === 'Ouverte' && date2 >= date1)
              {
@@ -189,23 +193,54 @@ function filtrerNom(tab,nom)
 }
 
 //------------------------------------
-/*
-function filtrerDate(tab, dateDebut, dateFin)
+
+function filtrerDateDebut(tab, dateDebut)
 {
     let tab2 = [];
+    //console.log(dateDebut);
 
-    if (dateFin != null)
+    if (dateDebut.length >0)
     {
+        dateDebut = new Date(dateDebut);
         for (let s of tab)
         {
-            if (s.dateHeureDebut2 >= dateDebut && s.dateHeureDebut2 <= dateFin)
+            //console.log(s.dateHeureDebut2);
+            if (s.dateHeureDebut2 >= dateDebut)
+            {
+                tab2.push(s);
+                //console.log('test');
+            }
+        }
+    }else
+    {
+        tab2 = tab;
+    }
+    return tab2;
+}
+
+//------------------------------------
+
+function filtrerDateFin(tab, dateFin)
+{
+    let tab2 = [];
+    if (dateFin.length >0)
+    {
+        console.log('fin');
+        dateFin = new Date(dateFin); //parse la date en chaine de caractère après le if (dateFin.length).
+        for (let s of tab)
+        {
+            if (s.dateHeureDebut2 <= dateFin)
             {
                 tab2.push(s);
             }
         }
-        return tab2;
+    }else
+    {
+        tab2 = tab;
+    }
+    return tab2;
 }
-*/
+
 //------------------------------------
 
 function filtrerOrga(tab)
@@ -280,13 +315,11 @@ function filtrer()
     let nom = document.querySelector('#filtreNom').value;
     tableau2 = filtrerNom(tableau2,nom);
     //---
-    /*
     let dateDebut = document.querySelector('#dateDebut').value;
+    tableau2 = filtrerDateDebut(tableau2, dateDebut);
+    //---
     let dateFin = document.querySelector('#dateFin').value;
-    if (dateDebut && dateFin){
-        tableau2 = filtrerDate(tableau2, dateDebut, dateFin);
-    }
-    */
+    tableau2 = filtrerDateFin(tableau2, dateFin);
     //---
     let critereOrga = document.querySelector('#critereOrga').checked;
     //console.log(critereOrga);

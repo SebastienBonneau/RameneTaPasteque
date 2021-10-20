@@ -48,14 +48,14 @@
                 <label for="dateDebut">Entre</label>
             </div>
             <div class="col-2 my-3">
-                <input type="date" onkeyup="filtrer()"
+                <input type="date" onchange="filtrer()"
                        id="dateDebut" class="form-control">
             </div>
             <div class="col-1 my-3">
                 <label for="dateFin">et</label>
             </div>
             <div class="col-2 my-3">
-                <input type="date" onkeyup="filtrer()" on
+                <input type="date" onchange="filtrer()"
                        id="dateFin" class="form-control">
             </div>
             <div class="col-4 mb-1">
@@ -105,7 +105,9 @@
              si l'app.user n'est pas inscrit à cette sortie
              C'est une balise <i> qui sera utilisée dans le JS pour venir remplacer son contenu-->
             <td> <i class="fas fa-check"></i> <!--<i class="fab fa-angellist"> </i><i class="fas fa-check"></i> --></td>
-            <td>6</td>
+            <td>
+                <a href="#" class="organisateur"></a>
+            </td>
             <td  colspan="3">
                 <!-- lien affiché tout le temps, renvoie vers le détail de la sortie-->
                 <a href="#" id="detail"><i class="fas fa-archway"></i>afficher</a>

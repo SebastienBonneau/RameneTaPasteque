@@ -14,7 +14,11 @@
         <div>
             <li>Campus : {{ sortie.campus.nom }}</li>
             <li>Lieu : {{ sortie.lieu.nom }}</li>
-            <li>Lieu : {{ sortie.lieu.rue }}</li>
+            <li>Rue : {{ sortie.lieu.rue }}</li>
+            <li>Code postal : {{ sortie.lieu.ville.codePostal }}</li>
+            <li>Latitude : {{ sortie.lieu.latitude }}</li>
+            <li>Longitude : {{ sortie.lieu.longitude }}</li>
+
         </div>
 
     </ul>
@@ -31,7 +35,7 @@
             <tbody>
             {% for p in sortie.participants %}
                 <tr>
-                    <td>{{ p.pseudo }}</td>
+                    <td><a href="{{ path('participant_afficher', {'participant': p.id}) }}">{{ p.pseudo }}</a></td>
                     <td>{{ p.prenom }} {{ p.nom }}</td>
                 </tr>
             {% endfor %}

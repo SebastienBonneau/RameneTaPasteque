@@ -19,6 +19,18 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
+    /**
+     * @return Sortie[] Returns an array of Sortie objects
+     */
+    public function findByDate()
+    {
+        $entityManager = $this->getEntityManager();
+        $dql = ("SELECT s FROM App\Entity\Sortie s
+                WHERE s.dateHeureDebut > CURRENT_DATE()-30");
+        $query = $entityManager->createQuery($dql);
+        return $query->getResult();
+    }
+
     // /**
     //  * @return Sortie[] Returns an array of Sortie objects
     //  */
