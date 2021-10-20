@@ -169,7 +169,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                $this->addFlash('success', 'Votre participation a bien été prise en compte.');
            }else
            {
-               $this->addFlash('echec', 'Sortie déjà passée... Je t\'ai à l\'oeil, petit FILOU !!');
+               $this->addFlash('echec', 'Inscription impossible... Choisissez une autre sortie !');
            }
 
         return $this->redirectToRoute('sortie_liste');
@@ -198,7 +198,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             $this->addFlash('success', 'Votre désistement a bien été pris en compte.');
         }else
         {
-            $this->addFlash('echec', 'Sortie déjà passée... Je t\'ai à l\'oeil, petit(e) FILOU(TE) !! ');
+            $this->addFlash('echec', 'Impossible de se désister... Sortie en cours ou passée !! ');
         }
         return $this->redirectToRoute('sortie_liste');
 
@@ -248,12 +248,9 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     ): Response
     {
         $maDate = new \DateTime();
-        $verif = $service->verifLienAnuler(
-            $sortie->getOrganisateur(),
-            $this->getUser(),
-            $sortie->getEtat(),
-            $sortie->getDateHeureDebut()
-        );
+        $verifAnnulationPossible = $service->verifDateSortie($sortie->getDateHeureDebut());
+
+
 
             // création du formulaire pour la sortie à annuler
             $formAnnuler = $this->createForm(AnnulerSortieType::class, $sortie);
@@ -274,7 +271,9 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             $this->addFlash('success', 'La sortie a bien été annulée.');
             return $this->redirectToRoute('sortie_liste');
                 }
-       // }
+                else {
+                    $this->addFlash('echec', 'Impossible de se désister... Sortie en cours ou passée !! ');
+                }
             return $this->renderForm('sortie/annuler.html.twig',
                 compact('formAnnuler', 'sortie'));
 
