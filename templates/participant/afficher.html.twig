@@ -1,19 +1,47 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <h2>{{ participant.pseudo }}</h2>
+    <div class="container">
+        <div class="row">
+            <div class="offset-3 col-6">
+                <h2>{{ participant.pseudo }}</h2>
+            </div>
+        </div>
     <ul>
-        <div>
+        <div class="row">
+            <div class="offset-3 col-6">
             <li>Prénom : {{ participant.prenom }}</li>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-6">
             <li>Nom : {{ participant.Nom }}</li>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-6">
             <li>Téléphone : {{ participant.telephone }}</li>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-6">
             <li>Email : {{ participant.email }}</li>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-6">
             <li>Campus : {{ participant.campus.nom }}</li>
+            </div>
         </div>
     </ul>
+        <div class="row">
+            <div class="offset-3 col-3">
+        <a href="{{ path('sortie_liste') }}" class="btn btn-success mx-3 my-3">Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('sortie_liste') }}">Retour</a>
+
 
 {% endblock %}
 

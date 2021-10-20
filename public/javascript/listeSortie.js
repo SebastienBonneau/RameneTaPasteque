@@ -93,10 +93,10 @@ function afficherTableau(tableau) {
         tabTd[7].querySelector('#detail').setAttribute('href',urlDetail2);
 
         //Lien publier
-        if (s.etat === 'Créée') {
+        if (s.etat === 'Créée' && s.userOrganisateur ===true) {
             // je l'affiche
            tabTd[7].querySelector('#publier').setAttribute('href', urlPublier2);
-        } if (s.etat !== 'Créée'){
+        } if (s.etat !== 'Créée' || s.userOrganisateur ===false){
             // je le cache
             tabTd[7].querySelector('#publier').setAttribute('hidden', '');// lien "publier"caché
         }

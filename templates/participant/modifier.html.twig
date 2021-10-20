@@ -2,9 +2,23 @@
 
 {% block body %}
 
+<div class="container my-4">
+    <div class="row">
+        <div class="offset-3 col-6">
+            <h2>Mon profil à modifier</h2>
+        </div>
+    </div>
     {{ form_start(participantForm) }}
+    <div class="row">
+        <div class="offset-3 col-4">
     {{ form_widget(participantForm) }}
-    <button type="submit" class="btn btn-success my-3">Enregistrer</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-4 col-3">
+    <button type="submit" class="btn btn-success mx-3 my-3">Enregistrer</button>
+        </div>
+    </div>
     {{ form_end(participantForm) }}
 
 {% endblock %}
