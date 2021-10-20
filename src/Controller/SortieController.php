@@ -239,6 +239,40 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     }
 
     /**
+     * @Route("/modifier/{sortie}", name="_modifier")
+     */
+    public function modifier(
+        EntityManagerInterface $em,
+        Request $request,
+        LieuRepository $repoL,
+        EtatRepository $repoEtat,
+        SortieRepository $sortie
+
+    ): Response
+    {
+
+        // récupération du campus associé à la $newSortie via l'organisateur que l'on affecte à $newSortie
+
+
+        $formModifS = $this->createForm(SortieType::class, $sortie);
+
+        $formModifS->handleRequest($request);
+
+        if ($formModifS->isSubmitted() && $formModifS->isValid()) {
+
+            //$em->persist($sortie);on fait un update ==> pas besoin de faire un persis
+            $em->flush();
+
+            $this->addFlash('success', 'La sortie a bien été modifiée.');
+            return $this->redirectToRoute('sortie_modifier');
+        }
+
+        return $this->renderForm('sortie/modifier.html.twig',
+            compact("formModifS",'sortie'));
+    }
+
+
+    /**
      * @Route("/annuler/{sortie}", name="_annuler")
      */
     public function annuler(
@@ -246,11 +280,11 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         EntityManagerInterface $em,
         EtatRepository $repoEtat,
         Request $request,
-        Service $service
+
     ): Response
     {
-        $maDate = new \DateTime();
-        $verifAnnulationPossible = $service->verifDateSortie($sortie->getDateHeureDebut());
+       // $maDate = new \DateTime();
+       // $verifAnnulationPossible = $service->verifDateSortie($sortie->getDateHeureDebut());
 
 
 
@@ -273,9 +307,9 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             $this->addFlash('success', 'La sortie a bien été annulée.');
             return $this->redirectToRoute('sortie_liste');
                 }
-                else {
-                    $this->addFlash('echec', 'Impossible de se désister... Sortie en cours ou passée !! ');
-                }
+             //   else {
+              //      $this->addFlash('echec', 'Impossible d'annuler... Sortie en cours ou passée !! ');
+             //   }
             return $this->renderForm('sortie/annuler.html.twig',
                 compact('formAnnuler', 'sortie'));
 

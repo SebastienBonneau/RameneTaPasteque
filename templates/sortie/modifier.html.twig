@@ -1,0 +1,70 @@
+{%  extends 'base.html.twig' %}
+
+{% block title %}Sortie{% endblock %}
+
+{% block body %}
+    <div class="container" my-4>
+        <div class="row">
+            <div class="offset-3 col-6 mx-3 my-2">
+                <h2>Créer une sortie</h2>
+
+                {{ form_start(formModifS, {'attr':{id: 'formS'}}) }}
+
+                {{ form_widget(formModifS) }}
+
+                <label class="form-label col-3"  for="ville">Ville</label>
+                <select class="form-control" name="ville" id="ville" onchange="changerVille()">
+                    // ici on alimente
+                </select>
+                <label class="form-label"  for="lieu">Lieu</label>
+                <select class="form-control" name="lieu" id="lieu">
+                    // ici on alimente
+                </select>
+                <label class="form-label"  for="code">Ville</label>
+                <input class="form-control"  id="code" disabled>
+                {# J'ajoute un input de type hidden pour gérer mon bouton enregistrer #}
+                <input type="hidden" id="enregistrer" name="enregistrer" value="1">
+
+                {# J'ajoute un input de type hidden pour gérer mon bouton publier #}
+                <input type="hidden" id="publier" name="publier" value="0">
+
+                {# J'ajoute un input de type hidden pour gérer mon bouton supprimer #}
+                <input type="hidden" id="supprimer" name="supprimer" value="0">
+                {{ form_end(formModifS) }}
+
+                {# Je sors les boutons du formulaires pour pouvoir en gérer plusieurs #}
+                <button onclick="enregistrer()" class="btn btn-secondary mt-3 me-2 mb-3">Enregistrer</button>
+                <button onclick="publier()" class="btn btn-success mt-3 me-2 mb-3">Publier la sortie</button>
+                <button onclick="supprimer()" class="btn btn-success mt-3 me-2 mb-3">Supprimer la sortie</button>
+                <a href="{{ path('sortie_liste') }}" class="btn btn-dark mt-3 mb-3">Annuler</a>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        /**
+         * Fonction qui permet d'enregistrer la sortie en BDD
+         */
+    function enregistrer(){
+        console.log('enregistrement ok');
+        document.querySelector('#formS').submit();
+    }
+
+        /**
+         * Fonction qui permet de publier la sortie càd:
+         * l'enregistrer en BDD avec l'état Ouverte
+         */
+    function publier(){
+        console.log('publication OK');
+        document.querySelector('#publier').value="1";
+        document.querySelector('#formS').submit();
+    }
+
+    </script>
+
+    <!-- création d'un lien vers le fichier js qui regroupe les méthodes à appeler pour l'affichage-->
+    <script src="{{ asset('javascript/ajouterSortie.js') }}">
+    </script>
+
+
+{% endblock %}
