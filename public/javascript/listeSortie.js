@@ -57,10 +57,10 @@ function afficherTableau(tableau) {
             tabTd[6].innerHTML = s.organisateur;
         // C'est la colonne où s'affichent tous les liens ==> je les cible avec le querySelector et leur #id
         // et je les active avec setAttribute('href', urlId)
-        console.log(date2 > date1);
-        console.log(date2);
-        console.log(date1);
-        console.log(date3);
+        //console.log(date2 > date1);
+        //console.log(date2);
+        //console.log(date1);
+        //console.log(date3);
         //lien s'inscrire Condition SI user n'est pas inscrit et que la date de cloture est supperieur a la date du jour
         if( s.userInscrit === false && s.nbInscription < s.nbInscriptionsMax && s.etat === 'Ouverte' && date2 >= date1)
              {
@@ -179,23 +179,54 @@ function filtrerNom(tab,nom)
 }
 
 //------------------------------------
-/*
-function filtrerDate(tab, dateDebut, dateFin)
+
+function filtrerDateDebut(tab, dateDebut)
 {
     let tab2 = [];
+    //console.log(dateDebut);
 
-    if (dateFin != null)
+    if (dateDebut.length >0)
     {
+        dateDebut = new Date(dateDebut);
         for (let s of tab)
         {
-            if (s.dateHeureDebut2 >= dateDebut && s.dateHeureDebut2 <= dateFin)
+            //console.log(s.dateHeureDebut2);
+            if (s.dateHeureDebut2 >= dateDebut)
+            {
+                tab2.push(s);
+                //console.log('test');
+            }
+        }
+    }else
+    {
+        tab2 = tab;
+    }
+    return tab2;
+}
+
+//------------------------------------
+
+function filtrerDateFin(tab, dateFin)
+{
+    let tab2 = [];
+    if (dateFin.length >0)
+    {
+        console.log('fin');
+        dateFin = new Date(dateFin); //parse la date en chaine de caractère après le if (dateFin.length).
+        for (let s of tab)
+        {
+            if (s.dateHeureDebut2 <= dateFin)
             {
                 tab2.push(s);
             }
         }
-        return tab2;
+    }else
+    {
+        tab2 = tab;
+    }
+    return tab2;
 }
-*/
+
 //------------------------------------
 
 function filtrerOrga(tab)
@@ -270,13 +301,11 @@ function filtrer()
     let nom = document.querySelector('#filtreNom').value;
     tableau2 = filtrerNom(tableau2,nom);
     //---
-    /*
     let dateDebut = document.querySelector('#dateDebut').value;
+    tableau2 = filtrerDateDebut(tableau2, dateDebut);
+    //---
     let dateFin = document.querySelector('#dateFin').value;
-    if (dateDebut && dateFin){
-        tableau2 = filtrerDate(tableau2, dateDebut, dateFin);
-    }
-    */
+    tableau2 = filtrerDateFin(tableau2, dateFin);
     //---
     let critereOrga = document.querySelector('#critereOrga').checked;
     //console.log(critereOrga);
