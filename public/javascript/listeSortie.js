@@ -120,7 +120,7 @@ fetch(url)
 
         for (let s of tab)
         {
-            s.dateHeureDebut2 = new Date(s.dateHeureDebut);
+            s.dateHeureDebut2 = new Date(s.dateHeureDebut3);
         }
         //let campusId = tab.campus[0].id;
         //sorties = tab.sorties;
