@@ -33,7 +33,7 @@ class SortieType extends AbstractType
                 'label'=> "Nombre de places : "
             ])
             ->add('duree', null, [
-                'label'=> 'durée : ',
+                'label'=> 'durée (en minutes) : ',
                 'attr' => ['min'=> 30, 'step'=>15]
             ])
             ->add('infosSortie', null, [

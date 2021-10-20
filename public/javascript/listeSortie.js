@@ -107,13 +107,13 @@ function afficherTableau(tableau) {
         }
 
         //Lien modifier
-       //if (s.userOrganisateur === true) {
+       if (s.userOrganisateur === true && date1<date2) {
             // j'affiche le lien
            tabTd[7].querySelector('#modifier').setAttribute('href', urlModifier2);
-        //} if (s.userOrganisateur === false) {
+        } if (s.userOrganisateur === false || date1>date2) {
             // je cache le lien
-        //    tabTd[7].querySelector('#modifier').setAttribute('hidden', '');
-       //}
+           tabTd[7].querySelector('#modifier').setAttribute('hidden', '');
+       }
 
         // j'ajoute la balise <tr> dans la balise tbody
         tbody.appendChild(clone);

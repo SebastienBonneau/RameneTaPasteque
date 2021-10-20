@@ -5,11 +5,11 @@ let villes = [];
 //------------------------------------
 /**
  * Méthode qui permet de mettre à jour le code postal en
- * fonction de la ville sélectionnéee
+ * fonction de la ville sélectionnée
  * Elle sera utilisée à l'affichage du formulaire et au moment de la sélection d'une ville
  * @param villeId
  */
-function villeUpdate(villeId){
+function afficherCP(villeId){
     // je crée un objet ville
     let ville ={};
     // retrouver la ville à partir de l'id que j'ai dans le lieu
@@ -18,12 +18,73 @@ function villeUpdate(villeId){
             ville = v;
         }
     }
-    // je sélectionne l'élément dont l'id=code est je lui affecte le code postal de
+    // je sélectionne l'élément dont l'id=code et je lui affecte le code postal de
     // l'objet ville recréé
-    document.querySelector('#code').value= ville.codePostal;
+    document.querySelector('#cp').value= ville.codePostal;
     //
 }
+/**
+ * Méthode qui permet de mettre à jour la rue en
+ * fonction du lieu sélectionné
+ * Elle sera utilisée à l'affichage du formulaire et au moment de la sélection d'un lieu
+ * @param lieuId
+ */
+function afficherRue(lieuId){
+    // je crée un objet lieu
+    let lieu ={};
+    // retrouver la rue à partir de l'id que j'ai dans le lieu
+    for (let l of lieux){
+        if (lieuId == l.id){
+            lieu = l;
+        }
+    }
+    // je sélectionne l'élément dont l'id=rue et je lui affecte la rue de
+    // l'objet lieu recréé
+    document.querySelector('#rue').value= lieu.rue;
 
+}
+
+/**
+ * Méthode qui permet de mettre à jour la latitude en
+ * fonction du lieu sélectionné
+ * Elle sera utilisée à l'affichage du formulaire et au moment de la sélection d'un lieu
+ * @param lieuId
+ */
+function afficherLatitude(lieuId){
+    // je crée un objet lieu
+    let lieu ={};
+    // retrouver la rue à partir de l'id que j'ai dans le lieu
+    for (let l of lieux){
+        if (lieuId == l.id){
+            lieu = l;
+        }
+    }
+    // je sélectionne l'élément dont l'id=rue et je lui affecte la rue de
+    // l'objet lieu recréé
+    document.querySelector('#latitude').value= lieu.latitude;
+
+}
+
+/**
+ * Méthode qui permet de mettre à jour la longitude en
+ * fonction du lieu sélectionné
+ * Elle sera utilisée à l'affichage du formulaire et au moment de la sélection d'un lieu
+ * @param lieuId
+ */
+function afficherLongitude(lieuId){
+    // je crée un objet lieu
+    let lieu ={};
+    // retrouver la rue à partir de l'id que j'ai dans le lieu
+    for (let l of lieux){
+        if (lieuId == l.id){
+            lieu = l;
+        }
+    }
+    // je sélectionne l'élément dont l'id=rue et je lui affecte la rue de
+    // l'objet lieu recréé
+    document.querySelector('#longitude').value= lieu.longitude;
+
+}
 /**
  * Méthode qui permet de sélectionner une ville et qui sera appelée
  * pour mettre à jour les lieux en fonction de la ville
@@ -35,7 +96,7 @@ function changerVille()
     let villeId = document.querySelector('#ville').value;
 
     afficherLieu(villeId);// affiche les lieux en fonction de la ville
-    villeUpdate(villeId);// met à jour le code postal en fonction de la ville
+    afficherCP(villeId);// met à jour le code postal en fonction de la ville
 }
 
 //------------------------------------
@@ -65,6 +126,7 @@ function afficherLieu(villeId)
 
     }
 
+
 }
 
 //------------------------------------
@@ -92,11 +154,15 @@ fetch(url)
     .then(
         objet => {
             villes = objet.villes;
-            afficherVille(objet.villes);
+            lieux = objet.lieux;
 
             let villeId = objet.villes[0].id;
-            lieux = objet.lieux;
-            console.log(lieux);
+            let lieuId = objet.lieux[0].id;
+
+            afficherVille(objet.villes);
             afficherLieu(villeId);
-            villeUpdate(villeId);
+            afficherRue(lieuId);
+            afficherCP(villeId);
+            afficherLatitude(lieuId);
+            afficherLongitude(lieuId);
         });

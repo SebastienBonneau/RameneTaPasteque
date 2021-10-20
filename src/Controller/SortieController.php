@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Sortie;
 use App\Form\AnnulerSortieType;
+use App\Form\ModifierSortieType;
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
@@ -75,14 +76,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         compact("formSortie",'newSortie', 'campus'));
     }
 
-    /*
-     * @Route("/listeLien", name="_liste_lien")
 
-    public function listeLien(CampusRepository $repoC)
-    {
-        return $this->render('sortie/liste.html.twig');
-    }
-*/
     /**
      * @Route("/liste", name="_liste")
      */
@@ -120,7 +114,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $maDateDebut = $sortie->getDateHeureDebut();
                 $userInscrit = $service->verifInscription($sortie->getParticipants(),$this->getUser());
                 $userOrganisateur = $service->verifUserConnectedOrganisateur($sortie->getOrganisateur(),$this->getUser());
-                $annulationPossible = $service->verifDateSortie($maDateDebut, );
+
 
                    // if ($userInscrit == true){
                      //   $nbInscrits++;
@@ -141,7 +135,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $tab['organisateur']= $sortie->getOrganisateur()->getPrenom();
                 $tab['userOrganisateur'] = $userOrganisateur;
                 $tab['campus'] = $sortie->getCampus()->getId();
-                $tab['annulationPossible'] = $annulationPossible;
+
 
                 $tableau[]= $tab;
             }
@@ -242,29 +236,41 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
      * @Route("/modifier/{sortie}", name="_modifier")
      */
     public function modifier(
+        Sortie $sortie,
         EntityManagerInterface $em,
         Request $request,
         LieuRepository $repoL,
-        EtatRepository $repoEtat,
-        SortieRepository $sortie
-
+        EtatRepository $repoEtat
     ): Response
     {
 
         // récupération du campus associé à la $newSortie via l'organisateur que l'on affecte à $newSortie
 
 
-        $formModifS = $this->createForm(SortieType::class, $sortie);
+        $formModifS = $this->createForm(ModifierSortieType::class, $sortie);
 
         $formModifS->handleRequest($request);
 
         if ($formModifS->isSubmitted() && $formModifS->isValid()) {
+            $publier = $request->get('publier');
+            $annuler = $request->get('annuler');
+            if ($publier == 1){
+                $sortie->setEtat($repoEtat->findOneBy(['id' => 2]));
+            }
+            if ($annuler == 1){
+                $sortie->setEtat($repoEtat->findOneBy(['id' => 6]));
+                $em->flush();
+
+                $this->addFlash('success', 'La sortie a bien été annulée.');
+                return $this->redirectToRoute('sortie_liste');
+
+            }
 
             //$em->persist($sortie);on fait un update ==> pas besoin de faire un persis
             $em->flush();
 
             $this->addFlash('success', 'La sortie a bien été modifiée.');
-            return $this->redirectToRoute('sortie_modifier');
+            return $this->redirectToRoute('sortie_liste');
         }
 
         return $this->renderForm('sortie/modifier.html.twig',

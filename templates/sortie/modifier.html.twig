@@ -6,9 +6,9 @@
     <div class="container" my-4>
         <div class="row">
             <div class="offset-3 col-6 mx-3 my-2">
-                <h2>Créer une sortie</h2>
+                <h2>Modifier une sortie</h2>
 
-                {{ form_start(formModifS, {'attr':{id: 'formS'}}) }}
+                {{ form_start(formModifS, {'attr':{id: 'formModifS'}}) }}
 
                 {{ form_widget(formModifS) }}
 
@@ -20,8 +20,18 @@
                 <select class="form-control" name="lieu" id="lieu">
                     // ici on alimente
                 </select>
-                <label class="form-label"  for="code">Ville</label>
-                <input class="form-control"  id="code" disabled>
+                <label class="form-label"  for="rue">Rue</label>
+                <input class="form-control"  id="rue" disabled>
+
+                <label class="form-label"  for="cp">Code postal</label>
+                <input class="form-control"  id="cp" disabled>
+
+                <label class="form-label"  for="latitude">Latitude</label>
+                <input class="form-control"  id="latitude" disabled>
+
+                <label class="form-label"  for="longitude">Longitude</label>
+                <input class="form-control"  id="longitude" disabled>
+
                 {# J'ajoute un input de type hidden pour gérer mon bouton enregistrer #}
                 <input type="hidden" id="enregistrer" name="enregistrer" value="1">
 
@@ -29,13 +39,13 @@
                 <input type="hidden" id="publier" name="publier" value="0">
 
                 {# J'ajoute un input de type hidden pour gérer mon bouton supprimer #}
-                <input type="hidden" id="supprimer" name="supprimer" value="0">
+                <input type="hidden" id="annuler" name="annuler" value="0">
                 {{ form_end(formModifS) }}
 
                 {# Je sors les boutons du formulaires pour pouvoir en gérer plusieurs #}
                 <button onclick="enregistrer()" class="btn btn-secondary mt-3 me-2 mb-3">Enregistrer</button>
                 <button onclick="publier()" class="btn btn-success mt-3 me-2 mb-3">Publier la sortie</button>
-                <button onclick="supprimer()" class="btn btn-success mt-3 me-2 mb-3">Supprimer la sortie</button>
+                <button onclick="annuler()" class="btn btn-warning mt-3 me-2 mb-3">Annuler la sortie</button>
                 <a href="{{ path('sortie_liste') }}" class="btn btn-dark mt-3 mb-3">Annuler</a>
             </div>
         </div>
@@ -47,7 +57,7 @@
          */
     function enregistrer(){
         console.log('enregistrement ok');
-        document.querySelector('#formS').submit();
+        document.querySelector('#formModifS').submit();
     }
 
         /**
@@ -57,13 +67,22 @@
     function publier(){
         console.log('publication OK');
         document.querySelector('#publier').value="1";
-        document.querySelector('#formS').submit();
+        document.querySelector('#formModifS').submit();
     }
+
+        /**
+         * Fonction qui permet de suuprimer la sortie en BDD
+         */
+        function annuler(){
+            console.log('annulation ok');
+            document.querySelector('#annuler').value="1"
+            document.querySelector('#formModifS').submit();
+        }
 
     </script>
 
     <!-- création d'un lien vers le fichier js qui regroupe les méthodes à appeler pour l'affichage-->
-    <script src="{{ asset('javascript/ajouterSortie.js') }}">
+    <script src="{{ asset('javascript/ModifierSortie.js') }}">
     </script>
 
 
