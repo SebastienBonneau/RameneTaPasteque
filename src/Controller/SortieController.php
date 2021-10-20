@@ -96,7 +96,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         ): Response
     {
 
-        $listeSorties = $repo->findAll();
+        $listeSorties = $repo->findByDate();
         $tableau = [];
 
 
