@@ -279,6 +279,7 @@ function filtrer()
     }
 
     afficherTableau(tableau2);
+
 }
 
 

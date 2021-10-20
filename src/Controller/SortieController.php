@@ -315,4 +315,5 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
         return $this->json($tab);
     }
+
 }
