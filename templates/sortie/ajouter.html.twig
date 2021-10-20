@@ -11,6 +11,8 @@
                 {{ form_start(formSortie, {'attr':{id: 'formS'}}) }}
 
                 {{ form_widget(formSortie) }}
+                <label class="form-label"  for="campus">Campus : </label>
+                <input class="form-control"  id="campus" value="{{ app.user.campus.nom }}" disabled>
 
                 <label class="form-label col-3"  for="ville">Ville : </label>
                 <select class="form-control" name="ville" id="ville" onchange="changerVille()">

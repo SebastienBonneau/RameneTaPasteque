@@ -14,7 +14,11 @@
         <div>
             <li>Campus : {{ sortie.campus.nom }}</li>
             <li>Lieu : {{ sortie.lieu.nom }}</li>
-            <li>Lieu : {{ sortie.lieu.rue }}</li>
+            <li>Rue : {{ sortie.lieu.rue }}</li>
+            <li>Code postal : {{ sortie.lieu.ville.codePostal }}</li>
+            <li>Latitude : {{ sortie.lieu.latitude }}</li>
+            <li>Longitude : {{ sortie.lieu.longitude }}</li>
+
         </div>
 
     </ul>
