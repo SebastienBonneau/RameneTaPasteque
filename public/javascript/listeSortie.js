@@ -94,7 +94,7 @@ function afficherTableau(tableau) {
         }
 
         //Lien annuler
-         if (s.userOrganisateur === true) {
+         if (s.userOrganisateur === true && s.annulationPossible ===true) {
             // j'affiche le lien
             tabTd[7].querySelector('#annuler').setAttribute('href', urlAnnuler2);
        } if (s.etat ==='Annulée' || s.userOrganisateur === false) {

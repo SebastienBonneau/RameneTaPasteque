@@ -75,14 +75,14 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         compact("formSortie",'newSortie', 'campus'));
     }
 
-    /**
+    /*
      * @Route("/listeLien", name="_liste_lien")
-     */
+
     public function listeLien(CampusRepository $repoC)
     {
         return $this->render('sortie/liste.html.twig');
     }
-
+*/
     /**
      * @Route("/liste", name="_liste")
      */
@@ -120,7 +120,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $maDateDebut = $sortie->getDateHeureDebut();
                 $userInscrit = $service->verifInscription($sortie->getParticipants(),$this->getUser());
                 $userOrganisateur = $service->verifUserConnectedOrganisateur($sortie->getOrganisateur(),$this->getUser());
-                $lienAnnuler = $service->verifLienAnuler($sortie->getOrganisateur(),$this->getUser(),$maDateDebut, $sortie->getEtat());
+                $annulationPossible = $service->verifDateSortie($maDateDebut, );
 
                    // if ($userInscrit == true){
                      //   $nbInscrits++;
@@ -139,7 +139,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $tab['organisateur']= $sortie->getOrganisateur()->getPrenom();
                 $tab['userOrganisateur'] = $userOrganisateur;
                 $tab['campus'] = $sortie->getCampus()->getId();
-                $tab['lienAnnuler'] = $lienAnnuler;
+                $tab['annulationPossible'] = $annulationPossible;
 
                 $tableau[]= $tab;
             }
@@ -172,7 +172,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                $this->addFlash('echec', 'Sortie déjà passée... Je t\'ai à l\'oeil, petit FILOU !!');
            }
 
-        return $this->redirectToRoute('sortie_liste_lien');
+        return $this->redirectToRoute('sortie_liste');
 
     }
 
@@ -200,7 +200,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         {
             $this->addFlash('echec', 'Sortie déjà passée... Je t\'ai à l\'oeil, petit(e) FILOU(TE) !! ');
         }
-        return $this->redirectToRoute('sortie_liste_lien');
+        return $this->redirectToRoute('sortie_liste');
 
     }
 
