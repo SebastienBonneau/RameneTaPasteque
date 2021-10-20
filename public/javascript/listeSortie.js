@@ -18,7 +18,8 @@ function afficherTableau(tableau) {
     let urlseDesinscrire = "http://127.0.0.1:8000/sortie/seDesinscrire/"; //lien Se désister
     let urlPublier = "http://127.0.0.1:8000/sortie/publier/"; // lien publier
     let urlAnnuler = "http://127.0.0.1:8000/sortie/annuler/"; // lien annuler
-    let date1 = new Date(); // Je creer une variable avec la date du jour, pas besoin de la mettre dans la boucle
+    let urlModifier = "http://127.0.0.1:8000/sortie/modifier/"; // lien modifier
+    let date1 = new Date(); // Je crée une variable avec la date du jour, pas besoin de la mettre dans la boucle
 
 
     // On fait une boucle pour récupérer chaque élément d'une sortie
@@ -31,6 +32,7 @@ function afficherTableau(tableau) {
         let urlSeDesinscrire2 = urlseDesinscrire+s.id;//lien se désister
         let urlPublier2 = urlPublier+s.id; // lien publier
         let urlAnnuler2 = urlAnnuler+s.id; // lien annuler
+        let urlModifier2= urlModifier+s.id; // lien modifier
         let date2 = new Date(s.dateLimiteInscription2); // Je recupere la date dans mon tableau et la stocke dans une variable
         let date3 = new Date(s.dateHeureDebut3);
 
@@ -96,14 +98,22 @@ function afficherTableau(tableau) {
         }
 
         //Lien annuler
-         if (s.userOrganisateur === true && s.annulationPossible ===true) {
+         if (s.userOrganisateur === true && date1<date3 && s.etat !=='Annulée') {
             // j'affiche le lien
             tabTd[7].querySelector('#annuler').setAttribute('href', urlAnnuler2);
-       } if (s.etat ==='Annulée' || s.userOrganisateur === false) {
+       } if (s.etat ==='Annulée' || s.userOrganisateur === false || date1 > date3) {
             // je cache le lien
           tabTd[7].querySelector('#annuler').setAttribute('hidden', '');
         }
 
+        //Lien modifier
+       if (s.userOrganisateur === true && date1<date2) {
+            // j'affiche le lien
+           tabTd[7].querySelector('#modifier').setAttribute('href', urlModifier2);
+        } if (s.userOrganisateur === false || date1>date2) {
+            // je cache le lien
+           tabTd[7].querySelector('#modifier').setAttribute('hidden', '');
+       }
 
         // j'ajoute la balise <tr> dans la balise tbody
         tbody.appendChild(clone);

@@ -43,16 +43,6 @@ class Service
             }return false;
     }
 
-    /**
-     *
-     * Méthode qui permet de vérifier si la date du jour est inférieure à la date de début de sortie
-     */
-    public function verifDateSortie($dateHeureDebut)
-    {
-        $dateDuJour = new Date();
-        if ($dateDuJour<$dateHeureDebut) {
-            return true;
-        }   return false;
 
-    }
+
 }
