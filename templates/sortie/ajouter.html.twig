@@ -12,16 +12,25 @@
 
                 {{ form_widget(formSortie) }}
 
-                <label class="form-label col-3"  for="ville">Ville</label>
+                <label class="form-label col-3"  for="ville">Ville : </label>
                 <select class="form-control" name="ville" id="ville" onchange="changerVille()">
                     // ici on alimente
                 </select>
-                <label class="form-label"  for="lieu">Lieu</label>
-                <select class="form-control" name="lieu" id="lieu">
+                <label class="form-label"  for="lieu">Lieu : </label>
+                <select class="form-control" name="lieu" id="lieu" onchange="changerLieu()">
                     // ici on alimente
                 </select>
-                <label class="form-label"  for="code">Ville</label>
+                <label class="form-label"  for="rue">Rue : </label>
+                <input class="form-control"  id="rue" disabled>
+
+                <label class="form-label"  for="code">Code postal : </label>
                 <input class="form-control"  id="code" disabled>
+
+                <label class="form-label"  for="latitude">Latitude : </label>
+                <input class="form-control"  id="latitude" disabled>
+
+                <label class="form-label"  for="longitude">Longitude : </label>
+                <input class="form-control"  id="longitude" disabled>
                 {# J'ajoute un input de type hidden pour gérer mon bouton enregistrer #}
                 <input type="hidden" id="enregistrer" name="enregistrer" value="1">
 

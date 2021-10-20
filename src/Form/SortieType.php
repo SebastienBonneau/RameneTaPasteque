@@ -39,20 +39,7 @@ class SortieType extends AbstractType
             ->add('infosSortie', null, [
                 'label'=> "Description et infos : "
             ])
-
-            /*->add('lieu', null, [
-                'choice_label'=>"nom",
-            ])
-            */
-           /* ->add('lieu', EntityType::class, [
-                'class'=> Lieu::class,
-                'label'=> "Lieu : ",
-                'choice_label'=>"nom",
-                'mapped'=>false, // mapped=>false permet de lui dire que ce champ ne fait
-                // pas partie de l'entité liée au formulaire
-                'multiple'=>false
-            ])
-
+            /*
             ->add('latitude', null, [
                 'label'=> "latitude : ",
                 'mapped'=>false
@@ -61,7 +48,7 @@ class SortieType extends AbstractType
                 'label'=> "longitude : ",
                 'mapped'=>false
             ])
-           */
+            */
         ;
     }
 
