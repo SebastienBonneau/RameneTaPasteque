@@ -48,13 +48,15 @@
                 <label for="dateDebut">Entre</label>
             </div>
             <div class="col-2 my-3">
-                <input type="date" id="dateDebut" class="form-control">
+                <input type="date" onkeyup="filtrer()"
+                       id="dateDebut" class="form-control">
             </div>
             <div class="col-1 my-3">
                 <label for="dateFin">et</label>
             </div>
             <div class="col-2 my-3">
-                <input type="date" id="dateFin" class="form-control">
+                <input type="date" onkeyup="filtrer()" on
+                       id="dateFin" class="form-control">
             </div>
             <div class="col-4 mb-1">
                 <input type="checkbox" id="critereNinscrit" onclick="filtrer()"> Sorties auxquelles je ne suis pas inscrit/e
