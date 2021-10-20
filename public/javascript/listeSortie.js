@@ -177,6 +177,24 @@ function filtrerNom(tab,nom)
 }
 
 //------------------------------------
+/*
+function filtrerDate(tab, dateDebut, dateFin)
+{
+    let tab2 = [];
+
+    if (dateFin != null)
+    {
+        for (let s of tab)
+        {
+            if (s.dateHeureDebut2 >= dateDebut && s.dateHeureDebut2 <= dateFin)
+            {
+                tab2.push(s);
+            }
+        }
+        return tab2;
+}
+*/
+//------------------------------------
 
 function filtrerOrga(tab)
 {
@@ -250,9 +268,13 @@ function filtrer()
     let nom = document.querySelector('#filtreNom').value;
     tableau2 = filtrerNom(tableau2,nom);
     //---
-        // filtre dateDébut
-    //---
-        // filtre dateFin
+    /*
+    let dateDebut = document.querySelector('#dateDebut').value;
+    let dateFin = document.querySelector('#dateFin').value;
+    if (dateDebut && dateFin){
+        tableau2 = filtrerDate(tableau2, dateDebut, dateFin);
+    }
+    */
     //---
     let critereOrga = document.querySelector('#critereOrga').checked;
     //console.log(critereOrga);

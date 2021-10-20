@@ -130,8 +130,9 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
                 $tab['id']= $sortie->getId();
                 $tab['nom']= $sortie->getNom();
-                $tab['dateHeureDebut']= $maDateDebut->format('d/m/Y H:i'); // permets de formater le dateTime en date seulement et comme on veut.
+                $tab['dateHeureDebut']= $maDateDebut->format('Y-m-d H:i'); // permets de formater le dateTime en date seulement et comme on veut.
                 $tab['dateLimiteInscription']= $maDateInscription->format('d/m/Y H:i');
+                $tab['dateLimiteInscription2']= $maDateInscription;
                 $tab['nbInscription']= count($sortie->getParticipants());
                 $tab['nbInscriptionsMax']= $sortie->getNbInscriptionsMax();
                 $tab['etat']= $sortie->getEtat()->getLibelle();
