@@ -40,16 +40,6 @@ class SortieType extends AbstractType
             ->add('infosSortie', null, [
                 'label'=> "Description et infos : "
             ])
-            /*
-            ->add('latitude', null, [
-                'label'=> "latitude : ",
-                'mapped'=>false
-            ])
-            ->add('longitude', null, [
-                'label'=> "longitude : ",
-                'mapped'=>false
-            ])
-            */
         ;
     }
 

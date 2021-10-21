@@ -102,18 +102,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
-
-                    {#  <form action="la route .." id="formP">
-                    <label for="nom" class="form-label col-3">Nom du lieu</label>
-                    <input type="text" class="form-control col-3"><br>
-                    <label for="rue" class="form-label col-3">Rue</label>
-                    <input type="text" class="form-control col-3"><br>
-                    <label for="latitude" class="form-label col-3">Latitude</label>
-                    <input type="text" class="form-control col-3"><br>
-                    <label for="longitude" class="form-label col-3">Longitude</label>
-                    <input type="text" class="form-control col-3"><br>
-                    #}
+                    {{ form_start(formLieu,{'action': path('sortie_ajouterLieu'), 'attr':{'id':
+                    'formLieu'}}) }}
+                    {{ form_widget(formLieu) }}
+                    {{ form_end(formLieu) }}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -125,27 +117,27 @@
 
     <script>
 
-        /**
-         * Fonction qui permet d'ajouter un lieu (popup)
-         * liée à l'action onclick
-         */
-        function ajouterLieu()
-        {
-            console.log('ajouterlieu');
-            document.querySelector('#formS').submit();
-        }
-        /**
-         * Fonction qui permet d'enregistrer la sortie en BDD
-         */
+    /**
+     * Fonction qui permet d'ajouter un lieu (popup)
+     * liée à l'action onclick
+     */
+    function ajouterLieu()
+    {
+        console.log('ajouterlieu');
+        document.querySelector('#formLieu').submit();
+    }
+    /**
+     * Fonction qui permet d'enregistrer la sortie en BDD
+     */
     function enregistrer(){
         console.log('enregistrement ok');
         document.querySelector('#formS').submit();
     }
 
-        /**
-         * Fonction qui permet de publier la sortie càd:
-         * l'enregistrer en BDD avec l'état Ouverte
-         */
+    /**
+     * Fonction qui permet de publier la sortie càd:
+     * l'enregistrer en BDD avec l'état Ouverte
+     */
     function publier(){
         console.log('publication OK');
         document.querySelector('#publier').value="1";
