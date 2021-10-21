@@ -30,12 +30,14 @@ class LieuController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstract
         $formLieu = $this->createForm(LieuType:: class, $newLieu);
 
         $formLieu->handleRequest($request);
-
+        if($formLieu->isSubmitted() && $formLieu->isValid())
+        {
         $em->persist($newLieu);
         $em->flush();
 
-        //$this->addFlash('success', 'Le lieu a bien été ajouté.');
+        $this->addFlash('success', 'Le lieu a bien été ajouté.');
         return $this->redirectToRoute('sortie_ajouter');
+        }
 
     }
 }
