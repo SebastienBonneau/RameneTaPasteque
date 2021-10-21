@@ -6,10 +6,12 @@ use App\Entity\Campus;
 use App\Entity\Participant;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ParticipantType extends AbstractType
 {
@@ -45,6 +47,21 @@ class ParticipantType extends AbstractType
             ->add('campus', null, [
                 'choice_label' => "nom",
                 'label' => 'Campus : '
+            ])
+            ->add('photo', FileType::class,[
+                'label' => 'Télécharger votre photo :',
+                'mapped'=> false,
+                'required' => false,
+
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/*'
+                        ],
+                        'mimeTypesMessage' => "Ce format d/'image n/'est pas accepter.",
+                    ])
+                ]
             ])
             //->add('inscrits')
         ;
