@@ -61,6 +61,7 @@ class ParticipantController extends AbstractController
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
                 $user->setPhoto($newPhoto);
+
             }
 
             $entityManager = $this->getDoctrine()->getManager();
