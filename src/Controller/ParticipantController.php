@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
- * @Route("/Participant", name="participant")
+ * @Route("/participant", name="participant")
  */
 class ParticipantController extends AbstractController
 {

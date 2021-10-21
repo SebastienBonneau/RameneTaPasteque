@@ -19,7 +19,7 @@ function afficherTableau(tableau) {
     let urlPublier = "http://127.0.0.1:8000/sortie/publier/"; // lien publier
     let urlAnnuler = "http://127.0.0.1:8000/sortie/annuler/"; // lien annuler
     let urlModifier = "http://127.0.0.1:8000/sortie/modifier/"; // lien modifier
-    let urlParticipant = "http://127.0.0.1:8000/Participant/afficher/"; // lien afficher participant
+    let urlParticipant = "http://127.0.0.1:8000/participant/afficher/"; // lien afficher participant
     let date1 = new Date(); // Je crée une variable avec la date du jour, pas besoin de la mettre dans la boucle
 
 
