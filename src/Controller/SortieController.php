@@ -114,7 +114,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $maDateDebut = $sortie->getDateHeureDebut();
                 $userInscrit = $service->verifInscription($sortie->getParticipants(),$this->getUser());
                 $userOrganisateur = $service->verifUserConnectedOrganisateur($sortie->getOrganisateur(),$this->getUser());
-
+                //$userAdmin =$service->verifRoleAdmin($this->getUser());
 
                    // if ($userInscrit == true){
                      //   $nbInscrits++;
@@ -136,6 +136,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $tab['organisateurId']= $sortie->getOrganisateur()->getId();
                 $tab['userOrganisateur'] = $userOrganisateur;
                 $tab['campus'] = $sortie->getCampus()->getId();
+                //$tab['userAdmin'] =$userAdmin;
 
 
                 $tableau[]= $tab;
