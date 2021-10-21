@@ -25,8 +25,9 @@ class SortieRepository extends ServiceEntityRepository
     public function findByDate()
     {
         $entityManager = $this->getEntityManager();
-        $dql = ("SELECT s FROM App\Entity\Sortie s
-                WHERE s.dateHeureDebut > CURRENT_DATE()-30");
+        $dql = (" SELECT s FROM App\Entity\Sortie s
+                WHERE (DATE_DIFF(CURRENT_DATE(), s.dateHeureDebut ) < 30)");
+        //        WHERE s.dateHeureDebut > CURRENT_DATE()-30");
         $query = $entityManager->createQuery($dql);
         return $query->getResult();
     }
