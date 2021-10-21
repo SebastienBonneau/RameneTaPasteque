@@ -1,41 +1,46 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
+    <div class="container my-4">
         <div class="row">
             <div class="offset-3 col-6">
                 <h2>{{ participant.pseudo }}</h2>
             </div>
         </div>
-    <ul>
+
         <div class="row">
             <div class="offset-3 col-6">
-            <li>Prénom : {{ participant.prenom }}</li>
+                <label class="form-label" for="prenom">Prénom : </label>
+                <input class="form-control"  id="prenom" value="{{ participant.prenom }}" disabled>
             </div>
         </div>
         <div class="row">
             <div class="offset-3 col-6">
-            <li>Nom : {{ participant.Nom }}</li>
+                <label class="form-label" for="nom">Nom : </label>
+                <input class="form-control"  id="nom" value="{{ participant.Nom }}" disabled>
             </div>
         </div>
         <div class="row">
             <div class="offset-3 col-6">
-            <li>Téléphone : {{ participant.telephone }}</li>
+                <label class="form-label" for="telephone">Téléphone : </label>
+                <input class="form-control"  id="telephone" value="{{ participant.telephone }}" disabled>
             </div>
         </div>
         <div class="row">
             <div class="offset-3 col-6">
-            <li>Email : {{ participant.email }}</li>
+                <label class="form-label" for="email">Email : </label>
+                <input class="form-control"  id="email" value="{{ participant.email }}" disabled>
             </div>
         </div>
         <div class="row">
             <div class="offset-3 col-6">
-            <li>Campus : {{ participant.campus.nom }}</li>
+                <label class="form-label" for="campus">Campus : </label>
+                <input class="form-control"  id="campus" value="{{ participant.campus.nom }}" disabled>
             </div>
         </div>
-    </ul>
+
         <div class="row">
-            <div class="offset-3 col-3">
+            <div class="offset-5 col-3">
         <a href="{{ path('sortie_liste') }}" class="btn btn-success mx-3 my-3">Retour à l'accueil</a>
             </div>
         </div>

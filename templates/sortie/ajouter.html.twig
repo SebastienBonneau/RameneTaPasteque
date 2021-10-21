@@ -30,22 +30,25 @@
                 </div>
             </div>
             <div class="row">
-                <div class="offset-3 col-6 my-3">
+                <div class="offset-3 col-5 my-3">
                     <label class="form-label"  for="lieu">Lieu : </label>
-                    <select class="form-control" name="lieu" id="lieu" onchange="changerLieu()">
-                        // ici on alimente
-                    </select>
+                    <div class="row">
+                        <div class="col-11">
+                            <select class="form-control" name="lieu" id="lieu" onchange="changerLieu()">
+                                // ici on alimente
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <!-- Button trigger modal-->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lieuModal">
+                                <i class="fas fa-plus-circle"></i>
+                            </button>
+                            <!-- -->
+                        </div>
+                    </div>
                 </div>
             </div>
-                <!-- Button trigger modal-->
-            <div class="row">
-                <div class="offset-3 col-6 my-3">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lieuModal">
-                        + Ajouter un lieu
-                    </button>
-                </div>
-            </div>
-                <!-- -->
+
             <div class="row">
                 <div class="offset-3 col-6 my-3">
                     <label class="form-label"  for="rue">Rue : </label>
@@ -79,13 +82,13 @@
 
                 {# Je sors les boutons du formulaires pour pouvoir en gérer plusieurs #}
             <div class="row">
-                <div class="offset-4 col-1 my-3">
+                <div class="offset-4 col-auto my-3">
                     <button onclick="enregistrer()" class="btn btn-secondary mt-3 me-2 mb-3">Enregistrer</button>
                 </div>
-                <div class="col-1 my-3 px-4">
+                <div class="col-auto my-3 px-4">
                     <button onclick="publier()" class="btn btn-success mt-3 me-2 mb-3">Publier</button>
                 </div>
-                <div class="col-1 my-3">
+                <div class="col-auto my-3">
                     <a href="{{ path('sortie_liste') }}" class="btn btn-dark mt-3 mb-3">Annuler</a>
                 </div>
             </div>

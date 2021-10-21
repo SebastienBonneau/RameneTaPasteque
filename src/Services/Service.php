@@ -43,6 +43,12 @@ class Service
             }return false;
     }
 
-
+   /* public function verifUserAdmin($userConnecte)
+    {
+        if ($userConnecte->getRoles() == ['ROLE_ADMIN']){
+            return true;
+        } return false;
+    }
+*/
 
 }
