@@ -11,7 +11,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/Participant", name="participant")
+ * @Route("/participant", name="participant")
  */
 class ParticipantController extends AbstractController
 {
