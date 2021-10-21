@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Lieu;
 use App\Entity\Sortie;
+use App\Entity\Ville;
 use App\Form\AnnulerSortieType;
 use App\Form\LieuType;
 use App\Form\ModifierSortieType;
 use App\Form\SortieType;
+use App\Form\VilleType;
 use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
 use App\Repository\LieuRepository;
@@ -41,7 +43,19 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         // création d'une sortie
         $lieu = new Lieu();
         $formLieu = $this->createForm(LieuType::class, $lieu);
-        // le handle request pour ce formulaire sera fait directement dans lieuController/ fonction : ajouter
+        // le handle request pour ce formulaire sera fait directement dans la fonction : ajouterLieu
+        // de ce SortieController
+        // le $formLieu sera envoyé dans le compact du renderForm en fin de fonction sortie_ajouter
+
+
+        // Infos pour que le formulaire ajouter ville soit accessible sur le formulaire de
+        // création d'une sortie
+        $ville = new Ville();
+        $formVille = $this->createForm(VilleType::class, $ville);
+        // le handle request pour ce formulaire sera fait directement dans la fonction : ajouterVille
+        // de ce SortieController
+        // le $formVille sera envoyé dans le compact du renderForm en fin de fonction sortie_ajouter
+
         // création d'une nouvelle sortie
         $newSortie = new Sortie();
         // récupération du campus associé à la $newSortie via l'organisateur que l'on affecte à $newSortie
@@ -80,7 +94,7 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         }
 
         return $this->renderForm('sortie/ajouter.html.twig',
-        compact("formSortie",'newSortie', 'formLieu', 'campus'));
+        compact("formSortie",'newSortie', 'campus', 'formLieu', 'formVille'));
     }
 
     /**
@@ -102,6 +116,23 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         return $this->redirectToRoute('sortie_ajouter');
     }
 
+    /**
+     * @Route("/ajouterVille", name="_ajouterVille")
+     */
+    public function ajouterVille(
+        EntityManagerInterface $em,
+        Request $request
+    ): Response
+    {
+        // création d'un nouveau lieu
+        $newVille = new Ville();
+        $formVille = $this->createForm(VilleType:: class, $newVille);
+        $formVille->handleRequest($request);
+        $em->persist($newVille);
+        $em->flush();
+
+        return $this->redirectToRoute('sortie_ajouter');
+    }
 
     /**
      * @Route("/liste", name="_liste")

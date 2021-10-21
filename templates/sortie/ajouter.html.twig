@@ -10,9 +10,15 @@
             </div>
         </div>
                 {{ form_start(formSortie, {'attr':{id: 'formS'}}) }}
+            {# l'id formS a été ajouté au formulaire pour pouvoir pointer
+            sur cette zone lorsqu'on utilisera l'un des 2 boutons publier ou enregistrer
+            qui ont été sortis du formulaire formSortie#}
             <div class="row">
                 <div class="offset-3 col-6 my-3">
                 {{ form_widget(formSortie) }}
+                    {# on utilise form_widget pour gérer tous les champs du formulaires sans passer par form_row
+                    mais on peut cumuler les 2 écritures. Il gèrera en form_row les champs qui onté été appelés nommément
+                    et en widget l'ensemble des autres#}}
                 </div>
             </div>
             <div class="row">
@@ -22,11 +28,25 @@
                 </div>
             </div>
             <div class="row">
-                <div class="offset-3 col-6 my-3">
-                    <label class="form-label col-3"  for="ville">Ville : </label>
-                    <select class="form-control" name="ville" id="ville" onchange="changerVille()">
+                <div class="offset-3 col-5 my-3">
+                    <label class="form-label"  for="ville">Ville : </label>
+                    <div class="row">
+                        <div class="col-11">
+                            <select class="form-control" name="ville" id="ville" onchange="changerVille()">
                         // ici on alimente
-                    </select>
+                            </select>
+                        </div>
+
+                        <div class="col-1">
+                        <!-- Intégration du Button trigger modal pour Ville
+                            ATTENTION définir un id (#villeModal) est indispensable pour relier avec le corps de
+                            la modal écrit plus bas-->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#villeModal">
+                                <i class="fas fa-plus-circle"></i>
+                            </button>
+                        <!-- -->
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -39,7 +59,9 @@
                             </select>
                         </div>
                         <div class="col-1">
-                            <!-- Button trigger modal-->
+                            <!-- Intégration du Button trigger modal pour Lieu
+                            ATTENTION définir un id (#lieuModal) est indispensable pour relier avec le corps de
+                            la modal écrit plus bas-->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lieuModal">
                                 <i class="fas fa-plus-circle"></i>
                             </button>
@@ -93,6 +115,34 @@
                 </div>
             </div>
     </div>
+
+    <!-- Modal pour ajouter une ville lors de la création d'une sortie id=villeModal-->
+    <div class="modal fade" id="villeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- intégration du formulaire de création d'une ville, qui a été créé dans une entité villeType -->
+                    <!-- ATTENTION ne pas oublier de préciser le path('') avec le chemin vers la fonction qui gère le
+                    formulaire-->
+                    {{ form_start(formVille,{'action': path('sortie_ajouterVille'), 'attr':{'id':
+                        'formVille'}}) }} <!-- l'id est obligatoire et sera réutilisé pour valider l'action du bouton
+                    de la modal, intitulé onclick="ajouterVille() -->
+                    {{ form_widget(formVille) }}
+                    {{ form_end(formVille) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="ajouterVille()">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- -->
+
     <!-- Modal pour ajouter un lieu lors de la création d'une sortie -->
     <div class="modal fade" id="lieuModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -102,8 +152,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <!-- intégration du formulaire de création d'un lieu, qui a été créé dans une entité lieuType -->
+                    <!-- ATTENTION ne pas oublier de préciser le path('') avec le chemin vers la fonction qui gère le
+                    formulaire-->
                     {{ form_start(formLieu,{'action': path('sortie_ajouterLieu'), 'attr':{'id':
-                    'formLieu'}}) }}
+                    'formLieu'}}) }} <!-- l'id est obligatoire et sera réutilisé pour valider l'action du bouton
+                    de la modal, intitulé onclick="ajouterLieu() -->
                     {{ form_widget(formLieu) }}
                     {{ form_end(formLieu) }}
                 </div>
@@ -114,20 +168,35 @@
             </div>
         </div>
     </div>
-
+    <!-- -->
     <script>
+/* -------------Fonctions liées aux modals pour Ville et Lieu--------------------------------------------- */
+    /**
+     * Fonction qui permet d'ajouter une ville (via popup)
+     * liée à l'action onclick de la villeModal intégrée dans le formulaire
+     * ajouter une sortie ci- dessus
+     */
+    function ajouterVille()
+    {
+        console.log('ajouterVille');
+        document.querySelector('#formVille').submit();
+    }
 
     /**
-     * Fonction qui permet d'ajouter un lieu (popup)
-     * liée à l'action onclick
+     * Fonction qui permet d'ajouter un lieu (via popup)
+     * liée à l'action onclick de la lieuModal intégrée dans le formulaire
+     * ajouter une sortie ci-dessus
      */
     function ajouterLieu()
     {
         console.log('ajouterlieu');
         document.querySelector('#formLieu').submit();
     }
+
+/* ---------Fonctions liées aux boutons (enregistrer et publier) du formulaire ajouter une sortie----------- */
     /**
-     * Fonction qui permet d'enregistrer la sortie en BDD
+     * Fonction qui permet d'enregistrer la nouvelle sortie en BDD
+     * avec l'état 'créée'
      */
     function enregistrer(){
         console.log('enregistrement ok');
@@ -135,7 +204,7 @@
     }
 
     /**
-     * Fonction qui permet de publier la sortie càd:
+     * Fonction qui permet de publier la nouvelle sortie càd:
      * l'enregistrer en BDD avec l'état Ouverte
      */
     function publier(){
@@ -145,7 +214,9 @@
     }
 
     </script>
+    <!-- import du cdn Bootstrap pour gérer les affichages plus efficacement-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
     <!-- création d'un lien vers le fichier js qui regroupe les méthodes à appeler pour l'affichage-->
     <script src="{{ asset('javascript/ajouterSortie.js') }}">
     </script>
