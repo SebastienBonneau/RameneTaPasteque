@@ -159,7 +159,7 @@ class AppFixtures extends Fixture
         $participant1-> setAdministrateur(false);
         $participant1-> setActif(true);
         $participant1->setCampus($campus1);
-        $participant1->setPhoto("papa1Profil.jpg");
+        $participant1->setPhoto("sandia.jpg");
         $manager->persist($participant1);
         $manager->flush();
 
@@ -174,7 +174,7 @@ class AppFixtures extends Fixture
         $participant2-> setAdministrateur(false);
         $participant2-> setActif(false);
         $participant2->setCampus($campus2);
-        $participant2->setPhoto("papa1Profil.jpg");
+        $participant2->setPhoto("jcdus.jpg");
         $manager->persist($participant2);
         $manager->flush();
 
@@ -189,7 +189,7 @@ class AppFixtures extends Fixture
         $participant3-> setAdministrateur(true);
         $participant3-> setActif(true);
         $participant3->setCampus($campus3);
-        $participant3->setPhoto("papa1Profil.jpg");
+        $participant3->setPhoto("josy.jpg");
         $manager->persist($participant3);
         $manager->flush();
 
@@ -204,7 +204,7 @@ class AppFixtures extends Fixture
         $participant4-> setAdministrateur(true);
         $participant4-> setActif(true);
         $participant4->setCampus($campus4);
-        $participant4->setphoto("papa1Profil.jpg");
+        $participant4->setphoto("chanchan.jpg");
         $manager->persist($participant4);
         $manager->flush();
 
@@ -262,7 +262,7 @@ class AppFixtures extends Fixture
         $sortie4-> setCampus($campus4);
         $sortie4-> setEtat($etat1);
         $sortie4->setLieu($lieu4);
-        $sortie4-> setOrganisateur($participant1);
+        $sortie4-> setOrganisateur($participant2);
         $manager->persist($sortie4);
         $manager->flush();
 
