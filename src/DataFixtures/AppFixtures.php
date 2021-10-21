@@ -46,7 +46,7 @@ class AppFixtures extends Fixture
         $manager->persist($etat6);
         $manager->flush();
 
-
+        //----------------------------------
 
         $ville1 = new Ville();
         $ville1-> setNom("Les Sables d'Olonne");
@@ -72,11 +72,13 @@ class AppFixtures extends Fixture
         $manager->persist($ville4);
         $manager-> flush();
 
-
+        //----------------------------------
 
         $lieu1 = new Lieu();
         $lieu1-> setNom("la plage des sables");
         $lieu1-> setRue("rue des marins");
+        $lieu1-> setLatitude("46.492958");
+        $lieu1-> setLongitude("-1.795493");
         $lieu1-> setVille($ville1);
         $manager->persist($lieu1);
         $manager-> flush();
@@ -84,6 +86,8 @@ class AppFixtures extends Fixture
         $lieu2 = new Lieu();
         $lieu2-> setNom("le lac de samouass");
         $lieu2-> setRue("rue du petit pois");
+        $lieu2-> setLatitude("47.036878");
+        $lieu2-> setLongitude("-1.642905");
         $lieu2-> setVille($ville2);
         $manager->persist($lieu2);
         $manager-> flush();
@@ -91,6 +95,8 @@ class AppFixtures extends Fixture
         $lieu3 = new Lieu();
         $lieu3-> setNom("Aeroport de splash");
         $lieu3-> setRue("boulevard des champs");
+        $lieu3-> setLatitude("47.658236");
+        $lieu3-> setLongitude("-2.760847");
         $lieu3-> setVille($ville3);
         $manager->persist($lieu3);
         $manager-> flush();
@@ -98,15 +104,22 @@ class AppFixtures extends Fixture
         $lieu4 = new Lieu();
         $lieu4-> setNom("La foret des elfes");
         $lieu4-> setRue("chemin de bel espoir");
+        $lieu4-> setLatitude("47.478419");
+        $lieu4-> setLongitude("-0.563166");
         $lieu4-> setVille($ville4);
         $manager->persist($lieu4);
         $manager-> flush();
 
+        $lieu5 = new Lieu();
+        $lieu5-> setNom("La plage des pastèques");
+        $lieu5-> setRue("boulevard de l'océan");
+        $lieu5-> setLatitude("47.658236");
+        $lieu5-> setLongitude("-2.760847");
+        $lieu5-> setVille($ville3);
+        $manager->persist($lieu5);
+        $manager-> flush();
 
-
-
-
-
+        //----------------------------------
 
         $campus1 = new Campus();
         $campus1->setNom("Barbus Campus");
@@ -133,10 +146,10 @@ class AppFixtures extends Fixture
         $manager->persist($campus5);
         $manager->flush();
 
-
+        //----------------------------------
 
         $participant1 = new Participant();
-        $participant1-> setPseudo("heyjo");
+        $participant1-> setPseudo("jojo");
         $participant1-> setNom("HEY");
         $participant1-> setPrenom("John");
         $participant1-> setTelephone("01.02.03.30.20");
@@ -146,6 +159,7 @@ class AppFixtures extends Fixture
         $participant1-> setAdministrateur(false);
         $participant1-> setActif(true);
         $participant1->setCampus($campus1);
+        $participant1->setPhoto("papa1Profil.jpg");
         $manager->persist($participant1);
         $manager->flush();
 
@@ -160,11 +174,12 @@ class AppFixtures extends Fixture
         $participant2-> setAdministrateur(false);
         $participant2-> setActif(false);
         $participant2->setCampus($campus2);
+        $participant2->setPhoto("papa1Profil.jpg");
         $manager->persist($participant2);
         $manager->flush();
 
         $participant3 = new Participant();
-        $participant3-> setPseudo("josiane");
+        $participant3-> setPseudo("josy");
         $participant3-> setNom("LABELLE");
         $participant3-> setPrenom("Josiane");
         $participant3-> setTelephone("01.72.83.35.25");
@@ -174,11 +189,12 @@ class AppFixtures extends Fixture
         $participant3-> setAdministrateur(true);
         $participant3-> setActif(true);
         $participant3->setCampus($campus3);
+        $participant3->setPhoto("papa1Profil.jpg");
         $manager->persist($participant3);
         $manager->flush();
 
         $participant4 = new Participant();
-        $participant4-> setPseudo("chantal");
+        $participant4-> setPseudo("chanchan");
         $participant4-> setNom("LAFORTE");
         $participant4-> setPrenom("Chantal");
         $participant4-> setTelephone("01.72.00.65.25");
@@ -188,10 +204,11 @@ class AppFixtures extends Fixture
         $participant4-> setAdministrateur(true);
         $participant4-> setActif(true);
         $participant4->setCampus($campus4);
+        $participant4->setphoto("papa1Profil.jpg");
         $manager->persist($participant4);
         $manager->flush();
 
-
+        //----------------------------------
 
         $sortie1 = new Sortie();
         $sortie1-> setNom("Attrappe la meduse");
@@ -203,10 +220,9 @@ class AppFixtures extends Fixture
         $sortie1-> setCampus($campus1);
         $sortie1-> setEtat($etat1);
         $sortie1->setLieu($lieu1);
-        $sortie1-> setOrganisateur($participant3);
+        $sortie1-> setOrganisateur($participant1);
         $manager->persist($sortie1);
         $manager->flush();
-
 
         $sortie2 = new Sortie();
         $sortie2-> setNom("pedalo");
@@ -232,7 +248,7 @@ class AppFixtures extends Fixture
         $sortie3-> setCampus($campus3);
         $sortie3-> setEtat($etat2);
         $sortie3->setLieu($lieu3);
-        $sortie3-> setOrganisateur($participant3);
+        $sortie3-> setOrganisateur($participant4);
         $manager->persist($sortie3);
         $manager->flush();
 
@@ -246,12 +262,23 @@ class AppFixtures extends Fixture
         $sortie4-> setCampus($campus4);
         $sortie4-> setEtat($etat1);
         $sortie4->setLieu($lieu4);
-        $sortie4-> setOrganisateur($participant4);
+        $sortie4-> setOrganisateur($participant1);
         $manager->persist($sortie4);
         $manager->flush();
 
-
-
+        $sortie5 = new Sortie();
+        $sortie5-> setNom("Sortie à la plage.");
+        $sortie5-> setDateHeureDebut(new \datetime("14-08-2021"));
+        $sortie5-> setDuree(10);
+        $sortie5-> setDateLimiteInscription(new \datetime("12-08-2021"));
+        $sortie5-> setNbInscriptionsMax(10);
+        $sortie5-> setInfosSortie("Fait trop chaud let's go to the beach, las Sandias!!");
+        $sortie5-> setCampus($campus5);
+        $sortie5-> setEtat($etat5);
+        $sortie5->setLieu($lieu5);
+        $sortie5-> setOrganisateur($participant2);
+        $manager->persist($sortie5);
+        $manager->flush();
 
     }
 }
