@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Form\AnnulerSortieType;
+use App\Form\LieuType;
 use App\Form\ModifierSortieType;
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
@@ -35,6 +37,12 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
         ): Response
     {
+        /* Infos pour que le formulaire ajouter lieu soit accessible sur le formulaire de
+        // création d'une sortie
+        $lieu = new Lieu();
+        $formLieu = $this->createForm(LieuType::class, $lieu);
+        // le handle request pour ce formulaire sera fait directement dans lieuController/ fonction : ajouter
+*/
         // création d'une nouvelle sortie
         $newSortie = new Sortie();
         // récupération du campus associé à la $newSortie via l'organisateur que l'on affecte à $newSortie
