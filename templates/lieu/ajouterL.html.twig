@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container my-4">
+        <div class="row">
+            <div class="offset-3 col-6 my-3">
+                <h2>Ajouter un lieu</h2>
+            </div>
+        </div>
+    {{ form_start(formLieu, {'attr':{id: 'formS'}}) }}
+    {{ form_widget(formLieu) }}
+    {{ form_end(formLieu) }}
+
+{% endblock %}

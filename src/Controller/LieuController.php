@@ -17,9 +17,9 @@ class LieuController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstract
 {
 
     /**
-     * @Route("/ajouter", name="_ajouter")
+     * @Route("/ajouterL", name="_ajouterL")
      */
-    public function ajouter(
+    public function ajouterL(
         EntityManagerInterface $em,
         Request                $request
     ): Response
@@ -35,7 +35,7 @@ class LieuController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstract
         $em->persist($newLieu);
         $em->flush();
 
-        $this->addFlash('success', 'Le lieu a bien été ajouté.');
+        //$this->addFlash('success', 'Le lieu a bien été ajouté.');
         return $this->redirectToRoute('sortie_ajouter');
         }
 
