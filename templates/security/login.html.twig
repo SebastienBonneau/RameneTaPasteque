@@ -13,36 +13,53 @@
             Bienvenue sur le site, petite Pastèque  {{ app.user.pseudo }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-     <div class="container p-5">
-         <div class="col-4">
-            <h1 class="h3 mb-3 font-weight-normal">SVP, Connectez- vous !</h1>
-            <label for="inputIdentifiant">Identifiant : </label>
-            <input type="text" placeholder="adresse@mail ou pseudo" value="{{ last_username}}" name="identifiant" id="inputIdentifiant" class="form-control"  required autofocus>
-            <label for="inputPassword">Mot de passe : </label>
-            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}">
+    <div class="container my-4">
+        <div class="row">
+            <div class="offset-3 col-6 my-3">
+                <h1 class="h3 mb-3 font-weight-normal">SVP, Connectez- vous !</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-4 my-3">
+                <label for="inputIdentifiant">Identifiant : </label>
+                <input type="text" placeholder="adresse@mail ou pseudo" value="{{ last_username}}" name="identifiant" id="inputIdentifiant" class="form-control"  required autofocus>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-4 my-3">
+                <label for="inputPassword">Mot de passe : </label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-4 my-3">
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}">
+            </div>
+        </div>
 
 
         {#
             Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
             See https://symfony.com/doc/current/security/remember_me.html
         #}
-            <div class="mx-auto">
-                <div class="checkbox mb-3">
+            <div class="row mx-auto">
+                <div class="offset-3 col-2 checkbox mb-3">
+                    <button class="btn btn-lg btn-primary" type="submit">Connexion</button>
+                </div>
+                <div class="col-3 checkbox mb-3">
                     <label>
                         <input type="checkbox" name="_remember_me"> Se souvenir de moi
                     </label>
-                    <br>
-                    <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
                 </div>
-                <div>
-                    <button class="btn btn-lg btn-primary" type="submit">
-                        Connexion
-                    </button>
+                <div class="row mx-auto">
+                    <div class="offset-5 col-3 checkbox mb-3">
+                        <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
+                    </div>
                 </div>
-            </div>
+                <div class="row mx-auto">
+
+                </div>
          </div>
      </div>
 </form>

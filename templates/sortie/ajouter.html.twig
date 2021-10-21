@@ -5,24 +5,24 @@
 {% block body %}
     <div class="container my-4">
         <div class="row">
-            <div class="offset-3 col-6 mx-3 my-3">
+            <div class="offset-3 col-6 my-3">
                 <h2>Créer une sortie</h2>
             </div>
         </div>
                 {{ form_start(formSortie, {'attr':{id: 'formS'}}) }}
             <div class="row">
-                <div class="offset-3 col-6 mx-3 my-3">
+                <div class="offset-3 col-6 my-3">
                 {{ form_widget(formSortie) }}
                 </div>
             </div>
             <div class="row">
-                <div class="offset-3 col-6 mx-3 my-3">
+                <div class="offset-3 col-6 my-3">
                     <label class="form-label"  for="campus">Campus : </label>
                     <input class="form-control"  id="campus" value="{{ app.user.campus.nom }}" disabled>
                 </div>
             </div>
             <div class="row">
-                <div class="offset-3 col-6 mx-3 my-3">
+                <div class="offset-3 col-6 my-3">
                     <label class="form-label col-3"  for="ville">Ville : </label>
                     <select class="form-control" name="ville" id="ville" onchange="changerVille()">
                         // ici on alimente
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="offset-3 col-6 mx-3 my-3">
+                <div class="offset-3 col-6 my-3">
                     <label class="form-label"  for="lieu">Lieu : </label>
                     <select class="form-control" name="lieu" id="lieu" onchange="changerLieu()">
                         // ici on alimente
@@ -39,7 +39,7 @@
             </div>
                 <!-- Button trigger modal-->
             <div class="row">
-                <div class="offset-3 col-6 mx-3 my-3">
+                <div class="offset-3 col-6 my-3">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lieuModal">
                         + Ajouter un lieu
                     </button>
@@ -47,25 +47,25 @@
             </div>
                 <!-- -->
             <div class="row">
-                <div class="offset-3 col-6 mx-3 my-3">
+                <div class="offset-3 col-6 my-3">
                     <label class="form-label"  for="rue">Rue : </label>
                     <input class="form-control"  id="rue" disabled>
                 </div>
             </div>
             <div class="row">
-                <div class="offset-3 col-6 mx-3 my-3">
+                <div class="offset-3 col-6 my-3">
                     <label class="form-label"  for="code">Code postal : </label>
                     <input class="form-control"  id="code" disabled>
                 </div>
             </div>
             <div class="row">
-                <div class="offset-3 col-6 mx-3 my-3">
+                <div class="offset-3 col-6 my-3">
                     <label class="form-label"  for="latitude">Latitude : </label>
                     <input class="form-control"  id="latitude" disabled>
                 </div>
             </div>
             <div class="row">
-                <div class="offset-3 col-6 mx-3 my-3">
+                <div class="offset-3 col-6 my-3">
                     <label class="form-label"  for="longitude">Longitude : </label>
                     <input class="form-control"  id="longitude" disabled>
                 </div>
@@ -79,13 +79,13 @@
 
                 {# Je sors les boutons du formulaires pour pouvoir en gérer plusieurs #}
             <div class="row">
-                <div class="offset-4 col-1 mx-3">
+                <div class="offset-4 col-1 my-3">
                     <button onclick="enregistrer()" class="btn btn-secondary mt-3 me-2 mb-3">Enregistrer</button>
                 </div>
-                <div class="offset-5 col-1 mx-3">
+                <div class="col-1 my-3 px-4">
                     <button onclick="publier()" class="btn btn-success mt-3 me-2 mb-3">Publier</button>
                 </div>
-                <div class="offset-6 col-1 mx-3">
+                <div class="col-1 my-3">
                     <a href="{{ path('sortie_liste') }}" class="btn btn-dark mt-3 mb-3">Annuler</a>
                 </div>
             </div>
