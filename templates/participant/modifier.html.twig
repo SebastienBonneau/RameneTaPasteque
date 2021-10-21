@@ -7,16 +7,24 @@
         <div class="offset-3 col-6">
             <h2>Mon profil à modifier</h2>
         </div>
-        <div><img style="height:200px; width: 200px;" src="{{ asset('images/photoUtilisateur/' ~ app.user.photo) }}"></div>
-    </div>
-    {{ form_start(participantForm) }}
+            {{ form_start(participantForm) }}
+        <div class="row rowspan-4">
+            <div class="col-3">
+                <img style="height:200px; width: 200px;" src="{{ asset('images/photoUtilisateur/' ~ app.user.photo) }}">
+            </div>
+            <div class="col-6">
+                {{ form_row(participantForm.pseudo) }}
+                {{ form_row(participantForm.prenom) }}
+                {{ form_row(participantForm.nom) }}
+                {{ form_row(participantForm.email) }}
+        </div>
+
     <div class="row">
         <div class="offset-3 col-4">
-    {{ form_widget(participantForm) }}
+            {{ form_widget(participantForm) }}
            <!-- <div><label for="pictureFile">Telecharger votre photo : </label>
             <input type="file" id="pictureFile" name="pictureFile" accept="image/png, image/jpeg"/>
                 <img id="uploadPreview" style="width: 100px; height: 100px;"/></div> -->
-            <br>
         </div>
     </div>
     <div class="row">
@@ -24,7 +32,6 @@
     <button type="submit" class="btn btn-success mx-3 my-3">Enregistrer</button>
         </div>
     </div>
-
     {{ form_end(participantForm) }}
 
 {% endblock %}

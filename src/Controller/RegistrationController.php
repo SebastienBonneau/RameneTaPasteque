@@ -19,6 +19,7 @@ class RegistrationController extends AbstractController
         $user->setAdministrateur(false);
         $user->setActif(true);
         $user->setRoles(["ROLE_USER"]);
+        $user->setPhoto('papa1.jpg');
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -32,6 +33,7 @@ class RegistrationController extends AbstractController
                     // pour récupérer une info détachée de l'entité (==> 'mapped'=> false dans le EntityTypeForm
                     $form->get('plainPassword')->getData()
                 )
+
             );
 
             $entityManager = $this->getDoctrine()->getManager();// remplace injection de dépendance
