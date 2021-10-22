@@ -75,6 +75,7 @@
 
     </div>
     <div>
+        <!-- Construction de la structure du tableau en html-->
         <table class="table table-striped bg-light">
            <!-- Affichage de l'entête du tableau en dur -->
             <thead>
@@ -91,11 +92,13 @@
                 </tr>
             </thead>
             <!-- le corps du tableau sera rempli avec du js ==>
-            on lui met un id qui permettra-->
+            on lui met un id(=myTbody) qui permettra de le remplir avec un fichier json,
+            grâce à un template-->
             <tbody id="myTbody">
 
             </tbody>
         </table>
+        <!-- Création du bouton "Créer une sortie"-->
         <div class="container">
             <div class="row">
                 <div class="offset-5 col-3">
@@ -104,6 +107,8 @@
             </div>
         </div>
     </div>
+
+    <!-- -------Création du template qui sera affiché par défaut si rien n'est reçu du json -------------------------->
     <template id="ligne">
         <tr>
             <td>0</td>
