@@ -204,7 +204,7 @@ class SortieController extends AbstractController
         $maDate = new \DateTime();
         $verif = $service->verifInscription($exit->getParticipants(),$this->getUser());
         $SommeParticipants = count($exit->getParticipants());
-        if( $exit->getDateLimiteInscription() > $maDate && $exit->getNbInscriptionsMax() > $SommeParticipants && $verif == false)
+        if( $exit->getDateLimiteInscription() > $maDate && $exit->getNbInscriptionsMax() > $SommeParticipants && $verif == false && $exit->getEtat() == 'ouverte')
         {
            $exit->addParticipant($this->getUser());
            $em->persist($exit);
