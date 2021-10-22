@@ -6,6 +6,7 @@ use App\Entity\Campus;
 use App\Entity\Participant;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -56,6 +57,11 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Campus : ',
                 'mapped' => false,
                 'multiple' => false
+            ])
+            ->add('administrateur', CheckboxType::class, [
+                'label' => 'Administrateur',
+                'required' => false,
+                'mapped' => false
             ])
         ;
     }
