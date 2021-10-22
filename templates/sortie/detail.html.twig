@@ -13,7 +13,7 @@
                 <label class="form-label" for="dateHeure">Date et heure de la sortie : </label>
             </div>
             <div class="col-4 my-2">
-                <input class="form-control"  id="prenom" value="{{ sortie.dateHeureDebut|date ('d,M,Y H,i') }}" disabled>
+                <input class="form-control"  id="prenom" value="{{ sortie.dateHeureDebut|date ('d - M - Y  H:i') }}" disabled>
             </div>
         </div>
         <div class="row">
@@ -21,7 +21,7 @@
                 <label class="form-label" for="dateInscription">Date limite d'inscription : </label>
             </div>
             <div class="col-4 my-2">
-                <input class="form-control"  id="dateInscription" value="{{ sortie.dateLimiteInscription|date ('d,M,Y') }}" disabled>
+                <input class="form-control"  id="dateInscription" value="{{ sortie.dateLimiteInscription|date (' d - M - Y  H:i') }}" disabled>
             </div>
         </div>
         <div class="row">
@@ -124,4 +124,3 @@
 {% block title %}
 
 {% endblock %}
-
