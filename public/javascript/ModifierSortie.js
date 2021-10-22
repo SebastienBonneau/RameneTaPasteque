@@ -57,13 +57,13 @@ function afficherRue(lieuId){
 function afficherLatitude(lieuId){
     // je crée un objet lieu
     let lieu ={};
-    // retrouver la rue à partir de l'id que j'ai dans le lieu
+    // retrouver la latitude à partir de l'id que j'ai dans le lieu
     for (let l of lieux){
         if (lieuId == l.id){
             lieu = l;
         }
     }
-    // je sélectionne l'élément dont l'id=rue et je lui affecte la rue de
+    // je sélectionne l'élément dont l'id=latitude et je lui affecte la latitude de
     // l'objet lieu recréé
     document.querySelector('#latitude').value= lieu.latitude;
 }
@@ -79,13 +79,13 @@ function afficherLatitude(lieuId){
 function afficherLongitude(lieuId){
     // je crée un objet lieu
     let lieu ={};
-    // retrouver la rue à partir de l'id que j'ai dans le lieu
+    // retrouver la longitude à partir de l'id que j'ai dans le lieu
     for (let l of lieux){
         if (lieuId == l.id){
             lieu = l;
         }
     }
-    // je sélectionne l'élément dont l'id=rue et je lui affecte la rue de
+    // je sélectionne l'élément dont l'id=longitude et je lui affecte la longitude de
     // l'objet lieu recréé
     document.querySelector('#longitude').value= lieu.longitude;
 }

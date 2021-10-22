@@ -6,7 +6,7 @@ let villes = [];
 
 /**
  * Méthode qui permet de mettre à jour le code postal en
- * fonction de la ville sélectionnéee
+ * fonction de la ville sélectionnée
  * Elle sera utilisée à l'affichage du formulaire et au moment de la sélection d'une ville
  * @param villeId
  */
@@ -19,7 +19,7 @@ function afficherCodePostal(villeId){
             ville = v;
         }
     }
-    // je sélectionne l'élément dont l'id=code est je lui affecte le code postal de
+    // je sélectionne l'élément dont l'id=code et je lui affecte le code postal de
     // l'objet ville recréé
     document.querySelector('#code').value= ville.codePostal;
 }
@@ -27,7 +27,9 @@ function afficherCodePostal(villeId){
 //------------------------------------
 
 /**
- *
+ * Méthode qui permet de mettre à jour la rue en
+ * fonction du lieu sélectionné
+ * Elle sera utilisée à l'affichage du formulaire et au moment de la sélection d'un lieu
  * @param lieuId
  */
 function afficherRue(lieuId){
@@ -39,7 +41,7 @@ function afficherRue(lieuId){
             lieu = l;
         }
     }
-    // je sélectionne l'élément dont l'id=rue est je lui affecte un nom de rue de
+    // je sélectionne l'élément dont l'id=rue et je lui affecte la rue de
     // l'objet lieu recréé
     document.querySelector('#rue').value= lieu.rue;
 }
@@ -47,7 +49,9 @@ function afficherRue(lieuId){
 //------------------------------------
 
 /**
- *
+ * Méthode qui permet de mettre à jour la latitude en
+ * fonction du lieu sélectionné
+ * Elle sera utilisée à l'affichage du formulaire et au moment de la sélection d'un lieu
  * @param lieuId
  */
 function afficherLatitude(lieuId){
@@ -59,7 +63,7 @@ function afficherLatitude(lieuId){
             lieu = l;
         }
     }
-    // je sélectionne l'élément dont l'id=latitude est je lui affecte la latitude de
+    // je sélectionne l'élément dont l'id=latitude et je lui affecte la latitude de
     // l'objet lieu recréé
     document.querySelector('#latitude').value= lieu.latitude;
 }
@@ -67,7 +71,9 @@ function afficherLatitude(lieuId){
 //------------------------------------
 
 /**
- *
+ * Méthode qui permet de mettre à jour la longitude en
+ * fonction du lieu sélectionné
+ * Elle sera utilisée à l'affichage du formulaire et au moment de la sélection d'un lieu
  * @param lieuId
  */
 function afficherLongitude(lieuId){
@@ -79,7 +85,7 @@ function afficherLongitude(lieuId){
             lieu = l;
         }
     }
-    // je sélectionne l'élément dont l'id=longitude est je lui affecte la longitude de
+    // je sélectionne l'élément dont l'id=longitude et je lui affecte la longitude de
     // l'objet lieu recréé
     document.querySelector('#longitude').value= lieu.longitude;
 }
