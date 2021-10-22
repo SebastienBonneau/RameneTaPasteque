@@ -31,6 +31,13 @@
                             {% if app.user %}
                                 <li class="nav-item">
                                     <a class="nav-link
+                                        {% if my_route == 'sortie_liste'%} active{% endif %}"
+                                        aria-current="page"
+                                        href="{{ path('sortie_liste')}}">Accueil
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link
                                         {% if my_route == 'participant_modifier'%} active{% endif %}"
                                         aria-current="page"
                                         href="{{ path('participant_modifier')}}">Mon Profil
@@ -38,23 +45,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link
-                                        {% if my_route == 'sortie_ajouter'%} active{% endif %}"
-                                        aria-current="page"
-                                        href="{{ path('sortie_ajouter', {'id':app.user.id}) }}">Ajouter une sortie
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link
                                         {% if my_route == 'app_logout'%} active{% endif %}"
                                         aria-current="page"
-                                        href="{{ path('app_logout')}}">Logout
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link
-                                        {% if my_route == 'sortie_liste'%} active{% endif %}"
-                                        aria-current="page"
-                                        href="{{ path('sortie_liste')}}">Liste des Sorties
+                                        href="{{ path('app_logout')}}">Se déconnecter
                                     </a>
                                 </li>
                             {% endif %}
