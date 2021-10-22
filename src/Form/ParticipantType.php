@@ -42,8 +42,6 @@ class ParticipantType extends AbstractType
                 'first_options'  => ['label' => 'Nouveau mot de passe : '],
                 'second_options' => ['label' => 'Comfirmer mot de passe : '],
             ])
-            //->add('administrateur')
-            //->add('actif')
             ->add('campus', null, [
                 'choice_label' => "nom",
                 'label' => 'Campus : '
@@ -63,7 +61,6 @@ class ParticipantType extends AbstractType
                     ])
                 ]
             ])
-            //->add('inscrits')
         ;
     }
 

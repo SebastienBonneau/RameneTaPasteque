@@ -20,12 +20,10 @@ class SortieType extends AbstractType
             ->add('nom', null, [
                 'label'=> 'Nom de la sortie : '
             ])
-
             ->add('dateHeureDebut', DateTimeType::class, [
                 'widget' => 'single_text',
                 'label' => 'Date et heure de la sortie : '
             ])
-
             ->add('dateLimiteInscription', DateTimeType::class, [
                 'widget' => 'single_text',
                 'label'=> "Date limite d\'inscription : "

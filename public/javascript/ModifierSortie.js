@@ -3,6 +3,7 @@ let lieux = [];
 let villes = [];
 
 //------------------------------------
+
 /**
  * Méthode qui permet de mettre à jour le code postal en
  * fonction de la ville sélectionnée
@@ -21,8 +22,10 @@ function afficherCP(villeId){
     // je sélectionne l'élément dont l'id=code et je lui affecte le code postal de
     // l'objet ville recréé
     document.querySelector('#cp').value= ville.codePostal;
-    //
 }
+
+//------------------------------------
+
 /**
  * Méthode qui permet de mettre à jour la rue en
  * fonction du lieu sélectionné
@@ -41,8 +44,9 @@ function afficherRue(lieuId){
     // je sélectionne l'élément dont l'id=rue et je lui affecte la rue de
     // l'objet lieu recréé
     document.querySelector('#rue').value= lieu.rue;
-
 }
+
+//------------------------------------
 
 /**
  * Méthode qui permet de mettre à jour la latitude en
@@ -62,8 +66,9 @@ function afficherLatitude(lieuId){
     // je sélectionne l'élément dont l'id=rue et je lui affecte la rue de
     // l'objet lieu recréé
     document.querySelector('#latitude').value= lieu.latitude;
-
 }
+
+//------------------------------------
 
 /**
  * Méthode qui permet de mettre à jour la longitude en
@@ -83,8 +88,10 @@ function afficherLongitude(lieuId){
     // je sélectionne l'élément dont l'id=rue et je lui affecte la rue de
     // l'objet lieu recréé
     document.querySelector('#longitude').value= lieu.longitude;
-
 }
+
+//------------------------------------
+
 /**
  * Méthode qui permet de sélectionner une ville et qui sera appelée
  * pour mettre à jour les lieux en fonction de la ville
@@ -100,6 +107,7 @@ function changerVille()
 }
 
 //------------------------------------
+
 /**
  * Méthode qui affiche le menu déroulant des lieux relatifs à une ville sélectionnée dans le
  * menu déroulant précédent
@@ -121,15 +129,12 @@ function afficherLieu(villeId)
             option.setAttribute('value',l.id); //<option value="42"></option>
             option.textContent = l.nom; //<option value="42"> rouge</option>
             selectLieu.appendChild(option);
-
         }
-
     }
-
-
 }
 
 //------------------------------------
+
 /**
  * Méthode qui permet d'afficher le menu déroulant des villes
  * @param tab
@@ -142,7 +147,6 @@ function afficherVille(tab)
         option.setAttribute('value',v.id); //<option value="42"></option>
         option.textContent = v.nom; //<option value="42"> rouge</option>
         document.querySelector('#ville').appendChild(option);
-
     }
 }
 

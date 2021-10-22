@@ -280,5 +280,19 @@ class AppFixtures extends Fixture
         $manager->persist($sortie5);
         $manager->flush();
 
+        $sortie6 = new Sortie();
+        $sortie6-> setNom("Sortie Cinema.");
+        $sortie6-> setDateHeureDebut(new \datetime("03-10-2021"));
+        $sortie6-> setDuree(10);
+        $sortie6-> setDateLimiteInscription(new \datetime("01-10-2021"));
+        $sortie6-> setNbInscriptionsMax(10);
+        $sortie6-> setInfosSortie("Le dernier StarWars est sorti au cinéma !!!");
+        $sortie6-> setCampus($campus3);
+        $sortie6-> setEtat($etat5);
+        $sortie6->setLieu($lieu3);
+        $sortie6-> setOrganisateur($participant3);
+        $manager->persist($sortie6);
+        $manager->flush();
+
     }
 }

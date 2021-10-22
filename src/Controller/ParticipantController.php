@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Participant;
 use App\Form\ParticipantType;
-use App\Services\Service;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,14 +38,11 @@ class ParticipantController extends AbstractController
                 );
             }
             $photo = $form->get('photo')->getData();
-
             if ($photo) {
-
                 $originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
                 $newPhoto = $safeFilename.'-'.uniqid().'.'.$photo->guessExtension();
-
                 // Move the file to the directory where brochures are stored
                 try {
                     $photo->move(
@@ -57,13 +52,10 @@ class ParticipantController extends AbstractController
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
-
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
                 $user->setPhoto($newPhoto);
-
             }
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
             // do anything else you need here, like send an email
@@ -71,11 +63,12 @@ class ParticipantController extends AbstractController
             $this->addFlash('success', 'Le participant a bien été modifié.');
             return $this->redirectToRoute('participant_modifier');
         }
-
         return $this->render('participant/modifier.html.twig', [
             'participantForm' => $form->createView(),
         ]);
     }
+
+    //------------------------------------
 
     /**
      * @Route("/afficher/{participant}", name="_afficher")

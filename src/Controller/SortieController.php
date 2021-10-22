@@ -17,15 +17,15 @@ use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
 use App\Services\Service;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use function Composer\Autoload\includeFile;
 
 /**
  * @Route("/sortie", name="sortie")
  */
-class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
+class SortieController extends AbstractController
 {
 
     /**
@@ -47,7 +47,6 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         // de ce SortieController
         // le $formLieu sera envoyé dans le compact du renderForm en fin de fonction sortie_ajouter
 
-
         // Infos pour que le formulaire ajouter ville soit accessible sur le formulaire de
         // création d'une sortie
         $ville = new Ville();
@@ -60,11 +59,8 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         $newSortie = new Sortie();
         // récupération du campus associé à la $newSortie via l'organisateur que l'on affecte à $newSortie
         $campus = $this->getUser()->getCampus();
-
         $formSortie = $this->createForm(SortieType::class, $newSortie);
-
         $formSortie->handleRequest($request);
-
         if ($formSortie->isSubmitted() && $formSortie->isValid()) {
             // on récupère l'id du lieu
             $lieuId = $request->get('lieu');
@@ -92,10 +88,11 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             $this->addFlash('success', 'La sortie a bien été ajoutée.');
             return $this->redirectToRoute('sortie_ajouter');
         }
-
         return $this->renderForm('sortie/ajouter.html.twig',
         compact("formSortie",'newSortie', 'campus', 'formLieu', 'formVille'));
     }
+
+    //------------------------------------
 
     /**
      * @Route("/ajouterLieu", name="_ajouterLieu")
@@ -112,9 +109,10 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         $formLieu->handleRequest($request);
         $em->persist($newLieu);
         $em->flush();
-
         return $this->redirectToRoute('sortie_ajouter');
     }
+
+    //------------------------------------
 
     /**
      * @Route("/ajouterVille", name="_ajouterVille")
@@ -130,9 +128,10 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         $formVille->handleRequest($request);
         $em->persist($newVille);
         $em->flush();
-
         return $this->redirectToRoute('sortie_ajouter');
     }
+
+    //------------------------------------
 
     /**
      * @Route("/liste", name="_liste")
@@ -143,6 +142,8 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             [ 'campus'=>$repoC->findAll()]);
     }
 
+    //------------------------------------
+
     /**
      * @Route("/api/liste/", name="_api_liste")
      */
@@ -152,10 +153,8 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
         ): Response
     {
-
         $listeSorties = $repo->findByDate();
         $tableau = [];
-
 
         //Boucle for each pour récupérer tout ce qu'il y a dans le tableau
             foreach ($listeSorties as $sortie){
@@ -165,19 +164,10 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 // en paramètres (participants de sortie et l'user connecté)
                 // C'est ce qui permettra de gérer l'affichage de la colonne 'inscrit' dans le tableau
                 // du twig liste
-                //$userOrganisateur =$service->verifUserConnectedOrganisateur($sortie->getOrganisateur(), $this->getUser());
-                //dd($userOrganisateur);
                 $maDateInscription = $sortie->getDateLimiteInscription(); // je crée une variable pour la date pour pouvoir la formater comme je veux sans influencer sur mon fichier JS qui recupere la meme date.
                 $maDateDebut = $sortie->getDateHeureDebut();
                 $userInscrit = $service->verifInscription($sortie->getParticipants(),$this->getUser());
                 $userOrganisateur = $service->verifUserConnectedOrganisateur($sortie->getOrganisateur(),$this->getUser());
-                //$userAdmin =$service->verifRoleAdmin($this->getUser());
-
-                   // if ($userInscrit == true){
-                     //   $nbInscrits++;
-                    // }//elseif ($userInscrit == false){
-                       // $nbInscrits--;
-                   // }
 
                 $tab['id']= $sortie->getId();
                 $tab['nom']= $sortie->getNom();
@@ -193,14 +183,13 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
                 $tab['organisateurId']= $sortie->getOrganisateur()->getId();
                 $tab['userOrganisateur'] = $userOrganisateur;
                 $tab['campus'] = $sortie->getCampus()->getId();
-                //$tab['userAdmin'] =$userAdmin;
-
 
                 $tableau[]= $tab;
             }
-
         return $this->json($tableau);
     }
+
+    //------------------------------------
 
     /**
      * @Route("/inscription/{exit}", name="_inscription")
@@ -212,24 +201,23 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
     ): Response
     {
-            $maDate = new \DateTime();
-            $verif = $service->verifInscription($exit->getParticipants(),$this->getUser());
-            $SommeParticipants = count($exit->getParticipants());
-
-           if( $exit->getDateLimiteInscription() > $maDate && $exit->getNbInscriptionsMax() > $SommeParticipants && $verif == false)
-          {
-               $exit->addParticipant($this->getUser());
-               $em->persist($exit);
-               $em->flush();
-               $this->addFlash('success', 'Votre participation a bien été prise en compte.');
-           }else
-           {
-               $this->addFlash('echec', 'Inscription impossible... Choisissez une autre sortie !');
-           }
-
+        $maDate = new \DateTime();
+        $verif = $service->verifInscription($exit->getParticipants(),$this->getUser());
+        $SommeParticipants = count($exit->getParticipants());
+        if( $exit->getDateLimiteInscription() > $maDate && $exit->getNbInscriptionsMax() > $SommeParticipants && $verif == false)
+        {
+           $exit->addParticipant($this->getUser());
+           $em->persist($exit);
+           $em->flush();
+           $this->addFlash('success', 'Votre participation a bien été prise en compte.');
+        }else
+        {
+           $this->addFlash('echec', 'Inscription impossible... Choisissez une autre sortie !');
+        }
         return $this->redirectToRoute('sortie_liste');
-
     }
+
+    //------------------------------------
 
     /**
      * @Route("/seDesinscrire/{exit}", name="_seDesinscrire")
@@ -243,7 +231,6 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
     {
         $maDate = new \DateTime();
         $verif = $service->verifInscription($exit->getParticipants(),$this->getUser());
-        //dd($exit->getDateHeureDebut() , $maDate );
 
         if( $exit->getDateHeureDebut() > $maDate && $verif == true)
         {
@@ -256,8 +243,9 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             $this->addFlash('echec', 'Impossible de se désister... Sortie en cours ou passée !! ');
         }
         return $this->redirectToRoute('sortie_liste');
-
     }
+
+    //------------------------------------
 
     /**
      * @Route("/detail/{sortie}", name="_detail")
@@ -268,6 +256,8 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             compact("sortie")
         );
     }
+
+    //------------------------------------
 
     /**
      * @Route("/publier/{sortie}", name="_publier")
@@ -285,11 +275,11 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         // j'envoie en BDD
         $em->flush();
 
-
         $this->addFlash('success', 'La sortie a bien été publiée.');
         return $this->redirectToRoute('sortie_liste');
-
     }
+
+    //------------------------------------
 
     /**
      * @Route("/modifier/{sortie}", name="_modifier")
@@ -302,14 +292,10 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         EtatRepository $repoEtat
     ): Response
     {
-
         // récupération du campus associé à la $newSortie via l'organisateur que l'on affecte à $newSortie
 
-
         $formModifS = $this->createForm(ModifierSortieType::class, $sortie);
-
         $formModifS->handleRequest($request);
-
         if ($formModifS->isSubmitted() && $formModifS->isValid()) {
             $publier = $request->get('publier');
             $annuler = $request->get('annuler');
@@ -322,20 +308,17 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
                 $this->addFlash('success', 'La sortie a bien été annulée.');
                 return $this->redirectToRoute('sortie_liste');
-
             }
 
-            //$em->persist($sortie);on fait un update ==> pas besoin de faire un persis
             $em->flush();
-
             $this->addFlash('success', 'La sortie a bien été modifiée.');
             return $this->redirectToRoute('sortie_liste');
         }
-
         return $this->renderForm('sortie/modifier.html.twig',
             compact("formModifS",'sortie'));
     }
 
+    //------------------------------------
 
     /**
      * @Route("/annuler/{sortie}", name="_annuler")
@@ -348,39 +331,26 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 
     ): Response
     {
-       // $maDate = new \DateTime();
-       // $verifAnnulationPossible = $service->verifDateSortie($sortie->getDateHeureDebut());
+        // création du formulaire pour la sortie à annuler
+        $formAnnuler = $this->createForm(AnnulerSortieType::class, $sortie);
 
+        $formAnnuler->handleRequest($request);
+        if ($formAnnuler->isSubmitted() && $formAnnuler->isValid()) {
 
-
-            // création du formulaire pour la sortie à annuler
-            $formAnnuler = $this->createForm(AnnulerSortieType::class, $sortie);
-
-            $formAnnuler->handleRequest($request);
-            //if ($verif == true) {
-                if ($formAnnuler->isSubmitted() && $formAnnuler->isValid()) {
-
-
-                    // Dans la BDD, je donne à la variable sortie l'état "annulée" ==> id =6
-                    $sortie->setEtat($repoEtat->findOneBy(['id' => 6]));
-                    // je mets à jour avec cette valeur
-                    //$em->persist($sortieAannuler);
-                    // j'envoie en BDD
-                    $em->flush();
-
-
+            // Dans la BDD, je donne à la variable sortie l'état "annulée" ==> id =6
+            $sortie->setEtat($repoEtat->findOneBy(['id' => 6]));
+            // je mets à jour avec cette valeur
+            //$em->persist($sortieAannuler);
+            // j'envoie en BDD
+            $em->flush();
             $this->addFlash('success', 'La sortie a bien été annulée.');
             return $this->redirectToRoute('sortie_liste');
-                }
-             //   else {
-              //      $this->addFlash('echec', 'Impossible d'annuler... Sortie en cours ou passée !! ');
-             //   }
-            return $this->renderForm('sortie/annuler.html.twig',
-                compact('formAnnuler', 'sortie'));
-
+        }
+        return $this->renderForm('sortie/annuler.html.twig',
+            compact('formAnnuler', 'sortie'));
     }
 
-
+    //------------------------------------
 
     /**
      * @Route("/api/ville-lieu/", name="_api_ville-lieu")
@@ -396,7 +366,6 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
             $info_v['codePostal'] = $v->getCodePostal();
             $tab_ville[] = $info_v;
         }
-
         $lieux = $repoL->findAll();
         $tab_lieu = [];
         foreach ($lieux as $l)
@@ -411,8 +380,6 @@ class SortieController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
         }
         $tab['villes'] = $tab_ville;
         $tab['lieux'] = $tab_lieu;
-
-
         return $this->json($tab);
     }
 

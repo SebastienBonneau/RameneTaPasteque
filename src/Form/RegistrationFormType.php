@@ -57,19 +57,6 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'multiple' => false
             ])
-            /*
-             TODO Confirmation
-             ->add('confirmation', null, [
-
-                'label'=>'Confirmation',
-                'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Confirmez votre mot de passe'
-                    ]),
-                ],
-            ])*/
         ;
     }
 

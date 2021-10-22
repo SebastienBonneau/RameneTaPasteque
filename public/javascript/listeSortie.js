@@ -63,10 +63,6 @@ function afficherTableau(tableau) {
             //tabTd[6].innerHTML = s.organisateur;
         // C'est la colonne où s'affichent tous les liens ==> je les cible avec le querySelector et leur #id
         // et je les active avec setAttribute('href', urlId)
-        //console.log(date2 > date1);
-        //console.log(date2);
-        //console.log(date1);
-        //console.log(date3);
         //lien s'inscrire Condition SI user n'est pas inscrit et que la date de cloture est supperieur a la date du jour
         if( s.userInscrit === false && s.nbInscription < s.nbInscriptionsMax && s.etat === 'Ouverte' && date2 >= date1)
              {
@@ -129,20 +125,16 @@ function afficherTableau(tableau) {
 let url = 'http://127.0.0.1:8000/sortie/api/liste/'; // l'URL pour afficher le tableau doit être identique a l'url donner lors du lancement du serveur.
 fetch(url)
     .then(response => response.json()) // renvoie au 2 eme then le body (contenu JSON)
-    .then(tab=>
-    {
-
-        for (let s of tab)
-        {
-            s.dateHeureDebut2 = new Date(s.dateHeureDebut3);
-        }
-        //let campusId = tab.campus[0].id;
-        //sorties = tab.sorties;
-        //afficherSortie(campusId)
-        console.log(tab);
-        tableau = tab;
-        afficherTableau(tableau);
-    });
+    .then(
+        tab => {
+            for (let s of tab)
+            {
+                s.dateHeureDebut2 = new Date(s.dateHeureDebut3);
+            }
+            console.log(tab);
+            tableau = tab;
+            afficherTableau(tableau);
+        });
 
 //------------------------------------
 
@@ -197,18 +189,15 @@ function filtrerNom(tab,nom)
 function filtrerDateDebut(tab, dateDebut)
 {
     let tab2 = [];
-    //console.log(dateDebut);
 
     if (dateDebut.length >0)
     {
         dateDebut = new Date(dateDebut);
         for (let s of tab)
         {
-            //console.log(s.dateHeureDebut2);
             if (s.dateHeureDebut2 >= dateDebut)
             {
                 tab2.push(s);
-                //console.log('test');
             }
         }
     }else
@@ -225,8 +214,7 @@ function filtrerDateFin(tab, dateFin)
     let tab2 = [];
     if (dateFin.length >0)
     {
-        console.log('fin');
-        dateFin = new Date(dateFin); //parse la date en chaine de caractère après le if (dateFin.length).
+        dateFin = new Date(dateFin);
         for (let s of tab)
         {
             if (s.dateHeureDebut2 <= dateFin)
@@ -306,7 +294,6 @@ function filtrerPassees(tab)
 
 function filtrer()
 {
-    //console.log('filtre !!!');
     let tableau2 = tableau;
     //---
     let campus = document.querySelector('#campus').value;
@@ -322,31 +309,26 @@ function filtrer()
     tableau2 = filtrerDateFin(tableau2, dateFin);
     //---
     let critereOrga = document.querySelector('#critereOrga').checked;
-    //console.log(critereOrga);
     if (critereOrga){
         tableau2 = filtrerOrga(tableau2);
     }
     //---
     let critereInscrit = document.querySelector('#critereInscrit').checked;
-    //console.log(critereDate);
     if (critereInscrit){
         tableau2 = filtrerInscrit(tableau2);
     }
     //---
     let critereNinscrit = document.querySelector('#critereNinscrit').checked;
-    //console.log(critereDate);
     if (critereNinscrit){
         tableau2 = filtrerNinscrit(tableau2);
     }
     //---
     let criterePassees = document.querySelector('#criterePassees').checked;
-    //console.log(critereDate);
     if (criterePassees){
         tableau2 = filtrerPassees(tableau2);
     }
 
     afficherTableau(tableau2);
-
 }
 
 

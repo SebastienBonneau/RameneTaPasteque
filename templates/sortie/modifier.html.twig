@@ -52,38 +52,39 @@
     </div>
     <script>
 
-        /**
-         * Fonction qui permet d'enregistrer la sortie en BDD
-         */
+    /**
+     * Fonction qui permet d'enregistrer la sortie en BDD
+     */
     function enregistrer(){
         console.log('enregistrement ok');
         document.querySelector('#formModifS').submit();
     }
 
-        /**
-         * Fonction qui permet de publier la sortie càd:
-         * l'enregistrer en BDD avec l'état Ouverte
-         */
+    //------------------------------------
+
+    /**
+     * Fonction qui permet de publier la sortie càd:
+     * l'enregistrer en BDD avec l'état Ouverte
+     */
     function publier(){
         console.log('publication OK');
         document.querySelector('#publier').value="1";
         document.querySelector('#formModifS').submit();
     }
 
-        /**
-         * Fonction qui permet de suuprimer la sortie en BDD
-         */
-        function annuler(){
-            console.log('annulation ok');
-            document.querySelector('#annuler').value="1"
-            document.querySelector('#formModifS').submit();
-        }
+    //------------------------------------
+
+    /**
+     * Fonction qui permet de suuprimer la sortie en BDD
+     */
+    function annuler(){
+        console.log('annulation ok');
+        document.querySelector('#annuler').value="1"
+        document.querySelector('#formModifS').submit();
+    }
 
     </script>
 
     <!-- création d'un lien vers le fichier js qui regroupe les méthodes à appeler pour l'affichage-->
-    <script src="{{ asset('javascript/ModifierSortie.js') }}">
-    </script>
-
-
+    <script src="{{ asset('javascript/ModifierSortie.js') }}"></script>
 {% endblock %}

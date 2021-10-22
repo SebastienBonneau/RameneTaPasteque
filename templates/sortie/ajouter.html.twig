@@ -9,111 +9,110 @@
                 <h2>Créer une sortie</h2>
             </div>
         </div>
-                {{ form_start(formSortie, {'attr':{id: 'formS'}}) }}
-            {# l'id formS a été ajouté au formulaire pour pouvoir pointer
-            sur cette zone lorsqu'on utilisera l'un des 2 boutons publier ou enregistrer
-            qui ont été sortis du formulaire formSortie#}
-            <div class="row">
-                <div class="offset-3 col-6 my-3">
-                {{ form_widget(formSortie) }}
-                    {# on utilise form_widget pour gérer tous les champs du formulaires sans passer par form_row
-                    mais on peut cumuler les 2 écritures. Il gèrera en form_row les champs qui onté été appelés nommément
-                    et en widget l'ensemble des autres#}}
-                </div>
+        {{ form_start(formSortie, {'attr':{id: 'formS'}}) }}
+        {# l'id formS a été ajouté au formulaire pour pouvoir pointer
+        sur cette zone lorsqu'on utilisera l'un des 2 boutons publier ou enregistrer
+        qui ont été sortis du formulaire formSortie#}
+        <div class="row">
+            <div class="offset-3 col-6 my-3">
+            {{ form_widget(formSortie) }}
+                {# on utilise form_widget pour gérer tous les champs du formulaires sans passer par form_row
+                mais on peut cumuler les 2 écritures. Il gèrera en form_row les champs qui onté été appelés nommément
+                et en widget l'ensemble des autres#}
             </div>
-            <div class="row">
-                <div class="offset-3 col-6 my-3">
-                    <label class="form-label"  for="campus">Campus : </label>
-                    <input class="form-control"  id="campus" value="{{ app.user.campus.nom }}" disabled>
-                </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-6 my-3">
+                <label class="form-label"  for="campus">Campus : </label>
+                <input class="form-control"  id="campus" value="{{ app.user.campus.nom }}" disabled>
             </div>
-            <div class="row">
-                <div class="offset-3 col-5 my-3">
-                    <label class="form-label"  for="ville">Ville : </label>
-                    <div class="row">
-                        <div class="col-11">
-                            <select class="form-control" name="ville" id="ville" onchange="changerVille()">
-                        // ici on alimente
-                            </select>
-                        </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-5 my-3">
+                <label class="form-label"  for="ville">Ville : </label>
+                <div class="row">
+                    <div class="col-11">
+                        <select class="form-control" name="ville" id="ville" onchange="changerVille()">
+                    // ici on alimente
+                        </select>
+                    </div>
 
-                        <div class="col-1">
-                        <!-- Intégration du Button trigger modal pour Ville
-                            ATTENTION définir un id (#villeModal) est indispensable pour relier avec le corps de
-                            la modal écrit plus bas-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#villeModal">
-                                <i class="fas fa-plus-circle"></i>
-                            </button>
+                    <div class="col-1">
+                    <!-- Intégration du Button trigger modal pour Ville
+                        ATTENTION définir un id (#villeModal) est indispensable pour relier avec le corps de
+                        la modal écrit plus bas-->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#villeModal">
+                            <i class="fas fa-plus-circle"></i>
+                        </button>
+                    <!-- -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-5 my-3">
+                <label class="form-label"  for="lieu">Lieu : </label>
+                <div class="row">
+                    <div class="col-11">
+                        <select class="form-control" name="lieu" id="lieu" onchange="changerLieu()">
+                            // ici on alimente
+                        </select>
+                    </div>
+                    <div class="col-1">
+                        <!-- Intégration du Button trigger modal pour Lieu
+                        ATTENTION définir un id (#lieuModal) est indispensable pour relier avec le corps de
+                        la modal écrit plus bas-->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lieuModal">
+                            <i class="fas fa-plus-circle"></i>
+                        </button>
                         <!-- -->
-                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="offset-3 col-5 my-3">
-                    <label class="form-label"  for="lieu">Lieu : </label>
-                    <div class="row">
-                        <div class="col-11">
-                            <select class="form-control" name="lieu" id="lieu" onchange="changerLieu()">
-                                // ici on alimente
-                            </select>
-                        </div>
-                        <div class="col-1">
-                            <!-- Intégration du Button trigger modal pour Lieu
-                            ATTENTION définir un id (#lieuModal) est indispensable pour relier avec le corps de
-                            la modal écrit plus bas-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lieuModal">
-                                <i class="fas fa-plus-circle"></i>
-                            </button>
-                            <!-- -->
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-6 my-3">
+                <label class="form-label"  for="rue">Rue : </label>
+                <input class="form-control"  id="rue" disabled>
             </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-6 my-3">
+                <label class="form-label"  for="code">Code postal : </label>
+                <input class="form-control"  id="code" disabled>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-6 my-3">
+                <label class="form-label"  for="latitude">Latitude : </label>
+                <input class="form-control"  id="latitude" disabled>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-3 col-6 my-3">
+                <label class="form-label"  for="longitude">Longitude : </label>
+                <input class="form-control"  id="longitude" disabled>
+            </div>
+        </div>
+        {# J'ajoute un input de type hidden pour gérer mon bouton enregistrer #}
+        <input type="hidden" id="enregistrer" name="enregistrer" value="1">
 
-            <div class="row">
-                <div class="offset-3 col-6 my-3">
-                    <label class="form-label"  for="rue">Rue : </label>
-                    <input class="form-control"  id="rue" disabled>
-                </div>
-            </div>
-            <div class="row">
-                <div class="offset-3 col-6 my-3">
-                    <label class="form-label"  for="code">Code postal : </label>
-                    <input class="form-control"  id="code" disabled>
-                </div>
-            </div>
-            <div class="row">
-                <div class="offset-3 col-6 my-3">
-                    <label class="form-label"  for="latitude">Latitude : </label>
-                    <input class="form-control"  id="latitude" disabled>
-                </div>
-            </div>
-            <div class="row">
-                <div class="offset-3 col-6 my-3">
-                    <label class="form-label"  for="longitude">Longitude : </label>
-                    <input class="form-control"  id="longitude" disabled>
-                </div>
-            </div>
-                {# J'ajoute un input de type hidden pour gérer mon bouton enregistrer #}
-                <input type="hidden" id="enregistrer" name="enregistrer" value="1">
+        {# J'ajoute un input de type hidden pour gérer mon bouton publier #}
+        <input type="hidden" id="publier" name="publier" value="0">
+        {{ form_end(formSortie) }}
 
-                {# J'ajoute un input de type hidden pour gérer mon bouton publier #}
-                <input type="hidden" id="publier" name="publier" value="0">
-                {{ form_end(formSortie) }}
-
-                {# Je sors les boutons du formulaires pour pouvoir en gérer plusieurs #}
-            <div class="row">
-                <div class="offset-4 col-auto my-3">
-                    <button onclick="enregistrer()" class="btn btn-secondary mt-3 me-2 mb-3">Enregistrer</button>
-                </div>
-                <div class="col-auto my-3 px-4">
-                    <button onclick="publier()" class="btn btn-success mt-3 me-2 mb-3">Publier</button>
-                </div>
-                <div class="col-auto my-3">
-                    <a href="{{ path('sortie_liste') }}" class="btn btn-dark mt-3 mb-3">Annuler</a>
-                </div>
+        {# Je sors les boutons du formulaires pour pouvoir en gérer plusieurs #}
+        <div class="row">
+            <div class="offset-4 col-auto my-3">
+                <button onclick="enregistrer()" class="btn btn-secondary mt-3 me-2 mb-3">Enregistrer</button>
             </div>
+            <div class="col-auto my-3 px-4">
+                <button onclick="publier()" class="btn btn-success mt-3 me-2 mb-3">Publier</button>
+            </div>
+            <div class="col-auto my-3">
+                <a href="{{ path('sortie_liste') }}" class="btn btn-dark mt-3 mb-3">Annuler</a>
+            </div>
+        </div>
     </div>
 
     <!-- Modal pour ajouter une ville lors de la création d'une sortie id=villeModal-->
@@ -170,7 +169,9 @@
     </div>
     <!-- -->
     <script>
+
 /* -------------Fonctions liées aux modals pour Ville et Lieu--------------------------------------------- */
+
     /**
      * Fonction qui permet d'ajouter une ville (via popup)
      * liée à l'action onclick de la villeModal intégrée dans le formulaire
@@ -181,6 +182,8 @@
         console.log('ajouterVille');
         document.querySelector('#formVille').submit();
     }
+
+    //------------------------------------
 
     /**
      * Fonction qui permet d'ajouter un lieu (via popup)
@@ -194,6 +197,7 @@
     }
 
 /* ---------Fonctions liées aux boutons (enregistrer et publier) du formulaire ajouter une sortie----------- */
+
     /**
      * Fonction qui permet d'enregistrer la nouvelle sortie en BDD
      * avec l'état 'créée'
@@ -202,6 +206,8 @@
         console.log('enregistrement ok');
         document.querySelector('#formS').submit();
     }
+
+    //------------------------------------
 
     /**
      * Fonction qui permet de publier la nouvelle sortie càd:
@@ -214,12 +220,10 @@
     }
 
     </script>
+
     <!-- import du cdn Bootstrap pour gérer les affichages plus efficacement-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <!-- création d'un lien vers le fichier js qui regroupe les méthodes à appeler pour l'affichage-->
-    <script src="{{ asset('javascript/ajouterSortie.js') }}">
-    </script>
-
-
+    <script src="{{ asset('javascript/ajouterSortie.js') }}"></script>
 {% endblock %}

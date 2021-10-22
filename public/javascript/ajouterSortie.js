@@ -22,7 +22,6 @@ function afficherCodePostal(villeId){
     // je sélectionne l'élément dont l'id=code est je lui affecte le code postal de
     // l'objet ville recréé
     document.querySelector('#code').value= ville.codePostal;
-    //
 }
 
 //------------------------------------
@@ -32,18 +31,17 @@ function afficherCodePostal(villeId){
  * @param lieuId
  */
 function afficherRue(lieuId){
-    // je crée un objet ville
+    // je crée un objet lieu
     let lieu ={};
-    // retrouver la ville à partir de l'id que j'ai dans le lieu
+    // retrouver la rue à partir de l'id que j'ai dans le lieu
     for (let l of lieux){
         if (lieuId == l.id){
             lieu = l;
         }
     }
-    // je sélectionne l'élément dont l'id=code est je lui affecte le code postal de
-    // l'objet ville recréé
+    // je sélectionne l'élément dont l'id=rue est je lui affecte un nom de rue de
+    // l'objet lieu recréé
     document.querySelector('#rue').value= lieu.rue;
-    //
 }
 
 //------------------------------------
@@ -53,18 +51,17 @@ function afficherRue(lieuId){
  * @param lieuId
  */
 function afficherLatitude(lieuId){
-    // je crée un objet ville
+    // je crée un objet lieu
     let lieu ={};
-    // retrouver la ville à partir de l'id que j'ai dans le lieu
+    // retrouver la latitude à partir de l'id que j'ai dans le lieu
     for (let l of lieux){
         if (lieuId == l.id){
             lieu = l;
         }
     }
-    // je sélectionne l'élément dont l'id=code est je lui affecte le code postal de
-    // l'objet ville recréé
+    // je sélectionne l'élément dont l'id=latitude est je lui affecte la latitude de
+    // l'objet lieu recréé
     document.querySelector('#latitude').value= lieu.latitude;
-    //
 }
 
 //------------------------------------
@@ -74,18 +71,17 @@ function afficherLatitude(lieuId){
  * @param lieuId
  */
 function afficherLongitude(lieuId){
-    // je crée un objet ville
+    // je crée un objet lieu
     let lieu ={};
-    // retrouver la ville à partir de l'id que j'ai dans le lieu
+    // retrouver la longitude à partir de l'id que j'ai dans le lieu
     for (let l of lieux){
         if (lieuId == l.id){
             lieu = l;
         }
     }
-    // je sélectionne l'élément dont l'id=code est je lui affecte le code postal de
-    // l'objet ville recréé
+    // je sélectionne l'élément dont l'id=longitude est je lui affecte la longitude de
+    // l'objet lieu recréé
     document.querySelector('#longitude').value= lieu.longitude;
-    //
 }
 
 //------------------------------------
@@ -127,6 +123,7 @@ function changerLieu()
 }
 
 //------------------------------------
+
 /**
  * Méthode qui affiche le menu déroulant des lieux relatifs à une ville sélectionnée dans le
  * menu déroulant précédent
@@ -153,6 +150,7 @@ function afficherLieu(villeId)
 }
 
 //------------------------------------
+
 /**
  * Méthode qui permet d'afficher le menu déroulant des villes
  * @param tab

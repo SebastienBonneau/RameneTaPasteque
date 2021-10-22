@@ -24,9 +24,6 @@ class AnnulerSortieType extends AbstractType
             ->add('infosSortie', null,[
                 'label'=> 'motif :'
             ])
-
-
-
         ;
     }
 

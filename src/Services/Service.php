@@ -2,13 +2,9 @@
 
 namespace App\Services;
 
-use App\Entity\Participant;
-use Symfony\Component\Validator\Constraints\Date;
-
 
 class Service
 {
-
 
     /**
      * Méthode qui permet de vérifier si l'user connecté est inscrit ou non à une sortie affichée.
@@ -32,6 +28,8 @@ class Service
         }return false;
     }
 
+    //------------------------------------
+
     /**
      *
      * Méthode qui permet de vérifier si l'user connecté est l'organisateur de la sortie
@@ -49,6 +47,6 @@ class Service
             return true;
         } return false;
     }
-*/
+    */
 
 }

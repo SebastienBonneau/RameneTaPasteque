@@ -34,15 +34,6 @@ class ModifierSortieType extends AbstractType
             ->add('infosSortie', null, [
                 'label'=> "Description et infos : "
             ])
-            /*->add('campus', null, [
-                'label'=> "Description et infos : "
-            ])
-            ->add('organisateur', null, [
-                'label'=> "Description et infos : "
-            ])
-
-            ->add('lieu')
-            */
         ;
     }
 

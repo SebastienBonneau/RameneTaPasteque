@@ -7,34 +7,33 @@
             <h2>Découvrez tous les détails de la sortie  : {{ sortie.nom }} !</h2>
         </div>
     </div>
-
-        <div class="row">
-            <div class="offset-2 col-2 my-2">
-                <label class="form-label" for="dateHeure">Date et heure de la sortie : </label>
-            </div>
-            <div class="col-4 my-2">
-                <input class="form-control"  id="prenom" value="{{ sortie.dateHeureDebut|date ('d,M,Y H,i') }}" disabled>
-            </div>
-        </div>
-        <div class="row">
-            <div class="offset-2 col-2 my-2">
-                <label class="form-label" for="dateInscription">Date limite d'inscription : </label>
-            </div>
-            <div class="col-4 my-2">
-                <input class="form-control"  id="dateInscription" value="{{ sortie.dateLimiteInscription|date ('d,M,Y') }}" disabled>
-            </div>
-        </div>
-        <div class="row">
-            <div class="offset-2 col-2 my-2">
-                <label class="form-label" for="nbPlaces">Nombre de places : </label>
-            </div>
-            <div class="col-4 my-2">
-                <input class="form-control"  id="dateInscription" value="{{ sortie.nbInscriptionsMax }}" disabled>
-            </div>
-        </div>
     <div class="row">
         <div class="offset-2 col-2 my-2">
-                <label class="form-label" for="duree">Durée : </label>
+            <label class="form-label" for="dateHeure">Date et heure de la sortie : </label>
+        </div>
+        <div class="col-4 my-2">
+            <input class="form-control"  id="prenom" value="{{ sortie.dateHeureDebut|date ('d,M,Y H,i') }}" disabled>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-2 col-2 my-2">
+            <label class="form-label" for="dateInscription">Date limite d'inscription : </label>
+        </div>
+        <div class="col-4 my-2">
+            <input class="form-control"  id="dateInscription" value="{{ sortie.dateLimiteInscription|date ('d,M,Y') }}" disabled>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-2 col-2 my-2">
+            <label class="form-label" for="nbPlaces">Nombre de places : </label>
+        </div>
+        <div class="col-4 my-2">
+            <input class="form-control"  id="dateInscription" value="{{ sortie.nbInscriptionsMax }}" disabled>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-2 col-2 my-2">
+            <label class="form-label" for="duree">Durée : </label>
         </div>
         <div class="col-4 my-2">
             <input class="form-control"  id="dateInscription" value="{{ sortie.duree }} minutes" disabled>
@@ -42,7 +41,7 @@
     </div>
     <div class="row">
         <div class="offset-2 col-2 my-2">
-                <label class="form-label" for="infosSortie">Description et infos : </label>
+            <label class="form-label" for="infosSortie">Description et infos : </label>
         </div>
         <div class="col-4 my-2">
             <input class="form-control"  id="dateInscription" value="{{ sortie.infosSortie }}" disabled>
@@ -97,17 +96,14 @@
         </div>
     </div>
 
-
-
-
     <h4>Liste des participants inscrits :</h4>
     <div>
         <table>
             <thead>
-            <tr>
-                <th>Pseudo</th>
-                <th>Nom</th>
-            </tr>
+                <tr>
+                    <th>Pseudo</th>
+                    <th>Nom</th>
+                </tr>
             </thead>
             <tbody>
             {% for p in sortie.participants %}
@@ -118,7 +114,8 @@
             {% endfor %}
             </tbody>
         </table>
-
+    </div>
+</div>
 {% endblock %}
 
 {% block title %}
